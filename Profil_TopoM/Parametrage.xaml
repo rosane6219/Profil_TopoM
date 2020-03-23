@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="Profil_TopoM.Parametrage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Profil_TopoM"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <TextBox x:Name="equidistance"
+            materialDesign:HintAssist.Hint="50....."
+            BorderBrush="#58A3AF"
+            Foreground="#58A3AF"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            VerticalAlignment="Center" Height="40" Margin="425,87,223,323" />
+        <TextBox x:Name="echelle"
+            materialDesign:HintAssist.Hint="50....."
+            BorderBrush="#58A3AF"
+            Foreground="#58A3AF"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            VerticalAlignment="Center" Height="40" Margin="425,170,223,240" />
+        <TextBox x:Name="altritude_min"
+            materialDesign:HintAssist.Hint="50....."
+            BorderBrush="#58A3AF"
+            Foreground="#58A3AF"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            VerticalAlignment="Center" Height="40" Margin="425,238,223,172" />
+        <TextBox x:Name="altritude_max"
+            materialDesign:HintAssist.Hint="50....."
+            BorderBrush="#58A3AF"
+            Foreground="#58A3AF"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            VerticalAlignment="Center" Height="40" Margin="425,305,223,105" />
+        <Label x:Name="parametrageL" Content="Paramétrage" Foreground="#FF8E7B" HorizontalAlignment="Left" Height="37" Margin="334,29,0,0" VerticalAlignment="Top" Width="130" FontSize="20"/>
+        <Label x:Name="equidistanceL" Content="Equidistance" FontSize="14"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="29" Margin="237,102,0,0" VerticalAlignment="Top" Width="142"/>
+        <Label x:Name="echelleL" Content="Echelle"  FontSize="14"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="30" Margin="237,180,0,0" VerticalAlignment="Top" Width="142"/>
+        <Label x:Name="altitude_minL" Content="Altitude Min"  FontSize="14"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="29" Margin="237,253,0,0" VerticalAlignment="Top" Width="142"/>
+        <Label x:Name="altitude_maxL" Content="Altitude Max"  FontSize="14"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="30" Margin="237,323,0,0" VerticalAlignment="Top" Width="142"/>
+        <Grid Margin="338,0,323,0" Width="138.666666666667">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36*"/>
+                <RowDefinition Height="413*"/>
+            </Grid.RowDefinitions>
+            <Button
+                BorderBrush="#58A3AF"
+                Foreground="#58A3AF"    
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Height="50"
+                materialDesign:ButtonAssist.CornerRadius="25"
+                ToolTip="Importer une image" Margin="0,337,0,27" Grid.Row="1" Click="Button_Click" Background="{x:Null}">
+                <TextBlock Text="Ouvrir" />
+            </Button>
+            <Button x:Name="nextBtn"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                Background="{x:Null}"
+                BorderBrush="#58A3AF"
+                Foreground="#58A3AF"
+                ToolTip="MaterialDesignFloatingActionMiniLightButton" Margin="400,347,-316,26.6" Grid.Row="1">
+                <materialDesign:PackIcon
+                    Kind="ArrowRight"
+                    Height="24"
+                    Width="24" />
+            </Button>
+            <Button x:Name="prevBtn"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                Background="{x:Null}"
+                BorderBrush="#58A3AF"
+                Foreground="#58A3AF"
+                ToolTip="MaterialDesignFloatingActionMiniLightButton" Margin="338,347,-254,26.6" Grid.Row="1" Click="prevBtn_Click">
+                <materialDesign:PackIcon
+                    Kind="ArrowLeft"
+                    Height="24"
+                    Width="24" />
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>
