@@ -44,12 +44,14 @@ namespace Profil_TopoM
 
         private void paramBtn_Click(object sender, RoutedEventArgs e)
         {
+            selectionGrid.Children.Clear();
             Parametrage param = new Parametrage();
             selectionGrid.Children.Add(param);
         }
 
         private void textBlock1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            selectionGrid.Children.Clear();
             Parametrage param = new Parametrage();
             selectionGrid.Children.Add(param);
         }
@@ -57,11 +59,15 @@ namespace Profil_TopoM
         private void homeBtn_Click(object sender, RoutedEventArgs e)
         {
             selectionGrid.Children.Clear();
+            Accueil accueil = new Accueil();
+            selectionGrid.Children.Add(accueil);
         }
 
         private void textBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             selectionGrid.Children.Clear();
+            Accueil accueil = new Accueil();
+            selectionGrid.Children.Add(accueil);
         }
 
         private void dossierBtn_Click(object sender, RoutedEventArgs e)
@@ -74,12 +80,12 @@ namespace Profil_TopoM
 
         }
 
-        private void textBlock3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void aideBtn_Click(object sender, RoutedEventArgs e)
         {
 
-        }
+        } 
 
-        private void aideBtn_Click(object sender, RoutedEventArgs e)
+        private void textBlock3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
         }
@@ -91,7 +97,7 @@ namespace Profil_TopoM
 
         private void textBlock4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            Application.Current.Shutdown();
         }
     }
 }

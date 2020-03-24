@@ -9,35 +9,39 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <TextBox x:Name="equidistance"
-            materialDesign:HintAssist.Hint="50....."
+            materialDesign:HintAssist.Hint="distance entre courbes "
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
+            FontSize="17"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="40" Margin="425,87,223,323" />
+            VerticalAlignment="Center" Height="44" Margin="369,83,253,323" />
         <TextBox x:Name="echelle"
-            materialDesign:HintAssist.Hint="50....."
+            materialDesign:HintAssist.Hint="l'echelle de votre carte"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
+            FontSize="17"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="40" Margin="425,170,223,240" />
+            VerticalAlignment="Center" Height="49" Margin="369,163,253,238" />
         <TextBox x:Name="altritude_min"
-            materialDesign:HintAssist.Hint="50....."
+            materialDesign:HintAssist.Hint="la plus basse altitude"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
+            FontSize="17"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="40" Margin="425,238,223,172" />
+            VerticalAlignment="Center" Height="44" Margin="369,235,253,171" />
         <TextBox x:Name="altritude_max"
-            materialDesign:HintAssist.Hint="50....."
+            materialDesign:HintAssist.Hint="la plus haute altitude"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
+            FontSize="17"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="40" Margin="425,305,223,105" />
-        <Label x:Name="parametrageL" Content="Paramétrage" Foreground="#FF8E7B" HorizontalAlignment="Left" Height="37" Margin="334,29,0,0" VerticalAlignment="Top" Width="130" FontSize="20"/>
-        <Label x:Name="equidistanceL" Content="Equidistance" FontSize="14"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="29" Margin="237,102,0,0" VerticalAlignment="Top" Width="142"/>
-        <Label x:Name="echelleL" Content="Echelle"  FontSize="14"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="30" Margin="237,180,0,0" VerticalAlignment="Top" Width="142"/>
-        <Label x:Name="altitude_minL" Content="Altitude Min"  FontSize="14"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="29" Margin="237,253,0,0" VerticalAlignment="Top" Width="142"/>
-        <Label x:Name="altitude_maxL" Content="Altitude Max"  FontSize="14"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="30" Margin="237,323,0,0" VerticalAlignment="Top" Width="142"/>
-        <Grid Margin="338,0,323,0" Width="138.666666666667">
+            VerticalAlignment="Center" Height="48" Margin="369,302,253,100" />
+        <Label x:Name="parametrageL" Content="Paramétrage"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="253,25,0,0" VerticalAlignment="Top" Width="177" FontSize="30"/>
+        <Label x:Name="equidistanceL" Content="Equidistance" FontSize="17"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="29" Margin="181,102,0,0" VerticalAlignment="Top" Width="142"/>
+        <Label x:Name="echelleL" Content="Echelle"  FontSize="17"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="30" Margin="181,177,0,0" VerticalAlignment="Top" Width="142"/>
+        <Label x:Name="altitude_minL" Content="Altitude Min"  FontSize="17"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="29" Margin="181,251,0,0" VerticalAlignment="Top" Width="142"/>
+        <Label x:Name="altitude_maxL" Content="Altitude Max"  FontSize="17"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="30" Margin="181,323,0,0" VerticalAlignment="Top" Width="142"/>
+        <Grid Margin="282,0,379,0" Width="138.666666666667">
             <Grid.RowDefinitions>
                 <RowDefinition Height="36*"/>
                 <RowDefinition Height="413*"/>

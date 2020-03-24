@@ -240,8 +240,9 @@
             <materialDesign:PackIcon  Kind="Search"  Margin="305,21,0,0" VerticalAlignment="Top" Width="34" Height="40"  Foreground="#FF277FA0" RenderTransformOrigin="2.411,0.568" />
         </Grid>
 
-        <Grid x:Name="selectionGrid" Margin="79,85,10,9.667" Width="910">
-            <Image HorizontalAlignment="Left" Height="500" Margin="46,0,0,-124" VerticalAlignment="Top" Width="800" Source="Ressources/courbesbleu.jpg"/>
+        <Grid x:Name="selectionGrid" Margin="171,85,10,9.667">
+            <Image HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="296" Margin="421,83,0,0" Source="Ressources/courbesbleu.jpg"/>
+            <Label Content="Bienvenue dans &#xD;&#xA;Profil_Topo_Maker,&#xA;une application dédiées à la &#xA;génération de profil &#xD;&#xA;topographique " FontSize="20" FontFamily="Monserrat"   HorizontalAlignment="Left" Height="138" Margin="64,83,0,0" VerticalAlignment="Top" Width="265" Foreground="#DDEE6B6B"/>
 
         </Grid>
 

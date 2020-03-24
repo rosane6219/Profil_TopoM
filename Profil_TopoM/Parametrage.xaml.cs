@@ -46,6 +46,8 @@ namespace Profil_TopoM
         {
             var parent = (Grid)this.Parent;
             parent.Children.Clear();
+            Accueil accueil = new Accueil();
+            parent.Children.Add(accueil);
         }
     }
 }
