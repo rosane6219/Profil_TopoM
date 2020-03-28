@@ -1,0 +1,19 @@
+﻿<Window x:Class="Profil_TopoM.Alt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Profil_TopoM"
+        mc:Ignorable="d"
+        Title="Alt" Height="300" Width="400">
+    <Grid >
+        <Grid Margin="0,0,0.333,142.667" Background="AliceBlue">
+            <TextBlock HorizontalAlignment="Left" Margin="43,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="321" Height="70" FontSize="36" Foreground="#FFE66A6A" FontFamily="Times New Roman"><Run Text="Altitude"/><Run Text=" de la"/><Run Text=" "/><Run Text="courbe"/></TextBlock>
+
+        </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="38,171,0,0" TextWrapping="Wrap" Text="Altitude :" VerticalAlignment="Top" Height="39" Width="115" FontFamily="Times New Roman" FontSize="18"/>
+        <TextBox x:Name="altitude" HorizontalAlignment="Left" Height="39" Margin="139,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
+        <Button x:Name="sauvegarder" Content="Sauvegarder" HorizontalAlignment="Left" Margin="147,227,0,0" VerticalAlignment="Top" Width="110" Height="30" Click="sauvegarder_Click"/>
+
+    </Grid>
+</Window>
