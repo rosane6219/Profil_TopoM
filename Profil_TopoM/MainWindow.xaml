@@ -29,31 +29,55 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-2.5"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="textBlock">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.387"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.179"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="textBlock">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.153"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="textBlock">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="7.909"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="3.977"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="textBlock">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-1.678"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="textBlock1">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.231"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.163"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="textBlock1">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.231"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="textBlock1">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="5.803"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.7"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="textBlock1">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="2"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="image">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="9"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="textBlock2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.145"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="textBlock2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-0.512"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="textBlock2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.083"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="textBlock2">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="-1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="textBlock3">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.167"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="textBlock3">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="4.274"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="textBlock4">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.137"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="textBlock4">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.001"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="Menuclose">
@@ -74,6 +98,32 @@
     </Window.Triggers>
 
     <Grid Background="White" Width="1000">
+        <Grid x:Name="selectionGrid" Margin="60,0,10,-0.333" Height="570">
+            <Image HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="296" Margin="421,83,0,0" Source="Ressources/courbesbleu.jpg"/>
+            <Label Content="Bienvenue dans &#xD;&#xA;Profil_Topo_Maker,&#xA;une application dédiées à la &#xA;génération de profil &#xD;&#xA;topographique " FontSize="20" FontFamily="Monserrat"   HorizontalAlignment="Left" Height="138" Margin="64,83,0,0" VerticalAlignment="Top" Width="265" Foreground="#DDEE6B6B"/>
+            <Image x:Name="image" HorizontalAlignment="Left" Height="48" Margin="800,0,0,0" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Grid Height="57" VerticalAlignment="Top" Background="{x:Null}" Margin="515,0,130,0" RenderTransformOrigin="0.465,0.51" >
+                <Grid HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" VerticalAlignment="Top" Width="272">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="7*"/>
+                        <RowDefinition Height="34*"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="1" CornerRadius="20,20,20,20" BorderBrush="#FF277FA0" Margin="4,-6,32,6" Grid.RowSpan="2"/>
+                </Grid>
+                <TextBox HorizontalAlignment="Left" FontSize="14" Background="White" Height="30" Margin="67,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" RenderTransformOrigin="-0.033,-0.174" AutomationProperties.HelpText="Rechercher"/>
+                <materialDesign:PackIcon  Kind="Search"  Margin="18,4,0,0" VerticalAlignment="Top" Width="34" Height="40"  Foreground="#FF277FA0" RenderTransformOrigin="2.411,0.568" />
+            </Grid>
+
+        </Grid>
         <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#1E5370" Height="570" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" >
             <Grid.RenderTransform>
                 <TransformGroup>
@@ -128,7 +178,7 @@
                                 </Button.Background>
                             </Button>
 
-                            <Label x:Name="textBlock" Content="Accueil" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock_MouseLeftButtonDown" >
+                            <Label x:Name="textBlock" Content="Accueil" FontSize="14" VerticalAlignment="Center" Margin="10 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock_MouseLeftButtonDown" Width="120">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -147,7 +197,7 @@
                                     <ImageBrush ImageSource="./Ressources/import.png"/>
                                 </Button.Background>
                             </Button>
-                            <Label x:Name="textBlock1" Content="Importer" FontSize="12" VerticalAlignment="Center" Margin="10 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock1_MouseLeftButtonDown" Width="120"  >
+                            <Label x:Name="textBlock1" Content="Importer" FontSize="14" VerticalAlignment="Center" Margin="10 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock1_MouseLeftButtonDown" Width="120"  >
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -166,7 +216,7 @@
                                     <ImageBrush ImageSource="./Ressources/dossier.png"/>
                                 </Button.Background>
                             </Button>
-                            <Label x:Name="textBlock2" Content="Historique" FontSize="12" VerticalAlignment="Center" Margin="10 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock2_MouseLeftButtonDown" Width="120"  >
+                            <Label x:Name="textBlock2" Content="Historique" FontSize="14" VerticalAlignment="Center" Margin="10 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock2_MouseLeftButtonDown" Width="120"  >
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -185,7 +235,7 @@
                                     <ImageBrush ImageSource="./Ressources/aide.png"/>
                                 </Button.Background>
                             </Button>
-                            <Label x:Name="textBlock3" Content="Aide" FontSize="12" VerticalAlignment="Center" Margin="10 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock3_MouseLeftButtonDown" Width="120"  >
+                            <Label x:Name="textBlock3" Content="Aide" FontSize="14" VerticalAlignment="Center" Margin="10 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock3_MouseLeftButtonDown" Width="120"  >
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -205,7 +255,7 @@
                                     <ImageBrush ImageSource="./Ressources/logout.png"/>
                                 </Button.Background>
                             </Button>
-                            <Label x:Name="textBlock4" Content="Quitter" FontSize="12" VerticalAlignment="Center" Margin="10 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock4_MouseLeftButtonDown" Width="120"  >
+                            <Label x:Name="textBlock4" Content="Quitter" FontSize="14" VerticalAlignment="Center" Margin="10 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock4_MouseLeftButtonDown" Width="120"  >
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -221,41 +271,10 @@
                 </ListView>
             </StackPanel>
         </Grid>
-        <Grid Height="85" VerticalAlignment="Top" Background="White" Margin="254,0,10,0" RenderTransformOrigin="0.465,0.51" >
-            <materialDesign:PopupBox  HorizontalAlignment="Right"   materialDesign:ShadowAssist.ShadowDepth="Depth3" Margin="0,19,10,31" PlacementMode="BottomAndAlignRightEdges" Foreground="#FF277FA0" StaysOpen="False" Width="50" Height="50" >
-                <StackPanel  Width="150" >
-                    <Button  Command="Copy" Content="Copier"  />
-                    <Button Command="Paste" Content="Coller"/>
-                    <Button  Command="Cut"  Content="Couper"/>
-                    <Separator/>
-                    <Button  x:Name="ButtonPopUpLogout"   Content="Quiter" Click="ButtonPopUpLogout_Click"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" Width="0"/>
-                </StackPanel>
-            </materialDesign:PopupBox>
 
-            <Grid HorizontalAlignment="Left" Height="40" Margin="151,19,0,0" VerticalAlignment="Top" Width="272">
-                <Border BorderThickness="1" CornerRadius="20,20,20,20" BorderBrush="#FF277FA0" Margin="150,2,-114,-2"/>
-            </Grid>
-            <TextBox HorizontalAlignment="Left" FontSize="14" Background="White" Height="30" Margin="344,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" RenderTransformOrigin="-0.033,-0.174" AutomationProperties.HelpText="Rechercher"/>
-            <materialDesign:PackIcon  Kind="Search"  Margin="305,21,0,0" VerticalAlignment="Top" Width="34" Height="40"  Foreground="#FF277FA0" RenderTransformOrigin="2.411,0.568" />
-        </Grid>
 
-        <Grid x:Name="selectionGrid" Margin="171,85,10,9.667">
-            <Image HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="296" Margin="421,83,0,0" Source="Ressources/courbesbleu.jpg"/>
-            <Label Content="Bienvenue dans &#xD;&#xA;Profil_Topo_Maker,&#xA;une application dédiées à la &#xA;génération de profil &#xD;&#xA;topographique " FontSize="20" FontFamily="Monserrat"   HorizontalAlignment="Left" Height="138" Margin="64,83,0,0" VerticalAlignment="Top" Width="265" Foreground="#DDEE6B6B"/>
 
-        </Grid>
 
-        <Image x:Name="image" HorizontalAlignment="Left" Height="48" Margin="810,19,0,0" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
 
 
 

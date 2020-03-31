@@ -25,10 +25,7 @@ namespace Profil_TopoM
             InitializeComponent();
         }
 
-        private void ButtonPopUpLogout_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
+        
 
         private void buttonopenmenu_Click(object sender, RoutedEventArgs e)
         {

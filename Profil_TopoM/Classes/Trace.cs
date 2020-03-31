@@ -19,13 +19,14 @@ namespace Profil_TopoM
             this.equidistance = equi;
             this.image = img;
         }
-        public int Min { get { return min ; } set { min = value; } }
-        public int Max { get { return max ; } set { max = value; } }
-        public int Echelle { get { return echelle ; } set { echelle = value; } }
-        public int Equidistance { get { return equidistance; } set { equidistance = value; } }
-        public String Image { get { return image ; } set { image = value ; } }
+        public int Min { get { return min ; } set { this.min = value; } }
+        public int Max { get { return max ; } set { this.max = value; } }
+        public int Echelle { get { return echelle ; } set { this.echelle = value; } }
+        public int Equidistance { get { return equidistance; } set { this.equidistance = value; } }
+        public String Image { get { return image ; } set { this.image = value ; } }
         //public afficher(){ }
-        // public modifi() { }
+        // public modifier() { }
+        //public renommer(){}
 
     }
 }

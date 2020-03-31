@@ -87,6 +87,7 @@
       <DependentUpon>Alt.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Courbe.cs" />
+    <Compile Include="Classes\Profil.cs" />
     <Compile Include="Classes\Trace.cs" />
     <Page Include="Accueil.xaml">
       <SubType>Designer</SubType>
