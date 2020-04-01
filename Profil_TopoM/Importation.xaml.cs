@@ -86,7 +86,7 @@ namespace Profil_TopoM
 						if ((courbes[l].getaltitude() > 100) && (courbes[l].getaltitude() <= 200)) { newLine.Stroke = Brushes.Yellow; }
 						if ((courbes[l].getaltitude() > 200) && (courbes[l].getaltitude() <= 500)) { newLine.Stroke = Brushes.Orange; }
 						if ((courbes[l].getaltitude() > 500) && (courbes[l].getaltitude() <= 1000)) { newLine.Stroke = Brushes.Red; }
-						if (courbes[l].getaltitude() > 1000) { newLine.Stroke = Brushes.Purple; }
+						if (courbes[l].getaltitude() > 1000) { newLine.Stroke = Brushes.Purple ; }
 						newLine.StrokeThickness = 2;
 						cnv.Children.Add(newLine);
 						courbes[l].setlignes(newLine, trouve - 1);

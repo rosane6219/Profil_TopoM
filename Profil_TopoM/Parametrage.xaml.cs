@@ -41,7 +41,7 @@ namespace Profil_TopoM
 
         private void insertion(Trace trace)
         {
-            _query = "INSERT INTO Trace VALUES(@min,@max,@echelle,@equidistance,@image)";
+            _query = "INSERT INTO Trace VALUES(@min,@max,@echelle,@equidistance,@image,@nom,@creation,@modification)";
             _con.Open();
             using (_command = new SqlCommand(_query, _con))
             {
@@ -51,6 +51,9 @@ namespace Profil_TopoM
                 _command.Parameters.AddWithValue("@echelle", trace.Echelle);
                 _command.Parameters.AddWithValue("@equidistance", trace.Equidistance);
                 _command.Parameters.AddWithValue("@image", trace.Image);
+                _command.Parameters.AddWithValue("@nom", trace.Nom);
+                _command.Parameters.AddWithValue("@creation", trace.Datecreation.ToString("dd/mm/yyyy hh:mm:ss"));
+                _command.Parameters.AddWithValue("@modification", trace.Datemodification.ToString("dd/mm/yyyy hh:mm:ss"));
                 _command.ExecuteNonQuery();
             }
             _con.Close();
@@ -83,7 +86,7 @@ namespace Profil_TopoM
         private void nextBtn_Click(object sender, RoutedEventArgs e)
         {
     
-            Trace trace = new Trace(int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), Int32.Parse(echelle.Text), Int32.Parse(equidistance.Text), url);
+            Trace trace = new Trace(nomTrace.Text,DateTime.Now,DateTime.Now,int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), Int32.Parse(echelle.Text), Int32.Parse(equidistance.Text), url);
             insertion(trace);
             Importation imp = new Importation(img);
             var parent = (Grid)this.Parent;

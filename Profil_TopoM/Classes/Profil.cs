@@ -13,8 +13,9 @@ namespace Profil_TopoM.Classes
     {
         Line segment;
         List<Courbe> courbeaniveau;
-       //public void afficherProfil() { }
-       //public List<Point> intersection () { }
+       //public void DessinerAxes(min , max, echelle) { }
+       //public real CalculPente(segment) {}
+       //public List<Point> intersection (segment, courbeaniveau) { }
 
     }
 }

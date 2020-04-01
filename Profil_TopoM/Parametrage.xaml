@@ -8,39 +8,48 @@
              mc:Ignorable="d" 
              d:DesignHeight="570" d:DesignWidth="940">
     <Grid>
+        <TextBox x:Name="nomTrace"
+            materialDesign:HintAssist.Hint="nommez votre tracé "
+            BorderBrush="#58A3AF"
+            Foreground="#58A3AF"
+            FontSize="19"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            VerticalAlignment="Center" Height="58" Margin="442,62,253,450" />
+
         <TextBox x:Name="equidistance"
             materialDesign:HintAssist.Hint="distance entre courbes "
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="58" Margin="442,97,253,415" />
+            VerticalAlignment="Center" Height="58" Margin="442,137,253,375" />
         <TextBox x:Name="echelle"
             materialDesign:HintAssist.Hint="l'echelle de votre carte"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="64" Margin="442,187,253,319" />
+            VerticalAlignment="Center" Height="64" Margin="442,215,253,291" />
         <TextBox x:Name="altritude_min"
             materialDesign:HintAssist.Hint="la plus basse altitude"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="58" Margin="442,284,253,228" />
+            VerticalAlignment="Center" Height="58" Margin="442,302,253,210" />
         <TextBox x:Name="altritude_max"
             materialDesign:HintAssist.Hint="la plus haute altitude"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="62" Margin="442,373,253,135" />
-        <Label x:Name="parametrageL" Content="Paramétrage"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="327,21,0,0" VerticalAlignment="Top" Width="177" FontSize="30"/>
-        <Label x:Name="equidistanceL" Content="Equidistance" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,112,0,0" VerticalAlignment="Top" Width="185"/>
-        <Label x:Name="echelleL" Content="Echelle"  FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="40" Margin="198,201,0,0" VerticalAlignment="Top" Width="185"/>
-        <Label x:Name="altitude_minL" Content="Altitude Min"  FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,296,0,0" VerticalAlignment="Top" Width="185"/>
-        <Label x:Name="altitude_maxL" Content="Altitude Max"  FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="40" Margin="198,391,0,0" VerticalAlignment="Top" Width="185"/>
+            VerticalAlignment="Center" Height="62" Margin="442,383,253,125" />
+        <Label x:Name="parametrageL" Content="Paramétrage"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="327,9,0,0" VerticalAlignment="Top" Width="177" FontSize="30"/>
+        <Label x:Name="nom" Content="Nom du tracé" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,77,0,0" VerticalAlignment="Top" Width="185"/>
+        <Label x:Name="equidistanceL" Content="Equidistance" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,152,0,0" VerticalAlignment="Top" Width="185"/>
+        <Label x:Name="echelleL" Content="Echelle"  FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="40" Margin="198,237,0,0" VerticalAlignment="Top" Width="185"/>
+        <Label x:Name="altitude_minL" Content="Altitude Min"  FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,320,0,0" VerticalAlignment="Top" Width="185"/>
+        <Label x:Name="altitude_maxL" Content="Altitude Max"  FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="40" Margin="198,401,0,0" VerticalAlignment="Top" Width="185"/>
 
 
 
