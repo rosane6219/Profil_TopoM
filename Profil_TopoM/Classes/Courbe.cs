@@ -13,13 +13,14 @@ namespace Profil_TopoM.Classes
         private List<Point> Points = new List<Point>();
         private  List<Ellipse> shownPts = new List<Ellipse>();
         private  List<Line> lignes = new List<Line>();
+        private double  altitude;
         private Point p; 
         private Ellipse ell; 
         private Line l;
-        private int altitude;
+       
         public void courbe() { }
         public Point getpoints(int i) { if (i < Points.Count) return this.Points[i]; else { return p; } }
-        public int getaltitude() { return altitude; }
+        public double getaltitude() { return altitude; }
         public int nbPoints() { return Points.Count; }
         public int nblignes() { return lignes.Count; }
         public int nbshownPts() { return shownPts.Count; }
