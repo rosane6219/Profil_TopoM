@@ -16,25 +16,27 @@ using Profil_TopoM.Classes;
 
 namespace Profil_TopoM
 {
-    /// <summary>
-    /// Logique d'interaction pour Importation.xaml
-    /// </summary>
-    public partial class Importation : UserControl
-    {
-        public Importation(BitmapImage userImage)
-        {
-            InitializeComponent();
-            img.Source = userImage;
-        }
-
+	/// <summary>
+	/// Logique d'interaction pour Importation.xaml
+	/// </summary>
+	public partial class Importation : UserControl
+	{
+		int Fin = 0;
+		int Ss = 0;
+		public Importation(BitmapImage userImage)
+		{
+			InitializeComponent();
+			img.Source = userImage;
+		}
 		int k = 0;
 		List<Point> Points = new List<Point>();
 		List<Courbe> courbes = new List<Courbe>();
 		bool lineStarted = false;
 		Point mousePoint1;
+		bool lineStarted0 = false;
+		Point mousePoint;
 		List<Ellipse> shownPts = new List<Ellipse>();
 		List<Line> lignes = new List<Line>();
-
 		MouseButtonEventArgs m;
 		bool dep = false;
 		//------------------------------------------------------------------------------------------------------
@@ -68,7 +70,7 @@ namespace Profil_TopoM
 					Ellipse ell = new Ellipse();
 					ell.Width = 7;
 					ell.Height = 7;
-					ell.Fill = Brushes.Red;
+					ell.Fill = Brushes.SkyBlue;
 					ell.Stroke = Brushes.Transparent;
 					courbes[l].setpoints(p, trouve);
 					Canvas.SetLeft(ell, courbes[l].getpoints(trouve).X - 5 / 2);
@@ -81,12 +83,16 @@ namespace Profil_TopoM
 					{
 						cnv.Children.Remove(courbes[l].getlignes(trouve - 1));
 						newLine = new Line { X1 = courbes[l].getpoints(trouve - 1).X, Y1 = courbes[l].getpoints(trouve - 1).Y, X2 = p.X, Y2 = p.Y };
-						if ((courbes[l].getaltitude() > 0) && (courbes[l].getaltitude() <= 50)) { newLine.Stroke = Brushes.Blue; }
-						if ((courbes[l].getaltitude() > 50) && (courbes[l].getaltitude() <= 100)) { newLine.Stroke = Brushes.Green; }
-						if ((courbes[l].getaltitude() > 100) && (courbes[l].getaltitude() <= 200)) { newLine.Stroke = Brushes.Yellow; }
-						if ((courbes[l].getaltitude() > 200) && (courbes[l].getaltitude() <= 500)) { newLine.Stroke = Brushes.Orange; }
-						if ((courbes[l].getaltitude() > 500) && (courbes[l].getaltitude() <= 1000)) { newLine.Stroke = Brushes.Red; }
-						if (courbes[l].getaltitude() > 1000) { newLine.Stroke = Brushes.Purple ; }
+						if ((courbes[l].getaltitude() <= 0)) { newLine.Stroke = Brushes.Blue; }
+						if ((courbes[l].getaltitude() > 0) && (courbes[l].getaltitude() <= 50)) { newLine.Stroke = Brushes.SkyBlue; }
+						if ((courbes[l].getaltitude() > 50) && (courbes[l].getaltitude() <= 100)) { newLine.Stroke = Brushes.AliceBlue; }
+						if ((courbes[l].getaltitude() > 100) && (courbes[l].getaltitude() <= 200)) { newLine.Stroke = Brushes.Green; }
+						if ((courbes[l].getaltitude() > 200) && (courbes[l].getaltitude() <= 400)) { newLine.Stroke = Brushes.GreenYellow; }
+						if ((courbes[l].getaltitude() > 400) && (courbes[l].getaltitude() <= 600)) { newLine.Stroke = Brushes.Yellow; }
+						if ((courbes[l].getaltitude() > 600) && (courbes[l].getaltitude() <= 800)) { newLine.Stroke = Brushes.Orange; }
+						if ((courbes[l].getaltitude() > 800) && (courbes[l].getaltitude() <= 1000)) { newLine.Stroke = Brushes.OrangeRed; }
+						if (courbes[l].getaltitude() > 1000) { newLine.Stroke = Brushes.Red; }
+
 						newLine.StrokeThickness = 2;
 						cnv.Children.Add(newLine);
 						courbes[l].setlignes(newLine, trouve - 1);
@@ -95,12 +101,15 @@ namespace Profil_TopoM
 					{
 						line = new Line { X1 = courbes[l].getpoints(trouve + 1).X, Y1 = courbes[l].getpoints(trouve + 1).Y, X2 = p.X, Y2 = p.Y };
 						cnv.Children.Remove(courbes[l].getlignes(trouve));
-						if ((courbes[l].getaltitude() > 0) && (courbes[l].getaltitude() <= 50)) { line.Stroke = Brushes.Blue; }
-						if ((courbes[l].getaltitude() > 50) && (courbes[l].getaltitude() <= 100)) { line.Stroke = Brushes.Green; }
-						if ((courbes[l].getaltitude() > 100) && (courbes[l].getaltitude() <= 200)) { line.Stroke = Brushes.Yellow; }
-						if ((courbes[l].getaltitude() > 200) && (courbes[l].getaltitude() <= 500)) { line.Stroke = Brushes.Orange; }
-						if ((courbes[l].getaltitude() > 500) && (courbes[l].getaltitude() <= 1000)) { line.Stroke = Brushes.Red; }
-						if (courbes[l].getaltitude() > 1000) { line.Stroke = Brushes.Purple; }
+						if ((courbes[l].getaltitude() <= 0)) { line.Stroke = Brushes.Blue; }
+						if ((courbes[l].getaltitude() > 0) && (courbes[l].getaltitude() <= 50)) { line.Stroke = Brushes.SkyBlue; }
+						if ((courbes[l].getaltitude() > 50) && (courbes[l].getaltitude() <= 100)) { line.Stroke = Brushes.AliceBlue; }
+						if ((courbes[l].getaltitude() > 100) && (courbes[l].getaltitude() <= 200)) { line.Stroke = Brushes.Green; }
+						if ((courbes[l].getaltitude() > 200) && (courbes[l].getaltitude() <= 400)) { line.Stroke = Brushes.GreenYellow; }
+						if ((courbes[l].getaltitude() > 400) && (courbes[l].getaltitude() <= 600)) { line.Stroke = Brushes.Yellow; }
+						if ((courbes[l].getaltitude() > 600) && (courbes[l].getaltitude() <= 800)) { line.Stroke = Brushes.Orange; }
+						if ((courbes[l].getaltitude() > 800) && (courbes[l].getaltitude() <= 1000)) { line.Stroke = Brushes.OrangeRed; }
+						if (courbes[l].getaltitude() > 1000) { line.Stroke = Brushes.Red; }
 						line.StrokeThickness = 2;
 						cnv.Children.Add(line);
 						courbes[l].setlignes(line, trouve);
@@ -114,9 +123,18 @@ namespace Profil_TopoM
 		//-----------------------------------------------------------------------------------------------------
 		private void cnv_MouseMove(object sender, MouseEventArgs e)
 		{
-			base.OnMouseMove(e);
-			if (lineStarted)
-				cnv.InvalidateVisual();
+			if (Ss == 0)
+			{
+				base.OnMouseMove(e);
+				if (lineStarted)
+					cnv.InvalidateVisual();
+			}
+			else
+			{
+				base.OnMouseMove(e);
+				if (lineStarted0)
+					this.InvalidateVisual();
+			}
 		}
 		//-------------------------------------------------------------------------------------------------------
 		private void btn_Click(object sender, RoutedEventArgs e)
@@ -141,7 +159,7 @@ namespace Profil_TopoM
 				k = 0;
 			}
 		}
-		int suppp = 0;
+		int suppp = 0; int sup = 0;
 		//------------------------------------------------------------------------------------------------------
 		private void Arret_Click(object sender, RoutedEventArgs e)
 		{
@@ -152,136 +170,180 @@ namespace Profil_TopoM
 		int s = 0; int u = 0; int v = 0;
 		private void cnv_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			if (suppp == 1)
+			if (Ss == 0)
 			{
-				suppp = 0;
-				int trouve = 0, l = 0;
-				int ok = 0;
-				int cpt = 10;
-				while ((ok == 0) && (l < courbes.Count))
+				if (suppp == 1)
 				{
-					trouve = 0;
-					while ((ok == 0) && (trouve < courbes[l].nbPoints()))
+					suppp = 0;
+					sup = 1;
+					int trouve = 0, l = 0;
+					int ok = 0;
+					int cpt = 10;
+					while ((ok == 0) && (l < courbes.Count))
 					{
-						if ((courbes[l].getpoints(trouve).X - cpt <= e.GetPosition(this).X) &&
-							(e.GetPosition(this).X <= courbes[l].getpoints(trouve).X + cpt) &&
-							(courbes[l].getpoints(trouve).Y - cpt <= e.GetPosition(this).Y) &&
-							(e.GetPosition(this).Y <= courbes[l].getpoints(trouve).Y + cpt))
+						trouve = 0;
+						while ((ok == 0) && (trouve < courbes[l].nbPoints()))
 						{
-							ok = 1;
+							if ((courbes[l].getpoints(trouve).X - cpt <= e.GetPosition(this).X) &&
+								(e.GetPosition(this).X <= courbes[l].getpoints(trouve).X + cpt) &&
+								(courbes[l].getpoints(trouve).Y - cpt <= e.GetPosition(this).Y) &&
+								(e.GetPosition(this).Y <= courbes[l].getpoints(trouve).Y + cpt))
+							{
+								ok = 1;
+							}
+							else { trouve++; }
 						}
-						else { trouve++; }
+						l++;
 					}
-					l++;
-				}
-				l = l - 1;
-				cnv.Children.Remove(courbes[l].getshownPts(trouve));
-				try { shownPts.Remove(shownPts[trouve]); } catch (Exception exp) { }
-				courbes[l].removeshownPts(courbes[l].getshownPts(trouve));
-				if (trouve > 0) { cnv.Children.Remove(courbes[l].getlignes(trouve - 1)); courbes[l].removeligne(courbes[l].getlignes(trouve - 1)); }
-				Line newLine;
-				if (trouve == 0)
-				{
-					cnv.Children.Remove(courbes[l].getlignes(trouve));
-					courbes[l].removeligne(courbes[l].getlignes(trouve));
-				}
-				if (((trouve - 1) >= 0) && ((trouve + 1) < courbes[l].nbPoints()))
-				{
-					cnv.Children.Remove(courbes[l].getlignes(trouve - 1));
-					newLine = new Line
+					l = l - 1;
+					cnv.Children.Remove(courbes[l].getshownPts(trouve));
+					try { shownPts.Remove(shownPts[trouve]); } catch (Exception exp) { }
+					courbes[l].removeshownPts(courbes[l].getshownPts(trouve));
+					if (trouve > 0) { cnv.Children.Remove(courbes[l].getlignes(trouve - 1)); courbes[l].removeligne(courbes[l].getlignes(trouve - 1)); }
+					Line newLine;
+					if (trouve == 0)
 					{
-						X1 = courbes[l].getpoints(trouve - 1).X,
-						Y1 = courbes[l].getpoints(trouve - 1).Y,
-						X2 = courbes[l].getpoints(trouve + 1).X,
-						Y2 = courbes[l].getpoints(trouve + 1).Y
-					};
-					if ((courbes[l].getaltitude() > 0) && (courbes[l].getaltitude() <= 50)) { newLine.Stroke = Brushes.Blue; }
-					if ((courbes[l].getaltitude() > 50) && (courbes[l].getaltitude() <= 100)) { newLine.Stroke = Brushes.Green; }
-					if ((courbes[l].getaltitude() > 100) && (courbes[l].getaltitude() <= 200)) { newLine.Stroke = Brushes.Yellow; }
-					if ((courbes[l].getaltitude() > 200) && (courbes[l].getaltitude() <= 500)) { newLine.Stroke = Brushes.Orange; }
-					if ((courbes[l].getaltitude() > 500) && (courbes[l].getaltitude() <= 1000)) { newLine.Stroke = Brushes.Red; }
-					if (courbes[l].getaltitude() > 1000) { newLine.Stroke = Brushes.Purple; }
-					newLine.StrokeThickness = 2;
-					cnv.Children.Add(newLine);
-					courbes[l].remplacer(newLine, trouve - 1);
+
+						cnv.Children.Remove(courbes[l].getlignes(trouve));
+						courbes[l].removeligne(courbes[l].getlignes(trouve));
+					}
+					if (((trouve - 1) >= 0) && ((trouve + 1) < courbes[l].nbPoints()))
+					{
+						cnv.Children.Remove(courbes[l].getlignes(trouve - 1));
+						newLine = new Line
+						{
+							X1 = courbes[l].getpoints(trouve - 1).X,
+							Y1 = courbes[l].getpoints(trouve - 1).Y,
+							X2 = courbes[l].getpoints(trouve + 1).X,
+							Y2 = courbes[l].getpoints(trouve + 1).Y
+						};
+						if ((courbes[l].getaltitude() <= 0)) { newLine.Stroke = Brushes.Blue; }
+						if ((courbes[l].getaltitude() > 0) && (courbes[l].getaltitude() <= 50)) { newLine.Stroke = Brushes.SkyBlue; }
+						if ((courbes[l].getaltitude() > 50) && (courbes[l].getaltitude() <= 100)) { newLine.Stroke = Brushes.AliceBlue; }
+						if ((courbes[l].getaltitude() > 100) && (courbes[l].getaltitude() <= 200)) { newLine.Stroke = Brushes.Green; }
+						if ((courbes[l].getaltitude() > 200) && (courbes[l].getaltitude() <= 400)) { newLine.Stroke = Brushes.GreenYellow; }
+						if ((courbes[l].getaltitude() > 400) && (courbes[l].getaltitude() <= 600)) { newLine.Stroke = Brushes.Yellow; }
+						if ((courbes[l].getaltitude() > 600) && (courbes[l].getaltitude() <= 800)) { newLine.Stroke = Brushes.Orange; }
+						if ((courbes[l].getaltitude() > 800) && (courbes[l].getaltitude() <= 1000)) { newLine.Stroke = Brushes.OrangeRed; }
+						if (courbes[l].getaltitude() > 1000) { newLine.Stroke = Brushes.Red; }
+						newLine.StrokeThickness = 2;
+						cnv.Children.Add(newLine);
+
+						courbes[l].remplacer(newLine, trouve - 1);
+					}
+					courbes[l].removePoint(courbes[l].getpoints(trouve));
+				}
+				else
+				{
+					base.OnMouseDown(e);
+					if (!lineStarted)
+					{
+						s = 0;
+						u = 0;
+						v = 0;
+						lineStarted = true;
+						c = new Courbe();
+						courbes.Add(c);
+						mousePoint1 = e.GetPosition(this);
+						Points.Add(mousePoint1);
+						courbes.Last().setpoints(mousePoint1, s); s++;
+						Ellipse ell = new Ellipse();
+						ell.Width = 7;
+						ell.Height = 7;
+						ell.Fill = Brushes.SkyBlue;
+						ell.Stroke = Brushes.Transparent;
+						Canvas.SetLeft(ell, mousePoint1.X - 5 / 2);
+						Canvas.SetTop(ell, mousePoint1.Y - 10 / 2);
+						shownPts.Add(ell);
+						courbes.Last().setshownPts(ell, u); u++;
+						cnv.Children.Add(ell);
+						int ex = 0;
+						while (ex == 0)
+						{
+							try
+							{
+								Alt alt = new Alt();
+								alt.ShowDialog();
+								double altit = double.Parse(alt.altitude.Text);
+								courbes.Last().setaltitude(altit);
+								ex = 1;
+							}
+							catch (Exception exp)
+							{
+								MessageBox.Show("Veuillez entrer l'altitude SVP", "Erreur");
+								ex = 0;
+							}
+						}
+					}
+					else
+					{
+						Point mousePoint2 = e.GetPosition(this);
+						if (sup == 1) { mousePoint1 = courbes.Last().getpoints(courbes.Last().nbPoints() - 1); sup = 0; }
+						Line newLine = new Line { X1 = mousePoint1.X, Y1 = mousePoint1.Y, X2 = mousePoint2.X, Y2 = mousePoint2.Y };
+
+						ToolTip t = new ToolTip();
+						t.Content = courbes.Last().getaltitude();
+						t.Background = Brushes.AliceBlue;
+
+						newLine.ToolTip = t;
+						if ((courbes.Last().getaltitude() <= 0)) { newLine.Stroke = Brushes.Blue; }
+						if ((courbes.Last().getaltitude() > 0) && (courbes.Last().getaltitude() <= 50)) { newLine.Stroke = Brushes.SkyBlue; }
+						if ((courbes.Last().getaltitude() > 50) && (courbes.Last().getaltitude() <= 100)) { newLine.Stroke = Brushes.AliceBlue; }
+						if ((courbes.Last().getaltitude() > 100) && (courbes.Last().getaltitude() <= 200)) { newLine.Stroke = Brushes.Green; }
+						if ((courbes.Last().getaltitude() > 200) && (courbes.Last().getaltitude() <= 400)) { newLine.Stroke = Brushes.GreenYellow; }
+						if ((courbes.Last().getaltitude() > 400) && (courbes.Last().getaltitude() <= 600)) { newLine.Stroke = Brushes.Yellow; }
+						if ((courbes.Last().getaltitude() > 600) && (courbes.Last().getaltitude() <= 800)) { newLine.Stroke = Brushes.Orange; }
+						if ((courbes.Last().getaltitude() > 800) && (courbes.Last().getaltitude() <= 1000)) { newLine.Stroke = Brushes.OrangeRed; }
+						if (courbes.Last().getaltitude() > 1000) { newLine.Stroke = Brushes.Red; }
+
+						newLine.StrokeThickness = 2;
+						lignes.Add(newLine);
+						courbes.Last().setlignes(newLine, v); v++;
+						cnv.Children.Add(newLine);
+						mousePoint1 = e.GetPosition(this);
+						Points.Add(mousePoint1);
+						courbes.Last().setpoints(mousePoint1, s); s++;
+						Ellipse ell = new Ellipse();
+						ell.Width = 7;
+						ell.Height = 7;
+						ell.Fill = Brushes.SkyBlue;
+						ell.Stroke = Brushes.Transparent;
+						Canvas.SetLeft(ell, mousePoint1.X - 5 / 2);
+						Canvas.SetTop(ell, mousePoint1.Y - 10 / 2);
+						shownPts.Add(ell);
+						courbes.Last().setshownPts(ell, u); u++;
+						cnv.Children.Add(ell);
+						if (k == 1)
+						{
+							this.lineStarted = false; k = 0;
+						}
+					}
+					this.InvalidateVisual();
 				}
 			}
 			else
 			{
-				base.OnMouseDown(e);
-				if (!lineStarted)
+				if (Fin < 2)
 				{
-					s = 0;
-					u = 0;
-					v = 0;
-					lineStarted = true;
-					c = new Courbe();
-					courbes.Add(c);
-					mousePoint1 = e.GetPosition(this);
-					Points.Add(mousePoint1);
-					courbes.Last().setpoints(mousePoint1, s); s++;
-					Ellipse ell = new Ellipse();
-					ell.Width = 7;
-					ell.Height = 7;
-					ell.Fill = Brushes.Red;
-					ell.Stroke = Brushes.Transparent;
-					Canvas.SetLeft(ell, mousePoint1.X - 5 / 2);
-					Canvas.SetTop(ell, mousePoint1.Y - 10 / 2);
-					shownPts.Add(ell);
-					courbes.Last().setshownPts(ell, u); u++;
-					cnv.Children.Add(ell);
-					int ex = 0;
-					while (ex == 0)
+					base.OnMouseDown(e);
+					if (!lineStarted0)
 					{
-						try
-						{
-							Alt alt = new Alt();
-							alt.ShowDialog();
-							int altit = int.Parse(alt.altitude.Text);
-							courbes.Last().setaltitude(altit);
-							ex = 1;
-						}
-						catch (Exception exp)
-						{
-							MessageBox.Show("Veuillez entrer l'altitude SVP", "Erreur");
-							ex = 0;
-						}
+						lineStarted0 = true;
+						mousePoint = e.GetPosition(this);
 					}
-				}
-				else
-				{
-					Point mousePoint2 = e.GetPosition(this);
-					Line newLine = new Line { X1 = mousePoint1.X, Y1 = mousePoint1.Y, X2 = mousePoint2.X, Y2 = mousePoint2.Y };
-					if ((courbes.Last().getaltitude() > 0) && (courbes.Last().getaltitude() <= 50)) { newLine.Stroke = Brushes.Blue; }
-					if ((courbes.Last().getaltitude() > 50) && (courbes.Last().getaltitude() <= 100)) { newLine.Stroke = Brushes.Green; }
-					if ((courbes.Last().getaltitude() > 100) && (courbes.Last().getaltitude() <= 200)) { newLine.Stroke = Brushes.Yellow; }
-					if ((courbes.Last().getaltitude() > 200) && (courbes.Last().getaltitude() <= 500)) { newLine.Stroke = Brushes.Orange; }
-					if ((courbes.Last().getaltitude() > 500) && (courbes.Last().getaltitude() <= 1000)) { newLine.Stroke = Brushes.Red; }
-					if (courbes.Last().getaltitude() > 1000) { newLine.Stroke = Brushes.Purple; }
-					newLine.StrokeThickness = 2;
-					lignes.Add(newLine);
-					courbes.Last().setlignes(newLine, v); v++;
-					cnv.Children.Add(newLine);
-					mousePoint1 = e.GetPosition(this);
-					Points.Add(mousePoint1);
-					courbes.Last().setpoints(mousePoint1, s); s++;
-					Ellipse ell = new Ellipse();
-					ell.Width = 7;
-					ell.Height = 7;
-					ell.Fill = Brushes.Red;
-					ell.Stroke = Brushes.Transparent;
-					Canvas.SetLeft(ell, mousePoint1.X - 5 / 2);
-					Canvas.SetTop(ell, mousePoint1.Y - 10 / 2);
-					shownPts.Add(ell);
-					courbes.Last().setshownPts(ell, u); u++;
-					cnv.Children.Add(ell);
-					if (k == 1)
+					else
 					{
-						this.lineStarted = false; k = 0;
+						Point mousePoint2 = e.GetPosition(this);
+						Line newLine0 = new Line { X1 = mousePoint.X, Y1 = mousePoint.Y, X2 = mousePoint2.X, Y2 = mousePoint2.Y };
+						newLine0.Stroke = Brushes.Black;
+						newLine0.StrokeThickness = 2;
+						cnv.Children.Add(newLine0);
+						this.lineStarted0 = false;
 					}
 
+					this.InvalidateVisual();
+					Fin++;
 				}
-				this.InvalidateVisual();
 			}
 		}
 		//----------------------------------------------------------------------------------------------------------
@@ -289,5 +351,22 @@ namespace Profil_TopoM
 		{
 			suppp = 1;
 		}
+		//-----------------------------------------------------------------------------------------------------------
+		protected override void OnRender(DrawingContext dc)
+		{
+			if (Ss == 1)
+			{
+				base.OnRender(dc);
+				if (lineStarted)
+					dc.DrawLine(new Pen(Brushes.Black, 5), this.mousePoint1, Mouse.GetPosition(this));
+			}
+		}
+		//----------------------------------------------------------------------------------------------------------
+		private void next_Click(object sender, RoutedEventArgs e)
+		{
+			Ss = 1;
+		}
+
+
 	}
 }

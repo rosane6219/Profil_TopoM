@@ -4,16 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Profil_TopoM"
+             x:Name="alt"
+        Title="Saisissez l'altitude"
         mc:Ignorable="d"
-        Title="Alt" Height="300" Width="400">
-    <Grid >
-        <Grid Margin="0,0,0.333,142.667" Background="AliceBlue">
-            <TextBlock HorizontalAlignment="Left" Margin="43,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="321" Height="70" FontSize="36" Foreground="#FFE66A6A" FontFamily="Times New Roman"><Run Text="Altitude"/><Run Text=" de la"/><Run Text=" "/><Run Text="courbe"/></TextBlock>
-
-        </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="38,171,0,0" TextWrapping="Wrap" Text="Altitude :" VerticalAlignment="Top" Height="39" Width="115" FontFamily="Times New Roman" FontSize="18"/>
-        <TextBox x:Name="altitude" HorizontalAlignment="Left" Height="39" Margin="139,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185"/>
-        <Button x:Name="sauvegarder" Content="Sauvegarder" HorizontalAlignment="Left" Margin="147,227,0,0" VerticalAlignment="Top" Width="110" Height="30" Click="sauvegarder_Click"/>
-
+         Height="179.897" Width="271.65">
+    <Grid Background="AliceBlue" Margin="0,0,2,1">
+        <TextBlock HorizontalAlignment="Center" Background="AntiqueWhite" Margin="22,10,19,0" TextWrapping="Wrap" 
+                   VerticalAlignment="Top" Width="221" Height="32" FontSize="18" Foreground="#FF8E7B"
+                   FontStyle="Oblique" TextAlignment="Center" FontWeight="UltraBold"
+                   FontFamily="Century Gothic" ><Run Text="L'Altitude"/><Run Text=" de la"/><Run Text=" "/><Run Text="courbe"/></TextBlock>
+        <TextBox x:Name="altitude" HorizontalAlignment="Left" Height="43" Margin="45,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+        <Button x:Name="sauvegarder" Content="Sauvegarder"  HorizontalAlignment="Left" Margin="67,95,0,0" VerticalAlignment="Top" Width="115" Height="33" Click="sauvegarder_Click"/>
     </Grid>
 </Window>
