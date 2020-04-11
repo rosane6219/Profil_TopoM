@@ -351,6 +351,8 @@ namespace Profil_TopoM
 		{
 			suppp = 1;
 		}
+		//-------------------------------------------------------------------------------------------------------------
+	
 		//-----------------------------------------------------------------------------------------------------------
 		protected override void OnRender(DrawingContext dc)
 		{
@@ -359,6 +361,12 @@ namespace Profil_TopoM
 				base.OnRender(dc);
 				if (lineStarted)
 					dc.DrawLine(new Pen(Brushes.Black, 5), this.mousePoint1, Mouse.GetPosition(this));
+				double x1 = this.mousePoint1.X;
+				double y1 = this.mousePoint1.Y;
+				double x2 = Mouse.GetPosition(this).X;
+				double y2 = Mouse.GetPosition(this).Y;
+
+
 			}
 		}
 		//----------------------------------------------------------------------------------------------------------
