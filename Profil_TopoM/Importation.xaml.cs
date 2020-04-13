@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +23,20 @@ namespace Profil_TopoM
     /// </summary>
     public partial class Importation : UserControl
     {
-        public Importation(BitmapImage userImage)
+		private SqlConnection _con;
+		private SqlCommand _command;
+		//private SqlDataReader _reader;
+		private string _query;
+		private int idTrace;
+		//---------------------------------------------
+        public Importation(BitmapImage userImage, int id )
         {
             InitializeComponent();
-            img.Source = userImage;
+			_con = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename = {System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf; Integrated Security = True");
+			img.Source = userImage;
+			idTrace = id;
         }
-
+		//-----------------------------------------------------
 		int k = 0;
 		List<Point> Points = new List<Point>();
 		List<Courbe> courbes = new List<Courbe>();
@@ -34,7 +44,6 @@ namespace Profil_TopoM
 		Point mousePoint1;
 		List<Ellipse> shownPts = new List<Ellipse>();
 		List<Line> lignes = new List<Line>();
-
 		MouseButtonEventArgs m;
 		bool dep = false;
 		//------------------------------------------------------------------------------------------------------
@@ -289,5 +298,93 @@ namespace Profil_TopoM
 		{
 			suppp = 1;
 		}
+		//---------------------*******************************-------------------------------------------------------------------
+		 
+
+		//---------------------***********************************************---------------------------------------------------
+		private int  idCourbe, idPoint, idPoint1, idPoint2;
+
+		private int  insertionCourbe(Courbe c,int idtra)
+		{
+			_query = "INSERT INTO Courbe VALUES(@idtrace)";
+			_con.Open();
+			using (_command = new SqlCommand(_query, _con))
+			{
+				_command.CommandType = CommandType.Text;
+				_command.Parameters.AddWithValue("@idtrace", idtra);
+				idCourbe = (int)_command.ExecuteScalar();
+			}
+			_con.Close();
+			return idCourbe;
+		}
+
+		private int insertionPoint(Point p)
+		{
+			_query = "INSERT INTO Point VALUES(@x,@y)";
+			_con.Open();
+			
+			using (_command = new SqlCommand(_query, _con))
+			{
+				_command.CommandType = CommandType.Text;
+				_command.Parameters.AddWithValue("@x", p.X);
+				_command.Parameters.AddWithValue("@y", p.Y);
+				idPoint = (int)_command.ExecuteScalar();
+			}
+			_con.Close();
+			return idPoint;
+		}
+
+		private void insertionLine(Line l,int idCbe)
+		{
+			_query = "INSERT INTO Line VALUES(@idpt1,@idpt2,@idcourbe)";
+			_con.Open();
+			Point Start = new Point(l.X1, l.Y1);
+			Point End = new Point(l.X2, l.Y2);
+			int idPoint1 = insertionPoint(Start);
+			int idPoint2 = insertionPoint(End);
+			using (_command = new SqlCommand(_query, _con))
+			{
+				_command.CommandType = CommandType.Text;
+				_command.Parameters.AddWithValue("@idpt1", idPoint1);
+				_command.Parameters.AddWithValue("@idpt2", idPoint2);
+				_command.Parameters.AddWithValue("@idcourbe", idCbe);
+			    _command.ExecuteNonQuery();
+			}
+			_con.Close();
+		}
+
+		private void insertionSegment(Line l, int idTra)
+		{
+			_query = "INSERT INTO Segment VALUES(@idpt1,@idpt2,@idtrace)";
+			_con.Open();
+			Point Start = new Point(l.X1, l.Y1);
+			Point End = new Point(l.X2, l.Y2);
+			int idPoint1 = insertionPoint(Start);
+			int idPoint2 = insertionPoint(End);
+			using (_command = new SqlCommand(_query, _con))
+			{
+				_command.CommandType = CommandType.Text;
+				_command.Parameters.AddWithValue("@idpt1", idPoint1);
+				_command.Parameters.AddWithValue("@idpt2", idPoint2);
+				_command.Parameters.AddWithValue("@idtrace", idTra);
+				_command.ExecuteNonQuery();
+			}
+			_con.Close();
+		}
+
+		
+		public void BddCourbe(int idTra) 
+		{
+			foreach (Courbe c in courbes)
+			{
+				idCourbe=insertionCourbe(c,idTra);
+				foreach (Line l in c.Lignes()) 
+				{
+					insertionLine(l, idCourbe);
+				}
+			}
+		}
+
+
 	}
 }

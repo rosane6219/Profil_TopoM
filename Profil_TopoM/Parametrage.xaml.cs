@@ -24,22 +24,22 @@ namespace Profil_TopoM
     public partial class Parametrage : UserControl
     {
 
-        private string _user;
+        
         private SqlConnection _con;
         private SqlCommand _command;
         private SqlDataReader _reader;
         private string _query;
         private Trace trace;
-       
+        private int id;
 
         public Parametrage()
         {
             InitializeComponent();
             _con = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename = {System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf; Integrated Security = True");
-
+            
         }
-
-        private void insertion(Trace trace)
+       
+        private void insertionTrace(Trace trace )
         {
             _query = "INSERT INTO Trace VALUES(@min,@max,@echelle,@equidistance,@image,@nom,@creation,@modification)";
             _con.Open();
@@ -54,8 +54,10 @@ namespace Profil_TopoM
                 _command.Parameters.AddWithValue("@nom", trace.Nom);
                 _command.Parameters.AddWithValue("@creation", trace.Datecreation.ToString("dd/mm/yyyy hh:mm:ss"));
                 _command.Parameters.AddWithValue("@modification", trace.Datemodification.ToString("dd/mm/yyyy hh:mm:ss"));
-                _command.ExecuteNonQuery();
+               // _command.ExecuteNonQuery();
+                id = (int) _command.ExecuteScalar();
             }
+            
             _con.Close();
             //list.Items.Add(user);
         }
@@ -87,8 +89,8 @@ namespace Profil_TopoM
         {
     
             Trace trace = new Trace(nomTrace.Text,DateTime.Now,DateTime.Now,int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), Int32.Parse(echelle.Text), Int32.Parse(equidistance.Text), url);
-            insertion(trace);
-            Importation imp = new Importation(img);
+            insertionTrace(trace);
+            Importation imp = new Importation(img,id);
             var parent = (Grid)this.Parent;
             parent.Children.Clear();
             parent.Children.Add(imp);

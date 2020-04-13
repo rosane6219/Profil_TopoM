@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,55 @@ namespace Profil_TopoM
     /// </summary>
     public partial class MainWindow : Window
     {
+        private SqlConnection _con;
+        private SqlCommand _command;
+        private SqlDataReader _reader;
+        private string _query;
+        private List<Trace> list= new List<Trace>();
         public MainWindow()
         {
             InitializeComponent();
+            _con = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename = {System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf; Integrated Security = True");
+           // LoadData();
+
+        }
+        private void LoadData() 
+        {
+            String name; DateTime creat; DateTime modif; int mini; int maxi; int echel; int equi; String img;
+
+            _query = "SELECT * FROM Trace";
+            try
+            {
+                if (_con.State != ConnectionState.Open) _con.Open();
+                using (_command = new SqlCommand(_query, _con))
+                {
+                    _reader = _command.ExecuteReader();
+                    while (_reader.Read())
+                    { //(String name,DateTime creat,DateTime modif,int mini,int maxi,int echel,int equi,String img)
+                      //int.Parse(altritude_min.Text)
+                        name = _reader[6].ToString();
+                        creat = DateTime.Parse(_reader[7].ToString());
+                        mini = int.Parse(_reader[1].ToString());
+                        list.Add(
+                            new Trace(
+                                 _reader[6].ToString(),//nom
+                                DateTime.Parse(_reader[7].ToString()),//cre
+                                DateTime.Parse(_reader[8].ToString()),//modif
+                                int.Parse(_reader[1].ToString()),//min
+                                int.Parse(_reader[2].ToString()),//max
+                                int.Parse(_reader[3].ToString()),//ech
+                                int.Parse(_reader[4].ToString()),//equi
+                                _reader[5].ToString()//img
+
+                                )
+                            );
+                    }
+                    _reader.Close();
+
+                }
+                _con.Close();
+            }
+            catch (Exception ex){ Console.WriteLine(ex.Message); }
         }
 
         
