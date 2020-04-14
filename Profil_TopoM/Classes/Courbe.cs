@@ -41,5 +41,7 @@ namespace Profil_TopoM.Classes
         public List<Line> Lignes() { return lignes; }
         public List<Point> Point() { return Points; }
 
+        public void setaltitude(double alt) { this.altitude = alt; }
+
     }
 }
