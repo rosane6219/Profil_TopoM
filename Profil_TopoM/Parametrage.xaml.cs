@@ -18,9 +18,6 @@ using System.Data;
 
 namespace Profil_TopoM
 {
-    /// <summary>
-    /// Logique d'interaction pour Parametrage.xaml
-    /// </summary>
     public partial class Parametrage : UserControl
     {
 
@@ -83,15 +80,31 @@ namespace Profil_TopoM
             Accueil accueil = new Accueil();
             parent.Children.Add(accueil);
         }
+        public static double echell;
+        public static double altmin;
+        public static double altmax;
+        public static double equidis;
         private void nextBtn_Click(object sender, RoutedEventArgs e)
-        {
-    
-            Trace trace = new Trace(nomTrace.Text,DateTime.Now,DateTime.Now,int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), Int32.Parse(echelle.Text), Int32.Parse(equidistance.Text), url);
+        {    
+            Trace trace = new Trace(nomTrace.Text,DateTime.Now,DateTime.Now,int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), Int32.Parse(echelle.Text) /Int32.Parse(echelleCM.Text), Int32.Parse(equidistance.Text), url);
             insertion(trace);
             Importation imp = new Importation(img);
             var parent = (Grid)this.Parent;
             parent.Children.Clear();
             parent.Children.Add(imp);
+            echell = double.Parse(echelle.Text)/double.Parse(echelleCM.Text);
+            altmin = double.Parse(altritude_min.Text);
+            altmax = double.Parse(altritude_max.Text);
+            equidis = double.Parse(equidistance.Text);
         }
+        private void echelleCM_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        private void echelle_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        //---------------------------------------------------------------------------------------------------------------       
     }
 }

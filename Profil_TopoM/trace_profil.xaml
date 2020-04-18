@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="Profil_TopoM.trace_profil"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Profil_TopoM"
+        Height="570" Width="940">
+
+    <Grid>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="46" Margin="840,0,0,0" VerticalAlignment="Top" Width="100" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Label Content="                              Tracé du profil topographique"  FontSize="30" Foreground="#FF8E7B" 
+         FontFamily="Rockwell Condensed" >
+        </Label>
+
+
+
+
+        <Grid Margin="0,46,2,0"  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="327*"/>
+                <ColumnDefinition Width="142*"/>
+            </Grid.ColumnDefinitions>
+
+            <oxy:PlotView x:Name="plot" Background="AliceBlue" Grid.ColumnSpan="2" Margin="45,34,196,42"  />
+
+        </Grid>
+        <Grid Margin="631,83,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75*"/>
+                <ColumnDefinition Width="92*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Altitude minimum :" Margin="0,10,0,0" Foreground="#58A3AF" FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
+            <TextBlock x:Name="T"  Margin="10,29,0,-29"  FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
+            <TextBlock Text="Altitude maximum :" Margin="0,74,0,-73" Foreground="#58A3AF" FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
+            <TextBlock x:Name="T1"  Margin="0,104,0,-104" FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
+            <TextBlock Text="Echelle :" Margin="0,154,0,-189" FontFamily="Segoe UI Semibold" Foreground="#58A3AF" FontSize="14" Grid.Column="1"/>
+            <TextBlock x:Name="T2"  Margin="0,180,0,-189" FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
+            <TextBlock Text="Pente moyenne :" Margin="0,221,0,-269" FontFamily="Segoe UI Semibold" Foreground="#58A3AF" FontSize="14" Grid.Column="1"/>
+            <TextBlock x:Name="T3"  Margin="0,269,0,-269" FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
+            <Button x:Name="precedant"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                Background="{x:Null}"
+                BorderBrush="#58A3AF"
+                Foreground="#58A3AF"
+                ToolTip="Retour au menu" Margin="65,485,69,10"  Grid.Column="1" Click="precedant_Click" >
+                <materialDesign:PackIcon
+                    Kind="ArrowLeft"
+                    Height="24"
+                    Width="24" />
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>
