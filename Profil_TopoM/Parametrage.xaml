@@ -107,7 +107,7 @@
                 Height="50"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 ToolTip="Importer une image" Margin="195,10,423.667,0" Click="Button_Click" Background="{x:Null}" VerticalAlignment="Top" Grid.ColumnSpan="2">
-                <TextBlock Text="Ouvrir" FontSize="19" />
+                <TextBlock Text="Importer" FontSize="19" />
             </Button>
             <Button x:Name="nextBtn"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"

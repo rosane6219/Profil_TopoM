@@ -83,7 +83,7 @@
                     Height="24"
                     Width="24" />
             </Button>
-            <Button x:Name="next" Content="Suivant " Height="Auto" Margin="261,-467,397,550" Grid.ColumnSpan="2" Click="next_Click"></Button>
+            <Button x:Name="next" Content="Suivant " Height="Auto" Margin="261,-474,396.667,553" Grid.ColumnSpan="2" Click="next_Click"></Button>
         </Grid>
 
     </Grid>

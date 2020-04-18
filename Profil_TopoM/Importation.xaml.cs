@@ -48,6 +48,7 @@ namespace Profil_TopoM
 		List<Line> lignes = new List<Line>();
 		MouseButtonEventArgs m;
 		bool dep = false;
+		int Ss,Fin;
 		//------------------------------------------------------------------------------------------------------
 		private void cnv_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
@@ -368,12 +369,13 @@ namespace Profil_TopoM
 
 		private int  insertionCourbe(Courbe c,int idtra)
 		{
-			_query = "INSERT INTO Courbe VALUES(@idtrace)";
+			_query = "INSERT INTO Courbe VALUES(@idtrace,@altitude)";
 			_con.Open();
 			using (_command = new SqlCommand(_query, _con))
 			{
 				_command.CommandType = CommandType.Text;
 				_command.Parameters.AddWithValue("@idtrace", idtra);
+				_command.Parameters.AddWithValue("@altitude", c.getaltitude()) ;
 				idCourbe = (int)_command.ExecuteScalar();
 			}
 			_con.Close();
@@ -449,8 +451,10 @@ namespace Profil_TopoM
 
 
 		//-------------------------------------------------------------------------------------------------------------
-	
+
 		//-----------------------------------------------------------------------------------------------------------
+		Line segment;
+		Profil profil;
 		protected override void OnRender(DrawingContext dc)
 		{
 			if (Ss == 1)
@@ -462,15 +466,24 @@ namespace Profil_TopoM
 				double y1 = this.mousePoint1.Y;
 				double x2 = Mouse.GetPosition(this).X;
 				double y2 = Mouse.GetPosition(this).Y;
-
-
+				segme nt = new Line { X1 = x1, Y1 = y1, X2 = x2, Y2 = y2 };
+				/*profil = new Profil(segment, courbes);
+				profil.Intersection(out a1, out a2, out point_Intersection);
+				foreach (Point p in point_Intersection) { Console.WriteLine(p); }*/
 			}
 		}
 		//----------------------------------------------------------------------------------------------------------
+		double a1, a2;
+		List<Point> point_Intersection;
 		private void next_Click(object sender, RoutedEventArgs e)
 		{
 			Ss = 1;
+			
 		}
+		
+		
+
+
 
 
 	}

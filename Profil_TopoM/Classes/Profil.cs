@@ -45,9 +45,12 @@ namespace Profil_TopoM.Classes
             bool hasIntersection = IntersectsWithLine(line, otherLine, out intersectionPoint);
             Point start = new Point(line.X1, line.Y1);
             Point end = new Point(line.X2, line.Y2);
+            Point start2 = new Point(otherLine.X1, line.Y1);
+            Point end2 = new Point(otherLine.X2, line.Y2);
             if (hasIntersection)
 
-                return IsBetweenTwoPoints(start, end, intersectionPoint);
+                return IsBetweenTwoPoints(start, end, intersectionPoint) && IsBetweenTwoPoints(start2, end2, intersectionPoint);
+            ;
 
             return false;
         }

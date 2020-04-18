@@ -27,7 +27,6 @@ C:\Users\User\source\repos\Profil_TopoM\Profil_TopoM\obj\Debug\Accueil.baml
 C:\Users\User\source\repos\Profil_TopoM\Profil_TopoM\obj\Debug\Alt.g.cs
 C:\Users\User\source\repos\Profil_TopoM\Profil_TopoM\obj\Debug\Profil_TopoM_Content.g.cs
 C:\Users\User\source\repos\Profil_TopoM\Profil_TopoM\obj\Debug\Alt.baml
-C:\Users\User\source\repos\Profil_TopoM\Profil_TopoM\obj\Debug\Profil_TopoM.csprojAssemblyReference.cache
 C:\Users\Fujitsu\Desktop\doss1\Profil_TopoM\bin\Debug\Profil_TopoM.exe.config
 C:\Users\Fujitsu\Desktop\doss1\Profil_TopoM\bin\Debug\Profil_TopoM.exe
 C:\Users\Fujitsu\Desktop\doss1\Profil_TopoM\bin\Debug\Profil_TopoM.pdb
@@ -88,3 +87,4 @@ C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\Profil_TopoM.c
 C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\Profil_TopoM.csproj.CopyComplete
 C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\Profil_TopoM.exe
 C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\Profil_TopoM.pdb
+C:\Users\User\source\repos\Profil_TopoM\Profil_TopoM\obj\Debug\Profil_TopoM.csprojAssemblyReference.cache

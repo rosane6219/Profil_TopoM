@@ -36,7 +36,7 @@ namespace Profil_TopoM.Classes
         public void removePoint(Point p) { Points.Remove(p); }
         public void removeligne(Line l) { lignes.Remove(l); }
         public void removeshownPts(Ellipse ell) { shownPts.Remove(ell); }
-        public void setaltitude(int alt) { this.altitude = alt; }
+        
         //--------------------------------------------
         public List<Line> Lignes() { return lignes; }
         public List<Point> Point() { return Points; }

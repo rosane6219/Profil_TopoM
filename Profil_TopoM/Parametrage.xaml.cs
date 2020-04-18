@@ -27,10 +27,10 @@ namespace Profil_TopoM
         
         private SqlConnection _con;
         private SqlCommand _command;
-        private SqlDataReader _reader;
+        //private SqlDataReader _reader;
         private string _query;
-        private Trace trace;
-        private int id;
+       // private Trace trace;
+        private int id=0;
 
         public Parametrage()
         {
@@ -54,8 +54,8 @@ namespace Profil_TopoM
                 _command.Parameters.AddWithValue("@nom", trace.Nom);
                 _command.Parameters.AddWithValue("@creation", trace.Datecreation.ToString("dd/mm/yyyy hh:mm:ss"));
                 _command.Parameters.AddWithValue("@modification", trace.Datemodification.ToString("dd/mm/yyyy hh:mm:ss"));
-               // _command.ExecuteNonQuery();
-                id = (int) _command.ExecuteScalar();
+                _command.ExecuteNonQuery();
+                //id = (int) _command.ExecuteScalar();
             }
             
             _con.Close();
@@ -85,9 +85,9 @@ namespace Profil_TopoM
             Accueil accueil = new Accueil();
             parent.Children.Add(accueil);
         }
+
         private void nextBtn_Click(object sender, RoutedEventArgs e)
-        {
-    
+        { 
             Trace trace = new Trace(nomTrace.Text,DateTime.Now,DateTime.Now,int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), Int32.Parse(echelle.Text), Int32.Parse(equidistance.Text), url);
             insertionTrace(trace);
             Importation imp = new Importation(img,id);
