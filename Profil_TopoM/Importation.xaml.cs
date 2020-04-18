@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Profil_TopoM.Classes;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Profil_TopoM
 {
@@ -21,13 +23,25 @@ namespace Profil_TopoM
 	/// </summary>
 	public partial class Importation : UserControl
 	{
+
+
 		int Fin = 0;
 		int Ss = 0;
-		public Importation(BitmapImage userImage)
+		BitmapImage kak;
+		Trace trac= new Trace();
+		String nomtr;
+		SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\BDDtopo.mdf;Integrated Security=True");
+		public Importation(BitmapImage userImage, Trace trace15)
 		{
 			InitializeComponent();
 			img.Source = userImage;
+			kak = userImage;
+			trac = trace15;
+			nomtr = trace15.nom;
+
+
 		}
+
 		int k = 0;
 		List<Point> Points = new List<Point>();
 		List<Courbe> courbes = new List<Courbe>();
@@ -39,6 +53,12 @@ namespace Profil_TopoM
 		List<Line> lignes = new List<Line>();
 		MouseButtonEventArgs m;
 		bool dep = false;
+		List<Point> pointIntersection = new List<Point>();
+		List<double> altitudee = new List<double>();
+		double alt1 = 0;
+		double alt2 = 0;
+		double pente;
+
 		//------------------------------------------------------------------------------------------------------
 		private void cnv_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
@@ -75,6 +95,7 @@ namespace Profil_TopoM
 					courbes[l].setpoints(p, trouve);
 					Canvas.SetLeft(ell, courbes[l].getpoints(trouve).X - 5 / 2);
 					Canvas.SetTop(ell, courbes[l].getpoints(trouve).Y - 10 / 2);
+
 					courbes[l].setshownPts(ell, trouve);
 					cnv.Children.Add(ell);
 					if (trouve > 0) cnv.Children.Remove(courbes[l].getlignes(trouve - 1));
@@ -352,29 +373,152 @@ namespace Profil_TopoM
 			suppp = 1;
 		}
 		//-------------------------------------------------------------------------------------------------------------
-	
+
 		//-----------------------------------------------------------------------------------------------------------
-		protected override void OnRender(DrawingContext dc)
-		{
-			if (Ss == 1)
-			{
-				base.OnRender(dc);
-				if (lineStarted)
-					dc.DrawLine(new Pen(Brushes.Black, 5), this.mousePoint1, Mouse.GetPosition(this));
-				double x1 = this.mousePoint1.X;
-				double y1 = this.mousePoint1.Y;
-				double x2 = Mouse.GetPosition(this).X;
-				double y2 = Mouse.GetPosition(this).Y;
-
-
-			}
-		}
+	
 		//----------------------------------------------------------------------------------------------------------
 		private void next_Click(object sender, RoutedEventArgs e)
 		{
 			Ss = 1;
+			List<Point> Points1 = new List<Point>();
+			int cr = 0,jk1=0;
+			int ik4=-1,ik3;
+			cnx.Open();
+			string readString3 = "select * from Trace  where nom ='"+ nomtr +"'";
+			
+			SqlCommand readCommand3 = new SqlCommand(readString3, cnx);
+			int nbs=1000;
+
+			using (SqlDataReader dataRead3 = readCommand3.ExecuteReader())
+
+			{
+				if (dataRead3 != null)
+				{
+					while (dataRead3.Read())
+					{
+
+						string xas = dataRead3["Id"].ToString();
+						 nbs = int.Parse(xas);
+
+					}
+				}
+			}
+			cnx.Close();
+			for (int ik = 0; ik < courbes.Count; ik++)
+			{
+
+				int jk = 0;
+
+				for (int ik2 = 0; ik2 < courbes[ik].nbPoints(); ik2++)
+				{
+
+					Points1.Add(courbes[ik].getpoints(ik2));
+
+				}
+				double ab = courbes[ik].getaltitude();
+				int ab1 = (int)ab;
+				for ( ik3 = ik4+1; ik3 <( ik4+1+courbes[ik].nbPoints()); ik3++)
+				{
+
+					double a;
+					double b;
+					a = Points1[ik3].X;
+					b = Points1[ik3].Y;
+					cnx.Open();
+					SqlCommand cmd = cnx.CreateCommand();
+					cmd.CommandType = CommandType.Text;
+					int a1 = (int)a;
+					int b1 = (int)b;
+
+					cmd.CommandText = "insert into [Point] (x,y,altitude,critere,Id) values ('" + a1 + "','" + b1 + "','" + ab1 + "','" + cr + "','" + nbs + "')";
+					cmd.ExecuteNonQuery();
+					cnx.Close();
+					jk1 = ik3;
+					
+
+				}
+				ik4 =jk1;
+				cr++;
+
+			}
+			Ss = 1;
+			cnx.Open();
+			
+
+						string readString = "select * from Point  where  Id =" +nbs;
+
+			SqlCommand readCommand = new SqlCommand(readString, cnx);
+
+
+			List<Courbe> courbes12 = new List<Courbe>();
+
+			double cris1p = 0;
+			int ik10 = 0;
+			double alts1p = 0;
+			Courbe fg = new Courbe();
+			using (SqlDataReader dataRead = readCommand.ExecuteReader())
+
+			{
+				if (dataRead != null)
+				{
+					while (dataRead.Read())
+					{
+
+						string xs = dataRead["x"].ToString();
+						string ys = dataRead["y"].ToString();
+						string alts = dataRead["altitude"].ToString();
+						string cris = dataRead["critere"].ToString();
+						double xs1 = (double)int.Parse(xs);
+						double ys1 = (double)int.Parse(ys);
+						double alts1 = (double)int.Parse(alts);
+						double cris1 = (double)int.Parse(cris);
+						if (cris1 == cris1p)
+						{
+							Point ab = new Point(xs1, ys1);
+							fg.setpoints(ab, ik10);
+							ik10++;
+
+						}
+						else
+						{
+							fg.setaltitude(alts1p);
+							courbes12.Add(fg);
+							fg = new Courbe();
+							ik10 = 0;
+							Point ab = new Point(xs1, ys1);
+							fg.setpoints(ab, ik10);
+							ik10++;
+
+
+
+
+						}
+						cris1p = cris1;
+						alts1p = alts1;
+
+
+
+
+
+					}
+				}
+				fg.setaltitude(alts1p);
+				courbes12.Add(fg);
+
+
+
+
+
+
+			}
+			cnx.Close();
+			
+			tracesegment imp = new tracesegment(kak, courbes12, nbs);
+			var parent = (Grid)this.Parent;
+			parent.Children.Clear();
+			parent.Children.Add(imp);
+
+
 		}
-
-
 	}
 }

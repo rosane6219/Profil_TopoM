@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Fujitsu\Desktop\doss1\Profil_TopoM\obj\Debug\
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\
 Profil_TopoM
 none
 false
 DEBUG;TRACE
-C:\Users\Fujitsu\Desktop\doss1\Profil_TopoM\App.xaml
-5-1855216401
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\App.xaml
+10916070407
 2-1355583596
-13-1632169867
-151864743983
-Accueil.xaml;Alt.xaml;Importation.xaml;MainWindow.xaml;Parametrage.xaml;
+1847853809
+192066727888
+Accueil.xaml;Alt.xaml;trace_profil.xaml;tracecourbes.xaml;historique.xaml;Importation.xaml;MainWindow.xaml;Parametrage.xaml;tracesegment.xaml;trace_apres_recup.xaml;
 
-True
+False
 

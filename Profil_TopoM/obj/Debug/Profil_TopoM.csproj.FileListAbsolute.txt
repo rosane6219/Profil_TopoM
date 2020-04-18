@@ -88,3 +88,17 @@ C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\Profil_TopoM.c
 C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\Profil_TopoM.csproj.CopyComplete
 C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\Profil_TopoM.exe
 C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\Profil_TopoM.pdb
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\tracesegment.g.cs
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\tracesegment.baml
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\tracecourbes.g.cs
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\historique.g.cs
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\tracecourbes.baml
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\historique.baml
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\trace_apres_recup.g.cs
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\trace_apres_recup.baml
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\bin\Debug\OxyPlot.dll
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\bin\Debug\OxyPlot.Wpf.dll
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\bin\Debug\OxyPlot.xml
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\bin\Debug\OxyPlot.Wpf.xml
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\trace_profil.g.cs
+C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\obj\Debug\trace_profil.baml
