@@ -85,7 +85,9 @@ namespace Profil_TopoM
 
         private void aideBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            selectionGrid.Children.Clear();
+            Aide aide = new Aide();
+            selectionGrid.Children.Add(aide);
         } 
 
         private void textBlock3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -101,6 +103,8 @@ namespace Profil_TopoM
         private void textBlock4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
+
         }
+        
     }
 }

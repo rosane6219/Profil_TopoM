@@ -45,7 +45,11 @@ namespace Profil_TopoM
                 i++;
             }
             var Xaxis = new OxyPlot.Axes.LinearAxis();
+<<<<<<< HEAD
             Xaxis.MajorStep = echelle;
+=======
+            Xaxis.MajorStep= echelle;
+>>>>>>> 9f1a0b9a76b8b8f3123557609c141a9a970e191e
             Xaxis.Position = OxyPlot.Axes.AxisPosition.Bottom;
             Xaxis.Title = "Axe des Abscisses";
             model.Axes.Add(Xaxis);
@@ -62,7 +66,11 @@ namespace Profil_TopoM
 
             // Add the plot to the window
             plot.Model = model;
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 9f1a0b9a76b8b8f3123557609c141a9a970e191e
         }
         private void precedant_Click(object sender, RoutedEventArgs e)
         {

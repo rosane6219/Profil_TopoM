@@ -93,6 +93,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Aide.xaml.cs">
+      <DependentUpon>Aide.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Alt.xaml.cs">
       <DependentUpon>Alt.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,7 @@
     <Compile Include="trace_profil.xaml.cs">
       <DependentUpon>trace_profil.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="tracecourbes.xaml.cs">
       <DependentUpon>tracecourbes.xaml</DependentUpon>
     </Compile>
@@ -114,7 +118,13 @@
     <Compile Include="trace_apres_recup.xaml.cs">
       <DependentUpon>trace_apres_recup.xaml</DependentUpon>
     </Compile>
+=======
+>>>>>>> 9f1a0b9a76b8b8f3123557609c141a9a970e191e
     <Page Include="Accueil.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Aide.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,11 +170,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
     <Page Include="tracesegment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="trace_apres_recup.xaml">
+=======
+    <Page Include="trace_profil.xaml">
+>>>>>>> 9f1a0b9a76b8b8f3123557609c141a9a970e191e
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
