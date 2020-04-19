@@ -8,7 +8,7 @@ using System.Windows.Shapes;
 
 namespace Profil_TopoM.Classes
 {
-    class Courbe
+    public class Courbe
     {
         private List<Point> Points = new List<Point>();
         private List<Ellipse> shownPts = new List<Ellipse>();
@@ -36,12 +36,10 @@ namespace Profil_TopoM.Classes
         public void removePoint(Point p) { Points.Remove(p); }
         public void removeligne(Line l) { lignes.Remove(l); }
         public void removeshownPts(Ellipse ell) { shownPts.Remove(ell); }
-        
+        public void setaltitude(double alt) { this.altitude = alt; }
+        public void Addpoints(Point p) { this.Points.Add(p); }
         //--------------------------------------------
         public List<Line> Lignes() { return lignes; }
         public List<Point> Point() { return Points; }
-
-        public void setaltitude(double alt) { this.altitude = alt; }
-
     }
 }

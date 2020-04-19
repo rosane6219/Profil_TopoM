@@ -18,26 +18,43 @@ using Profil_TopoM.Classes;
 
 namespace Profil_TopoM
 {
-    /// <summary>
-    /// Logique d'interaction pour Importation.xaml
-    /// </summary>
-    public partial class Importation : UserControl
-    {
-		private SqlConnection _con;
-		private SqlCommand _command;
-		//private SqlDataReader _reader;
-		private string _query;
-		private int idTrace;
-		//---------------------------------------------
-        public Importation(BitmapImage userImage, int id )
-        {
-            InitializeComponent();
-			_con = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename = {System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf; Integrated Security = True");
+	/// <summary>
+	/// Logique d'interaction pour Importation.xaml
+	/// </summary>
+	public partial class Importation : UserControl
+	{
+
+
+		int Fin = 0;
+		double Echelle, Equidistance, altmin, altmax;
+		Courbe cou = new Courbe();
+
+		int Ss = 0;
+		BitmapImage kak;
+		Trace trac= new Trace();
+		String nomtr;
+		SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\BDDtopo.mdf;Integrated Security=True");
+		public Importation(BitmapImage userImage, Trace trace15)
+		{
+
+
+			InitializeComponent();
 			img.Source = userImage;
-			idTrace = id;
-        }
-		//-----------------------------------------------------
+<<<<<<< HEAD
+			kak = userImage;
+			trac = trace15;
+			nomtr = trace15.nom;
+
+
+		}
+
 		int k = 0;
+=======
+
+		}
+		int k = 0; Line segment;
+
+>>>>>>> 9f1a0b9a76b8b8f3123557609c141a9a970e191e
 		List<Point> Points = new List<Point>();
 		List<Courbe> courbes = new List<Courbe>();
 		bool lineStarted = false;
@@ -48,8 +65,15 @@ namespace Profil_TopoM
 		List<Line> lignes = new List<Line>();
 		MouseButtonEventArgs m;
 		bool dep = false;
-		int Ss,Fin;
+		List<Point> pointIntersection = new List<Point>();
+		List<double> altitudee = new List<double>();
+		double alt1 = 0;
+		double alt2 = 0;
+		double pente;
+
 		//------------------------------------------------------------------------------------------------------
+
+
 		private void cnv_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			try
@@ -72,7 +96,7 @@ namespace Profil_TopoM
 				l = l - 1;
 				if (ok == 1)
 				{
-					Console.WriteLine(courbes[l].getpoints(trouve).X + " " + courbes[l].getpoints(trouve).Y);
+
 					dep = true;
 					cnv.Children.Remove(courbes[l].getshownPts(trouve));
 					base.OnMouseDoubleClick(e);
@@ -85,6 +109,7 @@ namespace Profil_TopoM
 					courbes[l].setpoints(p, trouve);
 					Canvas.SetLeft(ell, courbes[l].getpoints(trouve).X - 5 / 2);
 					Canvas.SetTop(ell, courbes[l].getpoints(trouve).Y - 10 / 2);
+
 					courbes[l].setshownPts(ell, trouve);
 					cnv.Children.Add(ell);
 					if (trouve > 0) cnv.Children.Remove(courbes[l].getlignes(trouve - 1));
@@ -93,6 +118,7 @@ namespace Profil_TopoM
 					{
 						cnv.Children.Remove(courbes[l].getlignes(trouve - 1));
 						newLine = new Line { X1 = courbes[l].getpoints(trouve - 1).X, Y1 = courbes[l].getpoints(trouve - 1).Y, X2 = p.X, Y2 = p.Y };
+						courbes[l].setlignes(newLine, trouve - 1);
 						if ((courbes[l].getaltitude() <= 0)) { newLine.Stroke = Brushes.Blue; }
 						if ((courbes[l].getaltitude() > 0) && (courbes[l].getaltitude() <= 50)) { newLine.Stroke = Brushes.SkyBlue; }
 						if ((courbes[l].getaltitude() > 50) && (courbes[l].getaltitude() <= 100)) { newLine.Stroke = Brushes.AliceBlue; }
@@ -102,15 +128,17 @@ namespace Profil_TopoM
 						if ((courbes[l].getaltitude() > 600) && (courbes[l].getaltitude() <= 800)) { newLine.Stroke = Brushes.Orange; }
 						if ((courbes[l].getaltitude() > 800) && (courbes[l].getaltitude() <= 1000)) { newLine.Stroke = Brushes.OrangeRed; }
 						if (courbes[l].getaltitude() > 1000) { newLine.Stroke = Brushes.Red; }
-
+						courbes[l].setlignes(newLine, trouve - 1);
 						newLine.StrokeThickness = 2;
 						cnv.Children.Add(newLine);
-						courbes[l].setlignes(newLine, trouve - 1);
+
 					}
 					if ((trouve + 1) < courbes[l].nbPoints())
 					{
 						line = new Line { X1 = courbes[l].getpoints(trouve + 1).X, Y1 = courbes[l].getpoints(trouve + 1).Y, X2 = p.X, Y2 = p.Y };
+
 						cnv.Children.Remove(courbes[l].getlignes(trouve));
+						courbes[l].setlignes(line, trouve);
 						if ((courbes[l].getaltitude() <= 0)) { line.Stroke = Brushes.Blue; }
 						if ((courbes[l].getaltitude() > 0) && (courbes[l].getaltitude() <= 50)) { line.Stroke = Brushes.SkyBlue; }
 						if ((courbes[l].getaltitude() > 50) && (courbes[l].getaltitude() <= 100)) { line.Stroke = Brushes.AliceBlue; }
@@ -120,9 +148,10 @@ namespace Profil_TopoM
 						if ((courbes[l].getaltitude() > 600) && (courbes[l].getaltitude() <= 800)) { line.Stroke = Brushes.Orange; }
 						if ((courbes[l].getaltitude() > 800) && (courbes[l].getaltitude() <= 1000)) { line.Stroke = Brushes.OrangeRed; }
 						if (courbes[l].getaltitude() > 1000) { line.Stroke = Brushes.Red; }
+
 						line.StrokeThickness = 2;
 						cnv.Children.Add(line);
-						courbes[l].setlignes(line, trouve);
+
 					}
 					if (k == 1) { this.lineStarted = false; k = 0; }
 				}
@@ -176,10 +205,12 @@ namespace Profil_TopoM
 			lineStarted = false;
 			k = 0;
 		}
-		Courbe c;
+		Courbe c; Point mousepoint;
 		int s = 0; int u = 0; int v = 0;
 		private void cnv_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
+			mousepoint = Mouse.GetPosition(this);
+
 			if (Ss == 0)
 			{
 				if (suppp == 1)
@@ -213,7 +244,6 @@ namespace Profil_TopoM
 					Line newLine;
 					if (trouve == 0)
 					{
-
 						cnv.Children.Remove(courbes[l].getlignes(trouve));
 						courbes[l].removeligne(courbes[l].getlignes(trouve));
 					}
@@ -227,6 +257,7 @@ namespace Profil_TopoM
 							X2 = courbes[l].getpoints(trouve + 1).X,
 							Y2 = courbes[l].getpoints(trouve + 1).Y
 						};
+						courbes[l].remplacer(newLine, trouve - 1);
 						if ((courbes[l].getaltitude() <= 0)) { newLine.Stroke = Brushes.Blue; }
 						if ((courbes[l].getaltitude() > 0) && (courbes[l].getaltitude() <= 50)) { newLine.Stroke = Brushes.SkyBlue; }
 						if ((courbes[l].getaltitude() > 50) && (courbes[l].getaltitude() <= 100)) { newLine.Stroke = Brushes.AliceBlue; }
@@ -236,10 +267,11 @@ namespace Profil_TopoM
 						if ((courbes[l].getaltitude() > 600) && (courbes[l].getaltitude() <= 800)) { newLine.Stroke = Brushes.Orange; }
 						if ((courbes[l].getaltitude() > 800) && (courbes[l].getaltitude() <= 1000)) { newLine.Stroke = Brushes.OrangeRed; }
 						if (courbes[l].getaltitude() > 1000) { newLine.Stroke = Brushes.Red; }
+
 						newLine.StrokeThickness = 2;
 						cnv.Children.Add(newLine);
 
-						courbes[l].remplacer(newLine, trouve - 1);
+
 					}
 					courbes[l].removePoint(courbes[l].getpoints(trouve));
 				}
@@ -256,7 +288,7 @@ namespace Profil_TopoM
 						courbes.Add(c);
 						mousePoint1 = e.GetPosition(this);
 						Points.Add(mousePoint1);
-						courbes.Last().setpoints(mousePoint1, s); s++;
+						courbes.Last().Addpoints(mousePoint1);
 						Ellipse ell = new Ellipse();
 						ell.Width = 7;
 						ell.Height = 7;
@@ -290,12 +322,12 @@ namespace Profil_TopoM
 						Point mousePoint2 = e.GetPosition(this);
 						if (sup == 1) { mousePoint1 = courbes.Last().getpoints(courbes.Last().nbPoints() - 1); sup = 0; }
 						Line newLine = new Line { X1 = mousePoint1.X, Y1 = mousePoint1.Y, X2 = mousePoint2.X, Y2 = mousePoint2.Y };
-
+						lignes.Add(newLine);
 						ToolTip t = new ToolTip();
 						t.Content = courbes.Last().getaltitude();
 						t.Background = Brushes.AliceBlue;
-
 						newLine.ToolTip = t;
+
 						if ((courbes.Last().getaltitude() <= 0)) { newLine.Stroke = Brushes.Blue; }
 						if ((courbes.Last().getaltitude() > 0) && (courbes.Last().getaltitude() <= 50)) { newLine.Stroke = Brushes.SkyBlue; }
 						if ((courbes.Last().getaltitude() > 50) && (courbes.Last().getaltitude() <= 100)) { newLine.Stroke = Brushes.AliceBlue; }
@@ -306,13 +338,12 @@ namespace Profil_TopoM
 						if ((courbes.Last().getaltitude() > 800) && (courbes.Last().getaltitude() <= 1000)) { newLine.Stroke = Brushes.OrangeRed; }
 						if (courbes.Last().getaltitude() > 1000) { newLine.Stroke = Brushes.Red; }
 
-						newLine.StrokeThickness = 2;
-						lignes.Add(newLine);
 						courbes.Last().setlignes(newLine, v); v++;
+						newLine.StrokeThickness = 2;
 						cnv.Children.Add(newLine);
 						mousePoint1 = e.GetPosition(this);
 						Points.Add(mousePoint1);
-						courbes.Last().setpoints(mousePoint1, s); s++;
+						courbes.Last().Addpoints(mousePoint1);
 						Ellipse ell = new Ellipse();
 						ell.Width = 7;
 						ell.Height = 7;
@@ -361,130 +392,217 @@ namespace Profil_TopoM
 		{
 			suppp = 1;
 		}
-		//---------------------*******************************-------------------------------------------------------------------
-		 
-
-		//---------------------***********************************************---------------------------------------------------
-		private int  idCourbe, idPoint, idPoint1, idPoint2;
-
-		private int  insertionCourbe(Courbe c,int idtra)
-		{
-			_query = "INSERT INTO Courbe VALUES(@idtrace,@altitude)";
-			_con.Open();
-			using (_command = new SqlCommand(_query, _con))
-			{
-				_command.CommandType = CommandType.Text;
-				_command.Parameters.AddWithValue("@idtrace", idtra);
-				_command.Parameters.AddWithValue("@altitude", c.getaltitude()) ;
-				idCourbe = (int)_command.ExecuteScalar();
-			}
-			_con.Close();
-			return idCourbe;
-		}
-
-		private int insertionPoint(Point p)
-		{
-			_query = "INSERT INTO Point VALUES(@x,@y)";
-			_con.Open();
-			
-			using (_command = new SqlCommand(_query, _con))
-			{
-				_command.CommandType = CommandType.Text;
-				_command.Parameters.AddWithValue("@x", p.X);
-				_command.Parameters.AddWithValue("@y", p.Y);
-				idPoint = (int)_command.ExecuteScalar();
-			}
-			_con.Close();
-			return idPoint;
-		}
-
-		private void insertionLine(Line l,int idCbe)
-		{
-			_query = "INSERT INTO Line VALUES(@idpt1,@idpt2,@idcourbe)";
-			_con.Open();
-			Point Start = new Point(l.X1, l.Y1);
-			Point End = new Point(l.X2, l.Y2);
-			int idPoint1 = insertionPoint(Start);
-			int idPoint2 = insertionPoint(End);
-			using (_command = new SqlCommand(_query, _con))
-			{
-				_command.CommandType = CommandType.Text;
-				_command.Parameters.AddWithValue("@idpt1", idPoint1);
-				_command.Parameters.AddWithValue("@idpt2", idPoint2);
-				_command.Parameters.AddWithValue("@idcourbe", idCbe);
-			    _command.ExecuteNonQuery();
-			}
-			_con.Close();
-		}
-
-		private void insertionSegment(Line l, int idTra)
-		{
-			_query = "INSERT INTO Segment VALUES(@idpt1,@idpt2,@idtrace)";
-			_con.Open();
-			Point Start = new Point(l.X1, l.Y1);
-			Point End = new Point(l.X2, l.Y2);
-			int idPoint1 = insertionPoint(Start);
-			int idPoint2 = insertionPoint(End);
-			using (_command = new SqlCommand(_query, _con))
-			{
-				_command.CommandType = CommandType.Text;
-				_command.Parameters.AddWithValue("@idpt1", idPoint1);
-				_command.Parameters.AddWithValue("@idpt2", idPoint2);
-				_command.Parameters.AddWithValue("@idtrace", idTra);
-				_command.ExecuteNonQuery();
-			}
-			_con.Close();
-		}
-
-		
-		public void BddCourbe(int idTra) 
-		{
-			foreach (Courbe c in courbes)
-			{
-				idCourbe=insertionCourbe(c,idTra);
-				foreach (Line l in c.Lignes()) 
-				{
-					insertionLine(l, idCourbe);
-				}
-			}
-		}
-
-
 		//-------------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
 
 		//-----------------------------------------------------------------------------------------------------------
-		Line segment;
-		Profil profil;
-		protected override void OnRender(DrawingContext dc)
+	
+		//----------------------------------------------------------------------------------------------------------
+		private void next_Click(object sender, RoutedEventArgs e)
+=======
+		List <Point> pointIntersection = new List<Point>();
+		List<double> altitudee = new List<double>();
+		double alt1 = 0;
+		double alt2 = 0;
+		double pente;
+		
+
+		private void prevBtn_Click(object sender, RoutedEventArgs e)
 		{
-			if (Ss == 1)
+			var parent = (Grid)this.Parent;
+			parent.Children.Clear();
+			Parametrage parametre = new Parametrage();
+			parent.Children.Add(parametre);
+		}
+
+		//-----------------------------------------------------------------------------------------------------------
+
+		protected override void OnRender(DrawingContext dc)
+>>>>>>> 9f1a0b9a76b8b8f3123557609c141a9a970e191e
+		{
+			Ss = 1;
+			List<Point> Points1 = new List<Point>();
+			int cr = 0,jk1=0;
+			int ik4=-1,ik3;
+			cnx.Open();
+			string readString3 = "select * from Trace  where nom ='"+ nomtr +"'";
+			
+			SqlCommand readCommand3 = new SqlCommand(readString3, cnx);
+			int nbs=1000;
+
+			using (SqlDataReader dataRead3 = readCommand3.ExecuteReader())
+
 			{
-				base.OnRender(dc);
+<<<<<<< HEAD
+				if (dataRead3 != null)
+				{
+					while (dataRead3.Read())
+					{
+
+						string xas = dataRead3["Id"].ToString();
+						 nbs = int.Parse(xas);
+
+					}
+				}
+			}
+			cnx.Close();
+			for (int ik = 0; ik < courbes.Count; ik++)
+			{
+
+				int jk = 0;
+
+				for (int ik2 = 0; ik2 < courbes[ik].nbPoints(); ik2++)
+				{
+
+					Points1.Add(courbes[ik].getpoints(ik2));
+
+				}
+				double ab = courbes[ik].getaltitude();
+				int ab1 = (int)ab;
+				for ( ik3 = ik4+1; ik3 <( ik4+1+courbes[ik].nbPoints()); ik3++)
+				{
+
+					double a;
+					double b;
+					a = Points1[ik3].X;
+					b = Points1[ik3].Y;
+					cnx.Open();
+					SqlCommand cmd = cnx.CreateCommand();
+					cmd.CommandType = CommandType.Text;
+					int a1 = (int)a;
+					int b1 = (int)b;
+
+					cmd.CommandText = "insert into [Point] (x,y,altitude,critere,Id) values ('" + a1 + "','" + b1 + "','" + ab1 + "','" + cr + "','" + nbs + "')";
+					cmd.ExecuteNonQuery();
+					cnx.Close();
+					jk1 = ik3;
+					
+
+				}
+				ik4 =jk1;
+				cr++;
+
+			}
+			Ss = 1;
+			cnx.Open();
+			
+
+						string readString = "select * from Point  where  Id =" +nbs;
+
+			SqlCommand readCommand = new SqlCommand(readString, cnx);
+
+
+			List<Courbe> courbes12 = new List<Courbe>();
+
+			double cris1p = 0;
+			int ik10 = 0;
+			double alts1p = 0;
+			Courbe fg = new Courbe();
+			using (SqlDataReader dataRead = readCommand.ExecuteReader())
+
+			{
+				if (dataRead != null)
+				{
+					while (dataRead.Read())
+					{
+
+						string xs = dataRead["x"].ToString();
+						string ys = dataRead["y"].ToString();
+						string alts = dataRead["altitude"].ToString();
+						string cris = dataRead["critere"].ToString();
+						double xs1 = (double)int.Parse(xs);
+						double ys1 = (double)int.Parse(ys);
+						double alts1 = (double)int.Parse(alts);
+						double cris1 = (double)int.Parse(cris);
+						if (cris1 == cris1p)
+						{
+							Point ab = new Point(xs1, ys1);
+							fg.setpoints(ab, ik10);
+							ik10++;
+
+						}
+						else
+						{
+							fg.setaltitude(alts1p);
+							courbes12.Add(fg);
+							fg = new Courbe();
+							ik10 = 0;
+							Point ab = new Point(xs1, ys1);
+							fg.setpoints(ab, ik10);
+							ik10++;
+
+
+
+
+						}
+						cris1p = cris1;
+						alts1p = alts1;
+
+
+
+
+
+					}
+				}
+				fg.setaltitude(alts1p);
+				courbes12.Add(fg);
+
+
+
+
+
+
+			}
+			cnx.Close();
+			
+			tracesegment imp = new tracesegment(kak, courbes12, nbs);
+			var parent = (Grid)this.Parent;
+			parent.Children.Clear();
+			parent.Children.Add(imp);
+
+
+=======
+
 				if (lineStarted)
-					dc.DrawLine(new Pen(Brushes.Black, 5), this.mousePoint1, Mouse.GetPosition(this));
-				double x1 = this.mousePoint1.X;
-				double y1 = this.mousePoint1.Y;
+				dc.DrawLine(new Pen(Brushes.Black, 5), this.mousePoint1, Mouse.GetPosition(this));
+				double x1 = this.mousePoint.X;
+				double y1 = this.mousePoint.Y;
 				double x2 = Mouse.GetPosition(this).X;
 				double y2 = Mouse.GetPosition(this).Y;
-				segme nt = new Line { X1 = x1, Y1 = y1, X2 = x2, Y2 = y2 };
-				/*profil = new Profil(segment, courbes);
-				profil.Intersection(out a1, out a2, out point_Intersection);
-				foreach (Point p in point_Intersection) { Console.WriteLine(p); }*/
+				Point start = new Point(x1, y1);
+				Point end = new Point(x2, y2);
+				segment = new Line { X1 = start.X, Y1 = start.Y, X2 = end.X, Y2 = end.Y };
+				Profil p = new Profil(start, end);
+				p.Intersection(courbes, out pointIntersection, out altitudee);
+				for (int l = 0; l < pointIntersection.Count; l++)
+				{
+					Console.WriteLine(pointIntersection[l]);
+				}
+				int o = 0; Point pp;
+				foreach (Courbe item in courbes)
+				{
+					o++;
+					for (int i = 0; i < item.nbPoints() - 1; i++)
+					{
+						pp = item.getpoints(i);
+					}
+				}
+				if (pointIntersection.Count > 1)
+				pente = p.Calcul_P(pointIntersection[0].X, pointIntersection[0].Y, pointIntersection[pointIntersection.Count - 1].X, pointIntersection[pointIntersection.Count - 1].Y, altitudee[0], altitudee[altitudee.Count - 1], 60);
 			}
 		}
+		private void next_Click1(object sender, RoutedEventArgs e)
+		{
+			trace_profil pr = new trace_profil(Parametrage.altmin, Parametrage.altmax, Parametrage.echell, pente);
+			pr.plotData(Parametrage.echell, Parametrage.altmin, Parametrage.altmax, Parametrage.equidis, pointIntersection, altitudee);
+			Grids.Children.Clear();
+			Grids.Children.Add(pr);
+		}
 		//----------------------------------------------------------------------------------------------------------
-		double a1, a2;
-		List<Point> point_Intersection;
 		private void next_Click(object sender, RoutedEventArgs e)
 		{
 			Ss = 1;
 			
 		}
-		
-		
-
-
-
-
 	}
 }

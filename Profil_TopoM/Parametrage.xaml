@@ -24,12 +24,19 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             VerticalAlignment="Center" Height="58" Margin="442,137,253,375" />
         <TextBox x:Name="echelle"
-            materialDesign:HintAssist.Hint="l'echelle de votre carte"
+            materialDesign:HintAssist.Hint="Sur le relief (m)"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="64" Margin="442,215,253,291" />
+            VerticalAlignment="Center" Height="64" Margin="661,215,102,291" TextChanged="echelle_TextChanged" />
+        <TextBox x:Name="echelleCM"
+            materialDesign:HintAssist.Hint="Sur la carte (cm)"
+            BorderBrush="#58A3AF"
+            Foreground="#58A3AF"
+            FontSize="19"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            VerticalAlignment="Center" Height="64" Margin="442,215,321,291" TextChanged="echelleCM_TextChanged" />
         <TextBox x:Name="altritude_min"
             materialDesign:HintAssist.Hint="la plus basse altitude"
             BorderBrush="#58A3AF"

@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="Profil_TopoM.historique"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Profil_TopoM"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="570" d:DesignWidth="940">
+    <Grid>
+        <TextBox x:Name="nomTracefait"
+            materialDesign:HintAssist.Hint="nommez votre tracé "
+            BorderBrush="#58A3AF"
+            Foreground="#58A3AF"
+            FontSize="19"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+            VerticalAlignment="Center" Height="58" Margin="442,62,253,450" />
+
+        
+      
+        <Label x:Name="parametrageL" Content="Récupération des traces"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="327,9,0,0" VerticalAlignment="Top" Width="177" FontSize="30"/>
+        <Label x:Name="nom" Content="Nom du tracé" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,77,0,0" VerticalAlignment="Top" Width="185"/>
+      
+        <!--Grid Margin="135,615,228,-628">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="82*"/>
+                <RowDefinition Height="91*"/>
+            </Grid.RowDefinitions-->
+
+        <!--/Grid-->
+
+        <!--Button x:Name="nextBtn"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                Background="{x:Null}"
+                BorderBrush="#58A3AF"
+                Foreground="#58A3AF"
+                ToolTip="Allons dessiner les courbes de niveau!!" Margin="845,493,55,37" Click="nextBtn_Click">
+            <materialDesign:PackIcon
+                    Kind="ArrowRight"
+                    Height="24"
+                    Width="24" />
+        </>
+        <Button x:Name="prevBtn"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                Background="{x:Null}"
+                BorderBrush="#58A3AF"
+                Foreground="#58A3AF"
+                ToolTip="Retour au menu" Margin="793,493,107,37" Click="prevBtn_Click">
+            <materialDesign:PackIcon
+                    Kind="ArrowLeft"
+                    Height="24"
+                    Width="24" />
+        </Button-->
+
+        <Image x:Name="image" HorizontalAlignment="Left" Height="48" Margin="800,0,0,0" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Grid HorizontalAlignment="Left" Height="108" Margin="155,462,0,0" VerticalAlignment="Top" Width="771">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="227*"/>
+                <ColumnDefinition Width="278*"/>
+            </Grid.ColumnDefinitions>
+            
+         
+            <Button x:Name="nextBtn"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                Background="{x:Null}"
+                BorderBrush="#58A3AF"
+                Foreground="#58A3AF"
+                ToolTip="récupérer votre carte!" Margin="352.333,14,31.667,47" Click="nextBtn_Click" Grid.Column="1">
+                <materialDesign:PackIcon
+                    Kind="ArrowRight"
+                    Height="24"
+                    Width="24" />
+            </Button>
+            <Button x:Name="prevBtn"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                Background="{x:Null}"
+                BorderBrush="#58A3AF"
+                Foreground="#58A3AF"
+                ToolTip="Retour au menu" Margin="282.333,14,101.667,47"  Grid.Column="1">
+                <materialDesign:PackIcon
+                    Kind="ArrowLeft"
+                    Height="24"
+                    Width="24" />
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>
