@@ -65,7 +65,7 @@
                 BorderBrush="#58A3AF"
                 Foreground="#58A3AF"
                 
-                ToolTip="Allons dessiner le segment!!" Margin="352.333,14,31.667,47"  Grid.Column="1"  Click="next_Click" >
+                ToolTip="allons dessiner le segment !!" Margin="352.333,14,31.667,47"  Grid.Column="1"  Click="next_Click" >
                 <materialDesign:PackIcon
                     Kind="ArrowRight"
                     Height="24"
@@ -83,7 +83,7 @@
                     Height="24"
                     Width="24" />
             </Button>
-            <Button x:Name="next" Content="Suivant " Height="Auto" Margin="261,-474,396.667,553" Grid.ColumnSpan="2" Click="next_Click"></Button>
+            <Button x:Name="next" Content="Suivant " Height="Auto" Margin="261,-467,397,550" Grid.ColumnSpan="2" Click="next_Click"></Button>
         </Grid>
 
     </Grid>

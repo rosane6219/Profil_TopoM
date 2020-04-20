@@ -41,7 +41,7 @@
         </member>
         <member name="T:MaterialDesignThemes.Wpf.ColorZone">
             <summary>
-            User a colour zone to easily switch the background and foreground colours, whilst still remaining within the selected Material Design palette.
+            User a colour zone to easily switch the background and foreground colours, from selected Material Design palette or custom ones.
             </summary>
         </member>
         <member name="F:MaterialDesignThemes.Wpf.ComboBoxAssist.ClassicModeProperty">
@@ -1243,9 +1243,27 @@
             <param name="element"></param>
             <returns></returns>
         </member>
+        <member name="F:MaterialDesignThemes.Wpf.TextFieldAssist.UnderlineBrushProperty">
+            <summary>
+            The attached WPF property for getting or setting the <see cref="T:System.Windows.Media.Brush"/> value for an underline decoration.
+            </summary>
+        </member>
+        <member name="M:MaterialDesignThemes.Wpf.TextFieldAssist.SetUnderlineBrush(System.Windows.DependencyObject,System.Windows.Media.Brush)">
+            <summary>
+            Sets the <see cref="T:System.Windows.Media.Brush"/> used for underline decoration.
+            </summary>
+            <param name="element"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:MaterialDesignThemes.Wpf.TextFieldAssist.GetUnderlineBrush(System.Windows.DependencyObject)">
+            <summary>
+            Gets the <see cref="T:System.Windows.Media.Brush"/> used for underline decoration.
+            </summary>
+            <param name="element"></param>
+        </member>
         <member name="F:MaterialDesignThemes.Wpf.TextFieldAssist.HasFilledTextFieldProperty">
             <summary>
-            Controls the visibility of the filled text field.
+            Controls the visbility of the text field box.
             </summary>
         </member>
         <member name="F:MaterialDesignThemes.Wpf.TextFieldAssist.HasOutlinedTextFieldProperty">
@@ -1271,21 +1289,6 @@
         <member name="F:MaterialDesignThemes.Wpf.TextFieldAssist.RippleOnFocusEnabledProperty">
             <summary>
             Enables a ripple effect on focusing the text box.
-            </summary>
-        </member>
-        <member name="F:MaterialDesignThemes.Wpf.TextFieldAssist.UnderlineBrushProperty">
-            <summary>
-            The color for highlighting effects on the border of a text box.
-            </summary>
-        </member>
-        <member name="M:MaterialDesignThemes.Wpf.TextFieldAssist.SetUnderlineBrush(System.Windows.DependencyObject,System.Windows.Media.Brush)">
-            <summary>
-            Sets the color for highlighting effects on the border of a text box.
-            </summary>
-        </member>
-        <member name="M:MaterialDesignThemes.Wpf.TextFieldAssist.GetUnderlineBrush(System.Windows.DependencyObject)">
-            <summary>
-            Gets the color for highlighting effects on the border of a text box.
             </summary>
         </member>
         <member name="F:MaterialDesignThemes.Wpf.TextFieldAssist.IncludeSpellingSuggestionsProperty">

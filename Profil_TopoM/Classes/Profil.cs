@@ -11,72 +11,119 @@ namespace Profil_TopoM.Classes
 {
     class Profil
     {
-        Line segment;
-        List<Courbe> courbeaniveau;
-        public Profil(Line l, List<Courbe> c) { this.segment = l; this.courbeaniveau = c; }
+        Point start, end;
+
+        public Profil(Point start, Point end) { this.start = start; this.end = end; }
         //public void DessinerAxes(min , max, echelle) { }
         //public real CalculPente(segment) {}
-        public void Intersection(out double alt1, out double alt2, out List<Point> point_Intersection)
+        public void Intersection(List<Courbe> courbeaniveau, out List<Point> point_Intersection, out List<double> altitude)
         {
+            bool trouv;
+            int k, a = 0;
+            bool intersect, inters1;
+            Point intersectionPoint;
             point_Intersection = new List<Point>();
-            List<double> altitude = new List<double>();
-            alt1 = 0;
-            alt2 = 0;
+            altitude = new List<double>();
+            Point p, p1; int o = 0;
             foreach (Courbe item in courbeaniveau)
             {
-
-                foreach (Line li in item.Lignes())
+                o++;
+                for (int i = 0; i < item.nbPoints() - 1; i++)
                 {
-                    bool intersect = IntersectWithSegementOfLine(segment, li, out Point intersectionPoint);
+                    p = item.getpoints(i); p1 = item.getpoints(i + 1);
+                    intersect = IntersectWithSegementOfLine(start, end, p, p1, out intersectionPoint);
                     if (intersect)
                     {
-                        point_Intersection.Add(intersectionPoint);
-                        altitude.Add(item.getaltitude());
+                        k = 0; trouv = false;
+                        if (point_Intersection.Count == 0)
+                        {
+                            point_Intersection.Add(intersectionPoint);
+                            altitude.Add(item.getaltitude());
+                        }
+                        else
+                        {
+                            while ((k < point_Intersection.Count) && (trouv == false))
+                            {
+                                if (point_Intersection[k].X > intersectionPoint.X) { a = k; trouv = true; }
+                                else { k++; }
+                            }
+                            if (trouv == true)
+                            {
+                                if ((a >= 0) && (a < point_Intersection.Count) && (point_Intersection.Count > 0))
+                                {
+                                    point_Intersection.Add(point_Intersection[point_Intersection.Count - 1]);
+
+
+                                    altitude.Add(altitude[altitude.Count - 1]);
+                                    k = point_Intersection.Count - 2;
+                                    while (k >= a)
+                                    {
+                                        point_Intersection[k + 1] = point_Intersection[k];
+                                        altitude[k + 1] = altitude[k];
+                                        k--;
+                                    }
+                                    point_Intersection[a] = intersectionPoint;
+                                    altitude[a] = item.getaltitude();
+                                }
+                                else
+                                {
+                                    while (a < point_Intersection.Count) a++;
+                                    point_Intersection.Add(intersectionPoint);
+                                    altitude.Add(item.getaltitude());
+                                }
+                            }
+                            else
+                            {
+                                point_Intersection.Add(intersectionPoint);
+                                altitude.Add(item.getaltitude());
+                            }
+
+                        }
+
+
                     }
                 }
             }
-            if (altitude.Count() != 0) { alt1 = altitude[1]; alt2 = altitude.Last(); }
-
 
         }
 
-        public bool IntersectWithSegementOfLine(Line line, Line otherLine, out Point intersectionPoint)
+        public bool IntersectWithSegementOfLine(Point start, Point end, Point p, Point p1, out Point intersectionPoint)
         {
-            bool hasIntersection = IntersectsWithLine(line, otherLine, out intersectionPoint);
-            Point start = new Point(line.X1, line.Y1);
-            Point end = new Point(line.X2, line.Y2);
-            Point start2 = new Point(otherLine.X1, line.Y1);
-            Point end2 = new Point(otherLine.X2, line.Y2);
+            Line line = new Line { X1 = start.X, Y1 = start.Y, X2 = end.X, Y2 = end.Y };
+            Line otherLine = new Line { X1 = p.X, Y1 = p.Y, X2 = p1.X, Y2 = p1.Y };
+            bool hasIntersection = IntersectsWithLine(start, end, p, p1, out intersectionPoint);
+
             if (hasIntersection)
+            {
+                Console.WriteLine("okeeeyyyyy");
+                Console.WriteLine("---------Le Point d Intersection est :" + intersectionPoint + "-----------");
 
-                return IsBetweenTwoPoints(start, end, intersectionPoint) && IsBetweenTwoPoints(start2, end2, intersectionPoint);
-            ;
-
-            return false;
+                if (IsBetweenTwoPoints(start, end, intersectionPoint) && IsBetweenTwoPoints(p, p1, intersectionPoint)) { Console.WriteLine("trouuuuuuuuve"); return true; }
+                else return false;
+            }
+            else return false;
         }
 
-        public bool IntersectsWithLine(Line line, Line otherLine, out Point intersectionPoint)
+        public bool IntersectsWithLine(Point start, Point end, Point p, Point p1, out Point intersectionPoint)
         {
             intersectionPoint = new Point(0, 0);
-            if (isVertical(line) && isVertical(otherLine))
-                return false;
-            if (isVertical(line) || isVertical(otherLine))
-            {
-                intersectionPoint = GetIntersectionPointIfOneIsVertical(otherLine, line);
-                return true;
-            }
 
-            double A = (line.Y2 - line.Y1) / (line.X2 - line.X1);
-            double Aother = (otherLine.Y2 - otherLine.Y1) / (otherLine.X2 - otherLine.X1);
-            double C = line.Y1 - A * line.X1;
-            double Cother = otherLine.Y1 - Aother * otherLine.X1;
-            double delta = Aother - A;
 
-            bool hasIntersection = Math.Abs(delta) > 0.0001f;
+            double a = (end.Y - start.Y) / (end.X - start.X);
+
+            double a1 = (p1.Y - p.Y) / (p1.X - p.X);
+
+            double b = end.Y - a * end.X;
+
+            double b1 = p1.Y - a1 * p1.X;
+
+            double delta = a - a1;
+
+            bool hasIntersection = Math.Abs(delta) > 0;
             if (hasIntersection)
             {
-                double x = (C - Cother) / delta;
-                double y = A * x + C;
+                double x = (b1 - b) / delta;
+                double y = a * x + b;
                 intersectionPoint = new Point(x, y);
             }
             return hasIntersection;
@@ -109,27 +156,57 @@ namespace Profil_TopoM.Classes
                 {
                     if ((start.X <= intersect.X) && (intersect.X <= end.X) && (intersect.Y <= end.Y)
                         && (start.Y <= intersect.Y)) return true;
+                    else return false;
                 }
-                else if (start.Y >= end.Y)
+                else
                 {
                     if ((start.X <= intersect.X) && (intersect.X <= end.X) && (intersect.Y >= end.Y)
                         && (start.Y >= intersect.Y)) return true;
+                    else return false;
                 }
             }
-            else if (start.X >= end.X)
+            else
             {
                 if (start.Y <= end.Y)
                 {
                     if ((start.X >= intersect.X) && (intersect.X >= end.X) && (intersect.Y <= end.Y)
                         && (start.Y <= intersect.Y)) return true;
+                    else return false;
                 }
-                else if (start.Y >= end.Y)
+                else
                 {
                     if ((start.X >= intersect.X) && (intersect.X >= end.X) && (intersect.Y >= end.Y)
                        && (start.Y >= intersect.Y)) return true;
+                    else return false;
                 }
             }
-            return false;
+
+        }
+
+
+
+
+        public double Calcul_P(double x1, double y1, double x2, double y2, double alt1, double alt2, int ech)
+        {
+            double distanceF = ((distance(x1, y1, x2, y2)) * ech);// conversion en metres
+            double denivele;
+            if (alt1 <= alt2)
+            {
+                denivele = alt2 - alt1;
+            }
+            else
+            {
+                denivele = alt1 - alt2;
+            }
+            double distanceH = Math.Pow(distanceF, 2) - Math.Pow(denivele, 2);
+            return (denivele * 100) / distanceH;
+        }
+        public double distance(double x1, double y1, double x2, double y2)
+        {
+            double p1 = Math.Pow((x2 - x1), 2);
+            double p2 = Math.Pow((y2 - y1), 2);
+            double result = Math.Sqrt(p1 + p2);
+            return result;
         }
 
     }

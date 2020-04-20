@@ -25,7 +25,7 @@ namespace Profil_TopoM
     {
         int mika1;
         public List<Courbe> courbes15 = new List<Courbe>();
-        SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\BDDtopo.mdf;Integrated Security=True");
+        SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
         public tracesegment(BitmapImage userImage1, List<Courbe> courbes3, int mika)
         {
             InitializeComponent();

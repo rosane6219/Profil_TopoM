@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Profil_TopoM", "Profil_TopoM\Profil_TopoM.csproj", "{10E6B966-72F9-46C2-B0AE-40FFB0E2139D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Profil_TopoM", "Profil_TopoM\Profil_TopoM.csproj", "{B98CA0C5-DA16-4298-8368-B91F27C0517F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{10E6B966-72F9-46C2-B0AE-40FFB0E2139D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{10E6B966-72F9-46C2-B0AE-40FFB0E2139D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{10E6B966-72F9-46C2-B0AE-40FFB0E2139D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{10E6B966-72F9-46C2-B0AE-40FFB0E2139D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B98CA0C5-DA16-4298-8368-B91F27C0517F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98CA0C5-DA16-4298-8368-B91F27C0517F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98CA0C5-DA16-4298-8368-B91F27C0517F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98CA0C5-DA16-4298-8368-B91F27C0517F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {9506EC43-7E97-4EF4-86D2-971D92FD6AB0}
+		SolutionGuid = {FF08E63B-BB18-4CD6-86A7-7D2772E300F4}
 	EndGlobalSection
 EndGlobal

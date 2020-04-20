@@ -28,7 +28,7 @@ namespace Profil_TopoM
 		BitmapImage kak;
 		Trace trac = new Trace();
 		String nomtr;
-		SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\BDDtopo.mdf;Integrated Security=True");
+		SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
 
 
 		public List<Courbe> courbes33= new List<Courbe>();

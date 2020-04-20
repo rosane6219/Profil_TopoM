@@ -18,16 +18,19 @@ using System.Data;
 
 namespace Profil_TopoM
 {
+    /// <summary>
+    /// Logique d'interaction pour Parametrage.xaml
+    /// </summary>
     public partial class Parametrage : UserControl
     {
 
-        
+        private string _user;
         private SqlConnection _con;
         private SqlCommand _command;
-        //private SqlDataReader _reader;
+        private SqlDataReader _reader;
         private string _query;
         private Trace trace;
-        SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Fujitsu\Desktop\Profil_topo_MAKER\Profil_TopoM\BDDtopo.mdf;Integrated Security=True");
+        SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename= {System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
 
 
 
@@ -36,8 +39,8 @@ namespace Profil_TopoM
             InitializeComponent();
            
         }
-       
-        private void insertionTrace(Trace trace )
+
+        private void insertion(Trace trace)
         {
             cnx.Open();
             bool bac = false;
@@ -84,7 +87,7 @@ namespace Profil_TopoM
             i = i - 1;
             cnx.Open();
             cmd.CommandText    = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id) values ('" +trace.min + "','" + trace.max + "','" +trace.echelle + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat.ToString("dd/mm/yyyy hh:mm:ss") + "','" + trace.date_modif.ToString("dd/mm/yyyy hh:mm:ss") + "','" + i + "')";
-          cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
             cnx.Close();
         }
         BitmapImage img;
@@ -111,37 +114,15 @@ namespace Profil_TopoM
             Accueil accueil = new Accueil();
             parent.Children.Add(accueil);
         }
-        public static double echell;
-        public static double altmin;
-        public static double altmax;
-        public static double equidis;
         private void nextBtn_Click(object sender, RoutedEventArgs e)
-<<<<<<< HEAD
         {
 
             Trace trace = new Trace(nomTrace.Text, DateTime.Now, DateTime.Now, int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), Int32.Parse(echelle.Text), Int32.Parse(equidistance.Text), url);
-=======
-        {    
-            Trace trace = new Trace(nomTrace.Text,DateTime.Now,DateTime.Now,int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), Int32.Parse(echelle.Text) /Int32.Parse(echelleCM.Text), Int32.Parse(equidistance.Text), url);
->>>>>>> 9f1a0b9a76b8b8f3123557609c141a9a970e191e
             insertion(trace);
             Importation imp = new Importation(img, trace);
             var parent = (Grid)this.Parent;
             parent.Children.Clear();
             parent.Children.Add(imp);
-            echell = double.Parse(echelle.Text)/double.Parse(echelleCM.Text);
-            altmin = double.Parse(altritude_min.Text);
-            altmax = double.Parse(altritude_max.Text);
-            equidis = double.Parse(equidistance.Text);
         }
-        private void echelleCM_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-        private void echelle_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-        //---------------------------------------------------------------------------------------------------------------       
     }
 }
