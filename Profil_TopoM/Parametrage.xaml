@@ -14,7 +14,7 @@
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="58" Margin="442,62,253,450" />
+            VerticalAlignment="Center" Height="58" Margin="442,62,253,450" PreviewTextInput="nomTrace_PreviewTextInput" />
 
         <TextBox x:Name="equidistance"
             materialDesign:HintAssist.Hint="distance entre courbes "
@@ -22,35 +22,35 @@
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="58" Margin="442,137,253,375" />
+            VerticalAlignment="Center" Height="58" Margin="442,137,253,375" PreviewTextInput="equidistance_PreviewTextInput" />
         <TextBox x:Name="echelle"
             materialDesign:HintAssist.Hint="Sur le relief (m)"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="64" Margin="661,215,102,291"  />
+            VerticalAlignment="Center" Height="64" Margin="661,215,102,291" PreviewTextInput="echelle_PreviewTextInput"  />
         <TextBox x:Name="echelleCM"
             materialDesign:HintAssist.Hint="Sur la carte (cm)"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="64" Margin="442,215,321,291"  />
+            VerticalAlignment="Center" Height="64" Margin="442,215,321,291"  PreviewTextInput="echelleCM_PreviewTextInput"  />
         <TextBox x:Name="altritude_min"
             materialDesign:HintAssist.Hint="la plus basse altitude"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="58" Margin="442,302,253,210" />
+            VerticalAlignment="Center" Height="58" Margin="442,302,253,210" PreviewTextInput="altritude_min_PreviewTextInput" />
         <TextBox x:Name="altritude_max"
             materialDesign:HintAssist.Hint="la plus haute altitude"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="62" Margin="442,383,253,125" />
+            VerticalAlignment="Center" Height="62" Margin="442,383,253,125" PreviewTextInput="altritude_max_PreviewTextInput" />
         <Label x:Name="parametrageL" Content="Paramétrage"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="327,9,0,0" VerticalAlignment="Top" Width="177" FontSize="30"/>
         <Label x:Name="nom" Content="Nom du tracé" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,77,0,0" VerticalAlignment="Top" Width="185"/>
         <Label x:Name="equidistanceL" Content="Equidistance" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,152,0,0" VerticalAlignment="Top" Width="185"/>
@@ -114,7 +114,7 @@
                 Height="50"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 ToolTip="Importer une image" Margin="195,10,423.667,0" Click="Button_Click" Background="{x:Null}" VerticalAlignment="Top" Grid.ColumnSpan="2">
-                <TextBlock Text="Ouvrir" FontSize="19" />
+                <TextBlock Text="Importer" FontSize="19" />
             </Button>
             <Button x:Name="nextBtn"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"

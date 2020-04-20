@@ -100,7 +100,7 @@
     <Grid Background="White" Width="1000">
         <Grid x:Name="selectionGrid" Margin="60,0,10,-0.333" Height="570">
             <Image HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="296" Margin="421,83,0,0" Source="Ressources/courbesbleu.jpg"/>
-            <Label Content="Bienvenue dans &#xD;&#xA;Profil_Topo_Maker,&#xA;une application dédiées à la &#xA;génération de profil &#xD;&#xA;topographique " FontSize="20" FontFamily="Monserrat"   HorizontalAlignment="Left" Height="138" Margin="64,83,0,0" VerticalAlignment="Top" Width="265" Foreground="#DDEE6B6B"/>
+            <Label Content="Bienvenue dans &#xA;Profil_Topo_Maker,&#xA;une application dédiée à la &#xA;génération de profil &#xA;topographique " FontSize="20" FontFamily="Monserrat"   HorizontalAlignment="Left" Height="138" Margin="64,83,0,0" VerticalAlignment="Top" Width="265" Foreground="#DDEE6B6B"/>
             <Image x:Name="image" HorizontalAlignment="Left" Height="48" Margin="800,0,0,0" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -150,7 +150,7 @@
                         <RowDefinition Height="0*"/>
                     </Grid.RowDefinitions>
 
-                    <Button x:Name="buttonopenmenu" Height="40"   BorderBrush="{x:Null}" Click="buttonopenmenu_Click" HorizontalAlignment="Center" Width="40" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="buttonopenmenu" Height="40"  ToolTip="Afficher le menu" BorderBrush="{x:Null}" Click="buttonopenmenu_Click" HorizontalAlignment="Center" Width="40" RenderTransformOrigin="0.5,0.5">
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -163,7 +163,7 @@
                             <ImageBrush ImageSource="./Ressources/menu.png"/>
                         </Button.Background>
                     </Button>
-                    <Button x:Name="Buttonclosemenu" Width="60" Height="60"  Background="#1E5370"   BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="Buttonclosemenu_Click">
+                    <Button x:Name="Buttonclosemenu" Width="60" ToolTip="Fermer le menu" Height="60"  Background="#1E5370"   BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="Buttonclosemenu_Click">
                         <materialDesign:PackIcon  Kind="ArrowLeft" Width="25" Height="25"/>
                     </Button>
                 </Grid>
@@ -172,7 +172,7 @@
 
                     <ListViewItem  Height="60">
                         <StackPanel Orientation="Horizontal" >
-                            <Button x:Name="homeBtn" BorderBrush="{x:Null}" Height="25" Width="25" Margin="10" Click="homeBtn_Click">
+                            <Button x:Name="homeBtn" BorderBrush="{x:Null}" ToolTip="Acceuil" Height="25" Width="25" Margin="10" Click="homeBtn_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="./Ressources/home.png"/>
                                 </Button.Background>
@@ -192,12 +192,12 @@
                     </ListViewItem>
                     <ListViewItem  Height="60"   >
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="paramBtn" BorderBrush="{x:Null}" Height="25" Width="25" Margin="10" Click="paramBtn_Click" >
+                            <Button x:Name="paramBtn" BorderBrush="{x:Null}" ToolTip="Créer un tracé" Height="25" Width="25" Margin="10" Click="paramBtn_Click" >
                                 <Button.Background>
                                     <ImageBrush ImageSource="./Ressources/import.png"/>
                                 </Button.Background>
                             </Button>
-                            <Label x:Name="textBlock1" Content="Importer" FontSize="14" VerticalAlignment="Center" Margin="10 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock1_MouseLeftButtonDown" Width="120"  >
+                            <Label x:Name="textBlock1" Content="Créer un tracé" FontSize="14" VerticalAlignment="Center" Margin="10 10" Foreground="#FFFFFF" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="textBlock1_MouseLeftButtonDown" Width="120"  >
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -211,7 +211,7 @@
                     </ListViewItem>
                     <ListViewItem  Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="dossierBtn" BorderBrush="{x:Null}" Height="25" Width="25" Margin="10" Click="dossierBtn_Click">
+                            <Button x:Name="dossierBtn" BorderBrush="{x:Null}" ToolTip="Ouvrir un tracé" Height="25" Width="25" Margin="10" Click="dossierBtn_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="./Ressources/dossier.png"/>
                                 </Button.Background>
@@ -230,7 +230,7 @@
                     </ListViewItem>
                     <ListViewItem  Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="aideBtn" BorderBrush="{x:Null}" Height="25" Width="25" Margin="10" Click="aideBtn_Click">
+                            <Button x:Name="aideBtn" BorderBrush="{x:Null}" ToolTip="Page d'aide" Height="25" Width="25" Margin="10" Click="aideBtn_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="./Ressources/aide.png"/>
                                 </Button.Background>
@@ -250,7 +250,7 @@
 
                     <ListViewItem  Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="quitBtn" BorderBrush="{x:Null}" Height="25" Width="25" Margin="10" Click="quitBtn_Click">
+                            <Button x:Name="quitBtn" BorderBrush="{x:Null}" ToolTip="Quitter l'application" Height="25" Width="25" Margin="10" Click="quitBtn_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="./Ressources/logout.png"/>
                                 </Button.Background>

@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace Profil_TopoM
 {
@@ -30,6 +31,8 @@ namespace Profil_TopoM
         private SqlDataReader _reader;
         private string _query;
         private Trace trace;
+        Regex nameControl = new Regex(@"[A-Za-z0-9]+");
+        Regex intControl = new Regex(@"[0-9]+");
         SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename= {System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
 
 
@@ -116,13 +119,71 @@ namespace Profil_TopoM
         }
         private void nextBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (nomTrace.Text == "" || altritude_max.Text == "" || altritude_min.Text == "" || echelle.Text == "" || equidistance.Text == "" || url == "")
+            {
+                /*SolidColorBrush MyBrush = (SolidColorBrush)Application.Current.Resources["PrimaryHueMidBrush"];
+                var msg = new CustomMaterialMessageBox
+                {
+                    TxtMessage = { Text = ("Veuillez remplir tous les champs ! "), FontSize = 14, Foreground = Brushes.Black, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center },
+                    TxtTitle = { Text = "Erreur", Foreground = Brushes.White, HorizontalAlignment = HorizontalAlignment.Left },
+                    BtnOk = { Content = "OK", Background = MyBrush, BorderBrush = Brushes.Transparent },
+                    BtnCancel = { Visibility = Visibility.Collapsed, BorderBrush = Brushes.Transparent },
+                    BtnCopyMessage = { Visibility = Visibility.Hidden },
+                    MainContentControl = { Background = Brushes.White },
 
-            Trace trace = new Trace(nomTrace.Text, DateTime.Now, DateTime.Now, int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), Int32.Parse(echelle.Text), Int32.Parse(equidistance.Text), url);
-            insertion(trace);
-            Importation imp = new Importation(img, trace);
-            var parent = (Grid)this.Parent;
-            parent.Children.Clear();
-            parent.Children.Add(imp);
+
+                    TitleBackgroundPanel = { Background = MyBrush },
+                    Height = 220,
+                    Width = 350,
+                    BorderBrush = MyBrush
+                };
+                msg.Show();*/
+                MessageBox.Show("Veuillez remplir tous les champs !");
+            }
+            else
+            {
+                if (Int32.Parse(altritude_max.Text) < int.Parse(altritude_min.Text)) 
+                { MessageBox.Show("L'altitude max doit être superieure à l'altitude min !"); }
+                else
+                {
+                    Trace trace = new Trace(nomTrace.Text, DateTime.Now, DateTime.Now, int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), Int32.Parse(echelle.Text), Int32.Parse(equidistance.Text), url);
+                    insertion(trace);
+                    Importation imp = new Importation(img, trace);
+                    var parent = (Grid)this.Parent;
+                    parent.Children.Clear();
+                    parent.Children.Add(imp);
+                }
+            }
+        }
+
+        private void nomTrace_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!nameControl.IsMatch(e.Text)) e.Handled = true;
+        }
+
+        private void equidistance_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!intControl.IsMatch(e.Text)) e.Handled = true;
+        }
+
+        private void echelleCM_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!intControl.IsMatch(e.Text)) e.Handled = true;
+        }
+
+        private void echelle_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!intControl.IsMatch(e.Text)) e.Handled = true;
+        }
+
+        private void altritude_min_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!intControl.IsMatch(e.Text)) e.Handled = true;
+        }
+
+        private void altritude_max_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!intControl.IsMatch(e.Text)) e.Handled = true;
         }
     }
 }
