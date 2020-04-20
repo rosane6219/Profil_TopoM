@@ -80,7 +80,9 @@ namespace Profil_TopoM
 
         private void textBlock2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            selectionGrid.Children.Clear();
+            historique param = new historique();
+            selectionGrid.Children.Add(param);
         }
 
         private void aideBtn_Click(object sender, RoutedEventArgs e)

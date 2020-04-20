@@ -8,9 +8,7 @@ namespace Profil_TopoM
 {
    public  class Trace
     {
-        public int min, max, echelle, equidistance;
-        public  String image, nom;
-        public DateTime date_creat, date_modif;
+       
         // private Profil profil;
         public Trace(String name, DateTime creat, DateTime modif, int mini, int maxi, int echel, int equi, String img)
         {
@@ -27,6 +25,17 @@ namespace Profil_TopoM
         {
 
         }
+
+        public string nom { get; set; }
+        public string image { get; set; }
+
+        public int min { get; set; }
+        public int max { get; set; }
+        public int echelle { get; set; }
+        public int equidistance { get; set; }
+        public DateTime date_creat { get; set; }
+        public DateTime date_modif { get; set; }
+
 
         // public  void modifier() { }
         //public void  renommer(){}
