@@ -7,7 +7,7 @@
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="570" d:DesignWidth="940">
-    <Grid>
+    <Grid x:Name="Grids">
         <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5" Canvas.Left="786" Canvas.Top="7" Margin="800,0,0,0">
             <Image.RenderTransform>
                 <TransformGroup>
@@ -50,9 +50,13 @@
             </Slider.RenderTransform>
         </Slider>
 
-        <Button x:Name="btn" Content="Retour" Margin="10,13,854,525" Click="btn_Click"    />
-        <Button x:Name="Supprimer" Content="Supprimer un point " Margin="220,0,557,526" Height="30" VerticalAlignment="Bottom" Click="Supprimer_Click"/>
-        <Button x:Name="Arret" Content =" Arrêt " Margin="117,12,754,526" Click="Arret_Click"/>
+
+        <Button x:Name="Supprimer"  BorderBrush="#58A3AF"
+                Foreground="#58A3AF"   ToolTip="Effacer un point"  
+                Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="{x:Null}" Content="Effacer " Margin="187,0,664,507" Height="56" VerticalAlignment="Bottom" Click="Supprimer_Click"/>
+        <Button x:Name="Arret" Content =" Fin "  ToolTip="Marquer la fin de la courbe" BorderBrush="#58A3AF"
+                Foreground="#58A3AF"    
+                Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="{x:Null}"  Margin="73,7,778,507" Click="Arret_Click" Height="Auto"/>
         <Grid HorizontalAlignment="Left" Height="111" Margin="159,485,0,-26" VerticalAlignment="Top" Width="771">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="227*"/>
@@ -65,7 +69,7 @@
                 BorderBrush="#58A3AF"
                 Foreground="#58A3AF"
                 
-                ToolTip="allons dessiner le segment !!" Margin="352.333,14,31.667,47"  Grid.Column="1"  Click="next_Click" >
+                ToolTip="Allons dessiner le profil!!" Margin="352.333,14,31.667,47"  Grid.Column="1"  Click="next_Click" >
                 <materialDesign:PackIcon
                     Kind="ArrowRight"
                     Height="24"
@@ -77,13 +81,15 @@
                 Background="{x:Null}"
                 BorderBrush="#58A3AF"
                 Foreground="#58A3AF"
-                ToolTip="Retour au menu" Margin="282.333,14,101.667,47"  Grid.Column="1">
+                ToolTip="Retour au menu" Margin="282.333,14,101.667,47"  Grid.Column="1" >
                 <materialDesign:PackIcon
                     Kind="ArrowLeft"
                     Height="24"
                     Width="24" />
             </Button>
-            <Button x:Name="next" Content="Suivant " Height="Auto" Margin="261,-467,397,550" Grid.ColumnSpan="2" Click="next_Click"></Button>
+            <Button x:Name="next" Content="Segment"  BorderBrush="#58A3AF"  ToolTip="Tracer le segment du profil"
+                Foreground="#58A3AF"    
+                Style="{StaticResource MaterialDesignRaisedDarkButton}" Background="{x:Null}"  Height="Auto" Margin="149,-476,109,532" Click="next_Click"/>
         </Grid>
 
     </Grid>

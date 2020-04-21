@@ -63,12 +63,28 @@ namespace Profil_TopoM
             {
                 lineStarted1 = true;
                 mousePoint11 = e.GetPosition(this);
+                Ellipse ell = new Ellipse();
+                ell.Width = 7;
+                ell.Height = 7;
+                ell.Fill = Brushes.SkyBlue;
+                ell.Stroke = Brushes.Transparent;
+                Canvas.SetLeft(ell, mousePoint11.X - 5 / 2);
+                Canvas.SetTop(ell, mousePoint11.Y - 10 / 2);
+                shownPts.Add(ell);
+                cnv2.Children.Add(ell);
             }
             else //(Schritt 3) linie fertig stellen -> Linie zu canvas hinzufügen, als 2. Punkt aktuelle maus position 
             {
                 Point mousePoint22 = e.GetPosition(this);
-
-                //linie hinzufügen
+                Ellipse ell = new Ellipse();
+                ell.Width = 7;
+                ell.Height = 7;
+                ell.Fill = Brushes.SkyBlue;
+                ell.Stroke = Brushes.Transparent;
+                Canvas.SetLeft(ell, mousePoint22.X - 5 / 2);
+                Canvas.SetTop(ell, mousePoint22.Y - 10 / 2);
+                shownPts.Add(ell);
+                cnv2.Children.Add(ell);
                 Line newLine = new Line { X1 = mousePoint11.X, Y1 = mousePoint11.Y, X2 = mousePoint22.X, Y2 = mousePoint22.Y };
                 newLine.Stroke = Brushes.Black;
                 newLine.StrokeThickness = 2;
