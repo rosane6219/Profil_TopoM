@@ -43,14 +43,14 @@
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="58" Margin="442,302,253,210" PreviewTextInput="altritude_min_PreviewTextInput" />
+            VerticalAlignment="Center" Height="58" Margin="442,302,253,210" TextChanged="altritude_min_TextChanged" PreviewTextInput="altritude_min_PreviewTextInput" />
         <TextBox x:Name="altritude_max"
             materialDesign:HintAssist.Hint="la plus haute altitude"
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="62" Margin="442,383,253,125" PreviewTextInput="altritude_max_PreviewTextInput" />
+            VerticalAlignment="Center" Height="62" Margin="442,383,253,125" PreviewTextInput="altritude_max_PreviewTextInput" TextChanged="altritude_max_TextChanged" />
         <Label x:Name="parametrageL" Content="Paramétrage"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="327,9,0,0" VerticalAlignment="Top" Width="177" FontSize="30"/>
         <Label x:Name="nom" Content="Nom du tracé" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,77,0,0" VerticalAlignment="Top" Width="185"/>
         <Label x:Name="equidistanceL" Content="Equidistance" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,152,0,0" VerticalAlignment="Top" Width="185"/>

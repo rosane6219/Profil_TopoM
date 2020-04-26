@@ -277,15 +277,28 @@ namespace Profil_TopoM
 						courbes.Last().setshownPts(ell, u); u++;
 						cnv.Children.Add(ell);
 						int ex = 0;
+						double altit = 0;
 						while (ex == 0)
 						{
 							try
 							{
-								Alt alt = new Alt();
-								alt.ShowDialog();
-								double altit = double.Parse(alt.altitude.Text);
-								courbes.Last().setaltitude(altit);
-								ex = 1;
+								do
+								{
+									Alt alt = new Alt();
+									alt.ShowDialog();
+									altit = double.Parse(alt.altitude.Text, System.Globalization.CultureInfo.InvariantCulture);
+									if (altit >= trac.min && altit <= trac.max)
+									{
+										courbes.Last().setaltitude(altit);
+										ex = 1;
+									}
+									else
+									{
+										MessageBox.Show($"L'altitude doit être comprise entre {trac.min} et {trac.max}");
+										//Supprimer le point dessiné
+									}
+								} while (altit < trac.min || altit > trac.max); 
+								
 							}
 							catch (Exception exp)
 							{
@@ -464,7 +477,7 @@ namespace Profil_TopoM
 
 				}
 				double ab = courbes[ik].getaltitude();
-				int ab1 = (int)ab;
+				double ab1 = ab;
 				for (ik3 = ik4 + 1; ik3 < (ik4 + 1 + courbes[ik].nbPoints()); ik3++)
 				{
 
@@ -518,7 +531,7 @@ namespace Profil_TopoM
 						string cris = dataRead["critere"].ToString();
 						double xs1 = (double)int.Parse(xs);
 						double ys1 = (double)int.Parse(ys);
-						double alts1 = (double)int.Parse(alts);
+						double alts1 = double.Parse(alts);
 						double cris1 = (double)int.Parse(cris);
 						if (cris1 == cris1p)
 						{

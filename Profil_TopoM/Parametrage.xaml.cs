@@ -31,24 +31,30 @@ namespace Profil_TopoM
         private SqlDataReader _reader;
         private string _query;
         private Trace trace;
+        bool isDecimal = false;
         Regex nameControl = new Regex(@"[A-Za-z0-9]+");
         Regex intControl = new Regex(@"[0-9]+");
+        Regex floating = new Regex(@"^[-+]?\d+(.\d+)?$");      
+        //Regex doubleControl = new Regex(@"^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$+");
+
         SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename= {System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
 
+        //C:\Users\Fujitsu\Desktop\Profil_topo_MAKER25\Profil_topo_MAKER\Profil_TopoM\BDDtopo.mdf
+       // SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename= C:\Users\User\source\repos\Profil_TopoM\Profil_TopoM\BDDtopo.mdf;Integrated Security=True");
 
 
         public Parametrage()
         {
             InitializeComponent();
-           
         }
 
         private void insertion(Trace trace)
         {
             cnx.Open();
             bool bac = false;
-            SqlCommand cmd = cnx.CreateCommand();
-            cmd.CommandType = CommandType.Text;
+            SqlCommand cmd;
+            //SqlCommand cmd = cnx.CreateCommand();
+           // cmd.CommandType = CommandType.Text;
             int i = 0;
             i++;
             int cac = 0;
@@ -86,12 +92,42 @@ namespace Profil_TopoM
                 }
                 i++;
              }
-            cnx.Close();
+            
             i = i - 1;
-            cnx.Open();
-            cmd.CommandText    = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id) values ('" +trace.min + "','" + trace.max + "','" +trace.echelle + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat.ToString("dd/mm/yyyy hh:mm:ss") + "','" + trace.date_modif.ToString("dd/mm/yyyy hh:mm:ss") + "','" + i + "')";
+
+           /* cmd.CommandText = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id) values ('" + trace.min + "','" + trace.max + "','" + trace.echelle + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat.ToString("dd/mm/yyyy hh:mm:ss") + "','" + trace.date_modif.ToString("dd/mm/yyyy hh:mm:ss") + "','" + i + "')";
             cmd.ExecuteNonQuery();
-            cnx.Close();
+            cnx.Close();*/
+            //______________________________________________________________________________________________________________
+             _query = "insert into Trace values (@min, @max, @echelle, @equidistance, @image, @nom, @dateCrea, @dateModif, @id,@echellecarte)";
+             using (cmd = new SqlCommand(_query, cnx))
+             {
+                 cmd.Parameters.AddWithValue("@min", trace.min);
+                 cmd.Parameters.AddWithValue("@max", trace.max);
+                 cmd.Parameters.AddWithValue("@echelle", trace.echelle);
+                 cmd.Parameters.AddWithValue("@equidistance", trace.equidistance);
+                 cmd.Parameters.AddWithValue("@image", trace.image);
+                 cmd.Parameters.AddWithValue("@nom", trace.nom);
+                 cmd.Parameters.AddWithValue("@dateCrea", trace.date_creat);
+                 cmd.Parameters.AddWithValue("@dateModif", trace.date_modif);
+                 cmd.Parameters.AddWithValue("@id", i);
+                 cmd.Parameters.AddWithValue("@echellecarte", trace.echellecarte);
+                 try
+                 {
+                     cmd.ExecuteNonQuery();
+                 }
+                 catch (Exception e)
+                 {
+                     MessageBox.Show(e.Message);
+                 }
+             }
+             cnx.Close();
+            //________________________________________________________________________
+            /* _query = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id) values ('" + trace.min + "','" + trace.max + "','" + trace.echelle + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat.ToString("dd/MM/yyyy hh:mm:ss") + "','" + trace.date_modif.ToString("dd/MM/yyyy hh:mm:ss") + "','" + i + "')";
+             cmd = new SqlCommand(_query, cnx);
+             //cmd.CommandText    = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id) values ('" +trace.min + "','" + trace.max + "','" +trace.echelle + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat.ToString("dd/MM/yyyy hh:mm:ss") + "','" + trace.date_modif.ToString("dd/MM/yyyy hh:mm:ss") + "','" + i + "')";
+             cmd.ExecuteNonQuery();
+             cnx.Close();*/
         }
         BitmapImage img;
         String url;
@@ -117,73 +153,106 @@ namespace Profil_TopoM
             Accueil accueil = new Accueil();
             parent.Children.Add(accueil);
         }
+
+        double max,min;
+
         private void nextBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (nomTrace.Text == "" || altritude_max.Text == "" || altritude_min.Text == "" || echelle.Text == "" || equidistance.Text == "" || url == "")
+            if (nomTrace.Text == "" || altritude_max.Text == "" || altritude_min.Text == "" || echelle.Text == "" || equidistance.Text == "" || url == "" || echelleCM.Text=="")
             {
-                /*SolidColorBrush MyBrush = (SolidColorBrush)Application.Current.Resources["PrimaryHueMidBrush"];
-                var msg = new CustomMaterialMessageBox
-                {
-                    TxtMessage = { Text = ("Veuillez remplir tous les champs ! "), FontSize = 14, Foreground = Brushes.Black, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center },
-                    TxtTitle = { Text = "Erreur", Foreground = Brushes.White, HorizontalAlignment = HorizontalAlignment.Left },
-                    BtnOk = { Content = "OK", Background = MyBrush, BorderBrush = Brushes.Transparent },
-                    BtnCancel = { Visibility = Visibility.Collapsed, BorderBrush = Brushes.Transparent },
-                    BtnCopyMessage = { Visibility = Visibility.Hidden },
-                    MainContentControl = { Background = Brushes.White },
-
-
-                    TitleBackgroundPanel = { Background = MyBrush },
-                    Height = 220,
-                    Width = 350,
-                    BorderBrush = MyBrush
-                };
-                msg.Show();*/
                 MessageBox.Show("Veuillez remplir tous les champs !");
             }
             else
             {
-                if (Int32.Parse(altritude_max.Text) < int.Parse(altritude_min.Text)) 
-                { MessageBox.Show("L'altitude max doit être superieure à l'altitude min !"); }
-                else
+                try
                 {
-                    Trace trace = new Trace(nomTrace.Text, DateTime.Now, DateTime.Now, int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), Int32.Parse(echelle.Text), Int32.Parse(equidistance.Text), url);
+                     max = double.Parse(altritude_max.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                     min = double.Parse(altritude_min.Text, System.Globalization.CultureInfo.InvariantCulture);
+                   //if (!floating.IsMatch(altritude_min.Text)) { MessageBox.Show("expression du {MIN} non valide!"); }
+                   if (max < min)
+                   { MessageBox.Show("L'altitude max doit être superieure à l'altitude min !"); }
+                   else
+                   {
+                    Trace trace = new Trace(nomTrace.Text, DateTime.Now, DateTime.Now, min, 
+                        max, Int32.Parse(echelle.Text), 
+                        Int32.Parse(equidistance.Text), url, Int32.Parse(echelleCM.Text));
                     insertion(trace);
                     Importation imp = new Importation(img, trace);
                     var parent = (Grid)this.Parent;
                     parent.Children.Clear();
                     parent.Children.Add(imp);
-                }
+                   } 
+                } catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
         }
 
         private void nomTrace_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!nameControl.IsMatch(e.Text)) e.Handled = true;
+            if (!nameControl.IsMatch(e.Text)) { e.Handled = true; MessageBox.Show("Caractère non valide"); }
         }
 
         private void equidistance_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!intControl.IsMatch(e.Text)) e.Handled = true;
+            if (!intControl.IsMatch(e.Text)) { e.Handled = true; MessageBox.Show("Caractère non valide"); }
         }
 
         private void echelleCM_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!intControl.IsMatch(e.Text)) e.Handled = true;
+            if (!intControl.IsMatch(e.Text)) { e.Handled = true; MessageBox.Show("Caractère non valide"); }
         }
 
         private void echelle_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!intControl.IsMatch(e.Text)) e.Handled = true;
+            if (!intControl.IsMatch(e.Text)) { e.Handled = true; MessageBox.Show("Caractère non valide"); }
         }
 
         private void altritude_min_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!intControl.IsMatch(e.Text)) e.Handled = true;
+            if (e.Text == "." || e.Text == "-")
+            {
+                if (altritude_min.Text.Contains(e.Text)) e.Handled = true;
+                else isDecimal = (e.Text == ".");
+            }
+
+        }
+
+        private void altritude_min_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (altritude_min.Text != "-" && altritude_min.Text != "")
+            {
+                if (!floating.IsMatch(altritude_min.Text) && !isDecimal)
+                {
+                    altritude_min.Text = altritude_min.Text.Substring(0, altritude_min.Text.Length - 1);
+                    altritude_min.Select(altritude_min.Text.Length, 0);
+                }
+                else  isDecimal = false;
+            }
+           // else MessageBox.Show("L'expression n'est pas valide");
         }
 
         private void altritude_max_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!intControl.IsMatch(e.Text)) e.Handled = true;
+            if (e.Text == "." || e.Text == "-")
+            {
+                if (altritude_max.Text.Contains(e.Text)) e.Handled = true;
+                else isDecimal = (e.Text == ".");
+            }
+
         }
+
+        private void altritude_max_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (altritude_max.Text != "-" && altritude_max.Text != "")
+            {
+                if (!floating.IsMatch(altritude_max.Text) && !isDecimal)
+                {
+                    altritude_max.Text = altritude_max.Text.Substring(0, altritude_max.Text.Length - 1);
+                    altritude_max.Select(altritude_max.Text.Length, 0);
+                }
+                else  isDecimal = false; //MessageBox.Show("L'expression n'est pas valide"); 
+            }
+        }
+
+       
     }
 }

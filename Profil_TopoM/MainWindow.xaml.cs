@@ -22,14 +22,18 @@ namespace Profil_TopoM
     /// </summary>
     public partial class MainWindow : Window
     {
-     
+        private SqlConnection _con;
+       
         public MainWindow()
         {
             InitializeComponent();
-          
+            Accueil home = new Accueil();
+            selectionGrid.Children.Add(home);
+            _con = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
+
         }
 
-        
+       
 
         private void buttonopenmenu_Click(object sender, RoutedEventArgs e)
         {
@@ -80,7 +84,9 @@ namespace Profil_TopoM
 
         private void textBlock2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            selectionGrid.Children.Clear();
+            historique param = new historique();
+            selectionGrid.Children.Add(param);
         }
 
         private void aideBtn_Click(object sender, RoutedEventArgs e)
@@ -106,5 +112,7 @@ namespace Profil_TopoM
         {
             Application.Current.Shutdown();
         }
+
+      
     }
 }

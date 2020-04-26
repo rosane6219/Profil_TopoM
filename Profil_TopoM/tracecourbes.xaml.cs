@@ -110,7 +110,7 @@ namespace Profil_TopoM
 						string cris = dataRead["critere"].ToString();
 						double xs1 = (double)int.Parse(xs);
 						double ys1 = (double)int.Parse(ys);
-						double alts1 = (double)int.Parse(alts);
+						double alts1 = double.Parse(alts);
 						double cris1 = (double)int.Parse(cris);
 						if (cris1 == cris1p)
 						{

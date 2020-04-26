@@ -50,9 +50,9 @@
             </Slider.RenderTransform>
         </Slider>
 
-        <Button x:Name="btn" Content="Retour" Margin="10,13,854,525" Click="btn_Click"    />
-        <Button x:Name="Supprimer" Content="Supprimer un point " Margin="220,0,557,526" Height="30" VerticalAlignment="Bottom" Click="Supprimer_Click"/>
-        <Button x:Name="Arret" Content =" Arrêt " Margin="117,12,754,526" Click="Arret_Click"/>
+        <Button x:Name="btn" Content="Retour" Margin="10,13,845,525" Click="btn_Click"    />
+        <Button x:Name="Supprimer" Content="Supprimer un point " Margin="220,0,557,526" Height="34" VerticalAlignment="Bottom" Click="Supprimer_Click"/>
+        <Button x:Name="Arret" Content =" Arrêt " Margin="117,12,745,526" Click="Arret_Click"/>
         <Grid HorizontalAlignment="Left" Height="111" Margin="159,485,0,-26" VerticalAlignment="Top" Width="771">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="227*"/>
@@ -83,7 +83,7 @@
                     Height="24"
                     Width="24" />
             </Button>
-            <Button x:Name="next" Content="Suivant " Height="Auto" Margin="261,-467,397,550" Grid.ColumnSpan="2" Click="next_Click"></Button>
+            <Button x:Name="next" Content="Suivant " Height="Auto" Margin="261,-475,396.667,550" Grid.ColumnSpan="2" Click="next_Click"></Button>
         </Grid>
 
     </Grid>

@@ -142,11 +142,11 @@ namespace Profil_TopoM
                 {
                     while (dataRead3.Read())
                     {
-
+                        
                         string mins = dataRead3["min"].ToString();
-                        min1 = (double)int.Parse(mins);
-                        string maxs = dataRead3["max"].ToString();
-                        max1 = (double)int.Parse(maxs);
+                        min1 = double.Parse(mins);//, System.Globalization.CultureInfo.InvariantCulture
+                        string maxs = dataRead3["max"].ToString();                       
+                        max1 = double.Parse(maxs);
                         string equi = dataRead3["equidistance"].ToString();
                         equi1 = (double)int.Parse(equi);
                         string ech = dataRead3["echelle"].ToString();

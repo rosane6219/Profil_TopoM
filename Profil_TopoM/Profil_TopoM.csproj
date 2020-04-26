@@ -200,12 +200,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BDDtopo.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="BDDtopo.mdf" />
     <Content Include="BDDtopo_log.ldf">
       <DependentUpon>BDDtopo.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Ressources\Acceuil.PNG" />
     <Resource Include="Ressources\aide.png" />

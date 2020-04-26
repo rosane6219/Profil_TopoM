@@ -20,10 +20,10 @@ namespace Profil_TopoM
         public trace_profil(double altmin, double altmax, double echelle, double pente)
         {
             InitializeComponent();
-            T.Text = Convert.ToString(altmin);
-            T1.Text = Convert.ToString(altmax);
-            T2.Text = Convert.ToString(echelle);
-            T3.Text = Convert.ToString(pente);
+            T.Text = altmin.ToString();
+            T1.Text = altmax.ToString();
+            T2.Text = echelle.ToString();
+            T3.Text = pente.ToString();            
         }
         public void plotData(double echelle, double altmin, double altmax, double equidist, List<Point> points_intersections, List<double> altitude)
         {

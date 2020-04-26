@@ -8,11 +8,12 @@ namespace Profil_TopoM
 {
    public  class Trace
     {
-        public int min, max, echelle, equidistance;
+        public double min, max;
+        public int  echelle,echellecarte, equidistance;
         public  String image, nom;
         public DateTime date_creat, date_modif;
         // private Profil profil;
-        public Trace(String name, DateTime creat, DateTime modif, int mini, int maxi, int echel, int equi, String img)
+        public Trace(String name, DateTime creat, DateTime modif, double mini, double maxi, int echel, int equi, String img,int carte)
         {
             this.nom = name;
             this.date_creat = creat;
@@ -22,6 +23,7 @@ namespace Profil_TopoM
             this.echelle = echel;
             this.equidistance = equi;
             this.image = img;
+            this.echellecarte = carte;
         }
       public Trace()
         {

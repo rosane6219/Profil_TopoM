@@ -14,8 +14,7 @@ namespace Profil_TopoM.Classes
         Point start, end;
 
         public Profil(Point start, Point end) { this.start = start; this.end = end; }
-        //public void DessinerAxes(min , max, echelle) { }
-        //public real CalculPente(segment) {}
+        
         public void Intersection(List<Courbe> courbeaniveau, out List<Point> point_Intersection, out List<double> altitude)
         {
             bool trouv;

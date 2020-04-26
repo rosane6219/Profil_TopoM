@@ -52,9 +52,6 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="textBlock1">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="2"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="image">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="9"/>
-            </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="textBlock2">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1.145"/>
             </DoubleAnimationUsingKeyFrames>
@@ -98,32 +95,7 @@
     </Window.Triggers>
 
     <Grid Background="White" Width="1000">
-        <Grid x:Name="selectionGrid" Margin="60,0,10,-0.333" Height="570">
-            <Image HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="296" Margin="421,83,0,0" Source="Ressources/courbesbleu.jpg"/>
-            <Label Content="Bienvenue dans &#xA;Profil_Topo_Maker,&#xA;une application dédiée à la &#xA;génération de profil &#xA;topographique " FontSize="20" FontFamily="Monserrat"   HorizontalAlignment="Left" Height="138" Margin="64,83,0,0" VerticalAlignment="Top" Width="265" Foreground="#DDEE6B6B"/>
-            <Image x:Name="image" HorizontalAlignment="Left" Height="48" Margin="800,0,0,0" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Grid Height="57" VerticalAlignment="Top" Background="{x:Null}" Margin="515,0,130,0" RenderTransformOrigin="0.465,0.51" >
-                <Grid HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" VerticalAlignment="Top" Width="272">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="7*"/>
-                        <RowDefinition Height="34*"/>
-                    </Grid.RowDefinitions>
-                    <Border BorderThickness="1" CornerRadius="20,20,20,20" BorderBrush="#FF277FA0" Margin="4,-6,32,6" Grid.RowSpan="2"/>
-                </Grid>
-                <TextBox HorizontalAlignment="Left" FontSize="14" Background="White" Height="30" Margin="67,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" RenderTransformOrigin="-0.033,-0.174" AutomationProperties.HelpText="Rechercher"/>
-                <materialDesign:PackIcon  Kind="Search"  Margin="18,4,0,0" VerticalAlignment="Top" Width="34" Height="40"  Foreground="#FF277FA0" RenderTransformOrigin="2.411,0.568" />
-            </Grid>
-
-        </Grid>
+        <Grid x:Name="selectionGrid" Margin="60,0,10,-0.333" Height="570"></Grid>
         <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#1E5370" Height="570" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" >
             <Grid.RenderTransform>
                 <TransformGroup>
