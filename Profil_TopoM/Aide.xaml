@@ -29,7 +29,7 @@ Ce boutton vous permettera d'afficher la page principale de l'application
 <LineBreak/>Impotation :
 Ce boutton vous dirigera vers la page de parametrages ou vous aller saisir les informations de votre carte topographique (l'echelle, l'altitude min, l'altitude max etc.) Puis,en cliquant sur le boutton "Ouvrir" cela vous permettera d'importer une image depuis votre PC et la mettre au fond du milieu du travail, vous pourriez ainsi :
 -Tracer les courbes de niveau :
-Vous pouvez dessiner les courbes de niveau en saisissante l'altitude de la courbe d'abord, puis commencer à dessiner avec des clicks successives de la souris afin d marquer les points. Tout point pourra etre déplacé avec un simple click droit de la souris oubien supprimé grace au boutton "Supprimer" de la meme fenetre. Un boutton "Retour" est aussi disponible pour supprimé la déerniere modification faite dans votre tracé de courbes.
+Vous pouvez dessiner les courbes de niveau en saisissante l'altitude de la courbe d'abord, puis commencer à dessiner avec des clicks successives de la souris afin d marquer les points. Tout point pourra etre déplacé avec un simple click droit de la souris oubien supprimé grace au boutton "Supprimer" de la meme fenetre.
 -Tracer le segment du profil :
 En cliquant sur le boutton "Segment" puis selection les deux points du segment
 -Afficher le profil topographique :

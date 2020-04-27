@@ -38,10 +38,7 @@ namespace Profil_TopoM
 			kak = userImage;
 			trac = trace15;
 			nomtr = trace15.nom;
-
-
 		}
-
 		int k = 0;
 		List<Point> Points = new List<Point>();
 		List<Courbe> courbes = new List<Courbe>();
@@ -224,7 +221,6 @@ namespace Profil_TopoM
 					Line newLine;
 					if (trouve == 0)
 					{
-
 						cnv.Children.Remove(courbes[l].getlignes(trouve));
 						courbes[l].removeligne(courbes[l].getlignes(trouve));
 					}
@@ -383,11 +379,7 @@ namespace Profil_TopoM
 		private void Supprimer_Click(object sender, RoutedEventArgs e)
 		{
 			suppp = 1;
-		}
-		//-------------------------------------------------------------------------------------------------------------
-
-		//-----------------------------------------------------------------------------------------------------------
-	
+		}	
 		//----------------------------------------------------------------------------------------------------------
 		private void next_Click(object sender, RoutedEventArgs e)
 		{
@@ -446,8 +438,6 @@ namespace Profil_TopoM
 					cmd.ExecuteNonQuery();
 					cnx.Close();
 					jk1 = ik3;
-					
-
 				}
 				ik4 =jk1;
 				cr++;
@@ -500,28 +490,13 @@ namespace Profil_TopoM
 							Point ab = new Point(xs1, ys1);
 							fg.setpoints(ab, ik10);
 							ik10++;
-
-
-
-
 						}
 						cris1p = cris1;
 						alts1p = alts1;
-
-
-
-
-
 					}
 				}
 				fg.setaltitude(alts1p);
 				courbes12.Add(fg);
-
-
-
-
-
-
 			}
 			cnx.Close();
 			

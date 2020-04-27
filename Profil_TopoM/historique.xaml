@@ -16,11 +16,11 @@
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
             VerticalAlignment="Center" Height="58" Margin="442,62,253,450" />
 
-        
-      
-        <Label x:Name="parametrageL" Content="Récupération des traces"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="327,9,0,0" VerticalAlignment="Top" Width="177" FontSize="30"/>
+
+
+        <Label x:Name="parametrageL" Content="Récupération des traces"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="320,9,0,0" VerticalAlignment="Top" Width="184" FontSize="30"/>
         <Label x:Name="nom" Content="Nom du tracé" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,77,0,0" VerticalAlignment="Top" Width="185"/>
-      
+
         <!--Grid Margin="135,615,228,-628">
             <Grid.RowDefinitions>
                 <RowDefinition Height="15*"/>
@@ -68,8 +68,8 @@
                 <ColumnDefinition Width="227*"/>
                 <ColumnDefinition Width="278*"/>
             </Grid.ColumnDefinitions>
-            
-         
+
+
             <Button x:Name="nextBtn"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                 Background="{x:Null}"
@@ -92,6 +92,49 @@
                     Height="24"
                     Width="24" />
             </Button>
+            
+            
+        </Grid>
+        <Grid Margin="10">
+
+            <DataGrid Name="dg" AutoGenerateColumns="False" Margin="148,119,26,90" Foreground="#DD915D5D" Background="#FF1E5370"  >
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nom du tracé" Binding="{Binding  Path= nom}" Foreground="#FF060303" />
+
+                    <DataGridTextColumn Header="L'échelle" Binding="{Binding echelle}" Foreground="#FF1D0606"/>
+                    <DataGridTextColumn Header="Date de création" Binding="{Binding date_creat}" Foreground="#FF1D0606" />
+                    <DataGridTextColumn Header="Date de modification" Binding="{Binding date_modif}" Foreground="#FF111B21"  />
+                </DataGrid.Columns>
+
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <DockPanel Background="#FFEBF3F5">
+                            <Image DockPanel.Dock="Left" Source="{Binding image}" Height="64" Margin="10" />
+                            <Grid Margin="0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="Le maximum: " FontWeight="Normal" Foreground="#FF030303" TextDecorations="Underline" FontSize="14" />
+                                <TextBlock Text="{Binding max}" Grid.Column="1" Foreground="#FF8D1212" />
+                                <TextBlock Text="le minimum: " FontWeight="Normal" Grid.Row="1" FontSize="14" Foreground="#FF030303"/>
+                                <TextBlock Text="{Binding min}" Grid.Column="1" Grid.Row="1" Foreground="#FF8D1212" />
+                                <TextBlock Text="l'équidistance: " FontWeight="Normal" Grid.Row="2" FontSize="14" Foreground="#FF030303" />
+                                <TextBlock Text="{Binding equidistance, StringFormat=d}" Grid.Column="1" Grid.Row="2"  Foreground="#FF8D1212"/>
+
+                            </Grid>
+                        </DockPanel>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+
+            </DataGrid>
         </Grid>
     </Grid>
 </UserControl>
