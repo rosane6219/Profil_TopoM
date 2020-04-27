@@ -26,7 +26,7 @@ namespace Profil_TopoM
 		int Fin = 0;
 		int Ss = 0;
 		BitmapImage kak;
-		Trace trac = new Trace();
+		Trace trace = new Trace();
 		String nomtr;
 		SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
 
@@ -35,16 +35,15 @@ namespace Profil_TopoM
 		public List<Courbe> courbes1 = new List<Courbe>();
 		int mika;
 
-        public trace_apres_recup(BitmapImage userImage1, List<Courbe> courbes3, int nbo)
+        public trace_apres_recup(BitmapImage userImage1, List<Courbe> courbes3, int nbo,Trace tracerecup)
         {
             InitializeComponent();
             img.Source = userImage1;
 			courbes33 = courbes3;
 			recuperation(courbes3);
-			
+			trace = tracerecup;
 			mika = nbo;
 			kak = userImage1;
-
         }
 		int k = 0;
 		List<Point> Points = new List<Point>();
@@ -287,17 +286,17 @@ namespace Profil_TopoM
 									Alt alt = new Alt();
 									alt.ShowDialog();
 									altit = double.Parse(alt.altitude.Text, System.Globalization.CultureInfo.InvariantCulture);
-									if (altit >= trac.min && altit <= trac.max)
+									if (altit >= trace.min && altit <= trace.max)
 									{
 										courbes.Last().setaltitude(altit);
 										ex = 1;
 									}
 									else
 									{
-										MessageBox.Show($"L'altitude doit être comprise entre {trac.min} et {trac.max}");
+										MessageBox.Show($"L'altitude doit être comprise entre {trace.min} et {trace.max}");
 										//Supprimer le point dessiné
 									}
-								} while (altit < trac.min || altit > trac.max); 
+								} while (altit < trace.min || altit > trace.max); 
 								
 							}
 							catch (Exception exp)

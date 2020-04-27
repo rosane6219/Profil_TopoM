@@ -166,7 +166,7 @@ namespace Profil_TopoM
 				}
 				
 			}
-			trace_apres_recup imp = new trace_apres_recup(kak,courbes12,nbs);
+			trace_apres_recup imp = new trace_apres_recup(kak,courbes12,nbs,trac);
 			var parent = (Grid)this.Parent;
 			parent.Children.Clear();
 			parent.Children.Add(imp);
