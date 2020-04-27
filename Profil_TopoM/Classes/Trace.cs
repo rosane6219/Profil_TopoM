@@ -30,9 +30,7 @@ namespace Profil_TopoM
 
         }
 
-        // public  void modifier() { }
-        //public void  renommer(){}
-        // public void genererProfil(list< point >) {}
+     
 
     }
 }

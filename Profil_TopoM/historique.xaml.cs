@@ -31,12 +31,12 @@ namespace Profil_TopoM
         public historique()
         {
             InitializeComponent();
-            SqlConnection cnx2 = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\BLUEinfo\Downloads\Profil_topo_MAKER\Profil_TopoM\BDDtopo.mdf;Integrated Security = True");
+            SqlConnection cnx2 = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
 
 
             cnx2.Open();
 
-            string readString3 = "select Id,echelle,min,max,nom,equidistance,image,creation,modification from Trace  ";
+            string readString3 = "select * from Trace  ";
 
             SqlCommand readCommand3 = new SqlCommand(readString3, cnx2);
             int nbs;
@@ -47,22 +47,21 @@ namespace Profil_TopoM
                 {
                     while (dataRead3.Read())
                     {
-
                         string xas = dataRead3["Id"].ToString();
                         nbs = int.Parse(xas);
                         string no = dataRead3["nom"].ToString();
-
                         string xas2 = dataRead3["echelle"].ToString();
                         int eche = int.Parse(xas2);
                         string xas4 = dataRead3["equidistance"].ToString();
                         int equi = int.Parse(xas4);
                         string xas6 = dataRead3["min"].ToString();
-                        int mi = int.Parse(xas6);
+                        double mi = double.Parse(xas6);
                         string xas8 = dataRead3["max"].ToString();
-                        int ma = int.Parse(xas8);
-                        string xas10 = dataRead3["creation"].ToString();
-
-
+                        double  ma = double.Parse(xas8);
+                        //string xas10 = dataRead3["creation"].ToString();
+                        DateTime xas10 = DateTime.Parse(dataRead3["creation"].ToString());
+                        string xas21 = dataRead3["echellecarte"].ToString();
+                        int echecarte = int.Parse(xas21);
 
 
 
@@ -70,7 +69,8 @@ namespace Profil_TopoM
                         string xasa = dataRead3["image"].ToString();
                         //Uri ur = new Uri(xasa);
                         //imgg = new BitmapImage(ur);
-                        Trace trace5 = new Trace(no, DateTime.Now, DateTime.Now, mi, ma, eche, equi, xasa);
+                        Trace trace5 = new Trace(nomTracefait.Text, xas10, DateTime.Now, mi, ma, eche, equi, xasa,echecarte);
+                        //Trace trace5 = new Trace(no, DateTime.Now, DateTime.Now, mi, ma, eche, equi, xasa);
                         trr = trace5;
                         it.Add(trr);
 
@@ -123,7 +123,7 @@ namespace Profil_TopoM
                         string xasa = dataRead3["image"].ToString();
                         Uri ur = new Uri(xasa);
                         imgg = new BitmapImage(ur);
-                        Trace trace5 = new Trace(nomTracefait.Text, DateTime.Now, DateTime.Now, mi, ma, eche, equi, xasa,echecarte);
+                        Trace trace5 = new Trace(nomTracefait.Text, xas10, DateTime.Now, mi, ma, eche, equi, xasa,echecarte);
                         trr = trace5;
                     }
                 }

@@ -49,7 +49,6 @@ namespace Profil_TopoM
                 {
                     while (dataRead3.Read())
                     {
-
                         string xas = dataRead3["Id"].ToString();
                         nbs = int.Parse(xas);
                         string xas2 = dataRead3["echelle"].ToString();
@@ -61,12 +60,6 @@ namespace Profil_TopoM
                         string xas8 = dataRead3["max"].ToString();
                         int ma = int.Parse(xas8);
                         string xas10 = dataRead3["creation"].ToString();
-
-
-
-
-
-
                         string xasa = dataRead3["image"].ToString();
                         Uri ur = new Uri(xasa);
                         BitmapImage imgg = new BitmapImage(ur);
@@ -93,7 +86,6 @@ namespace Profil_TopoM
                 double min = double.Parse(_reader[0].ToString(), System.Globalization.CultureInfo.InvariantCulture);
                 double max = double.Parse(_reader[1].ToString(), System.Globalization.CultureInfo.InvariantCulture);
                 
-                   //String name, DateTime creat, DateTime modif, int mini, int maxi, int echel, int equi, String img
                     Trace trace = new Trace(nomTrace.Text, DateTime.Parse(_reader[6].ToString()), DateTime.Now,
                         min, max,
                         int.Parse(_reader[2].ToString()), int.Parse(_reader[3].ToString()), _reader[4].ToString(),int.Parse(_reader[9].ToString()));

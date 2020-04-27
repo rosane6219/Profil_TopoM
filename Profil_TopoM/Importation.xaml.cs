@@ -31,6 +31,7 @@ namespace Profil_TopoM
 		Trace trac= new Trace();
 		String nomtr;
 		SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
+
 		public Importation(BitmapImage userImage, Trace trace15)
 		{
 			InitializeComponent();
@@ -433,7 +434,6 @@ namespace Profil_TopoM
 					cmd.CommandType = CommandType.Text;
 					int a1 = (int)a;
 					int b1 = (int)b;
-					//x,y,altitude,critere,Id
 					cmd.CommandText = "insert into Point  values (" + a1 + "," + b1 + "," + ab1 + "," + cr + "," + nbs + ")";
 					cmd.ExecuteNonQuery();
 					cnx.Close();

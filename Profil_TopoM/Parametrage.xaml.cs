@@ -35,7 +35,6 @@ namespace Profil_TopoM
         Regex nameControl = new Regex(@"[A-Za-z0-9]+");
         Regex intControl = new Regex(@"[0-9]+");
         Regex floating = new Regex(@"^[-+]?\d+(.\d+)?$");      
-        //Regex doubleControl = new Regex(@"^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$+");
 
         SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename= {System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
 
@@ -168,7 +167,6 @@ namespace Profil_TopoM
                 {
                      max = double.Parse(altritude_max.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture);
                      min = double.Parse(altritude_min.Text, System.Globalization.CultureInfo.InvariantCulture);
-                   //if (!floating.IsMatch(altritude_min.Text)) { MessageBox.Show("expression du {MIN} non valide!"); }
                    if (max < min)
                    { MessageBox.Show("L'altitude max doit être superieure à l'altitude min !"); }
                    else
@@ -227,7 +225,7 @@ namespace Profil_TopoM
                 }
                 else  isDecimal = false;
             }
-           // else MessageBox.Show("L'expression n'est pas valide");
+          
         }
 
         private void altritude_max_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -249,7 +247,7 @@ namespace Profil_TopoM
                     altritude_max.Text = altritude_max.Text.Substring(0, altritude_max.Text.Length - 1);
                     altritude_max.Select(altritude_max.Text.Length, 0);
                 }
-                else  isDecimal = false; //MessageBox.Show("L'expression n'est pas valide"); 
+                else  isDecimal = false; 
             }
         }
 
