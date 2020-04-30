@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="Profil_TopoM.Aide"
+﻿
+        <UserControl x:Class="Profil_TopoM.Aide"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,26 +11,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="570" d:DesignWidth="940">
     <Grid>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="50"/>
-        <ColumnDefinition Width="*"/>
-    </Grid.ColumnDefinitions>
-    <Grid Grid.Column="1">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Text="Page d'aide :" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30"/>
-        <ScrollViewer Grid.Row="2" >
-            <TextBlock TextWrapping="Wrap" xml:space="preserve" FontSize="16" Width="Auto" >Ceci est l'aide d'utilisation du logiciel 'Profil Topo Maker, logiciel destiné a realiser le profil topogrphique d'un relief à partir de ses courbes de niveau, pour une explication plus détaillée consultez le manuel d'utilisation<LineBreak/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1" Text="Page d'aide :" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30"/>
+            <ScrollViewer Grid.Row="2" >
+                <TextBlock TextWrapping="Wrap" xml:space="preserve" FontSize="16" Width="Auto" >Ceci est l'aide d'utilisation du logiciel 'Profil Topo Maker, logiciel destiné a realiser le profil topogrphique d'un relief à partir de ses courbes de niveau, pour une explication plus détaillée consultez le manuel d'utilisation<LineBreak/>
 La fenetre pricipale se constitue d'une barre de recherche ainsi que 5 boutton permettant la facilité de l'utilisation du logiciel
 <LineBreak/>Menu :
 Ce boutton vous permettera d'afficher la page principale de l'application
 <LineBreak/>Impotation :
 Ce boutton vous dirigera vers la page de parametrages ou vous aller saisir les informations de votre carte topographique (l'echelle, l'altitude min, l'altitude max etc.) Puis,en cliquant sur le boutton "Ouvrir" cela vous permettera d'importer une image depuis votre PC et la mettre au fond du milieu du travail, vous pourriez ainsi :
 -Tracer les courbes de niveau :
-Vous pouvez dessiner les courbes de niveau en saisissante l'altitude de la courbe d'abord, puis commencer à dessiner avec des clicks successives de la souris afin d marquer les points. Tout point pourra etre déplacé avec un simple click droit de la souris oubien supprimé grace au boutton "Supprimer" de la meme fenetre.
+Vous pouvez dessiner les courbes de niveau en saisissante l'altitude de la courbe d'abord, puis commencer à dessiner avec des clicks successives de la souris afin d marquer les points. Tout point pourra etre déplacé avec un simple click droit de la souris oubien supprimé grace au boutton "Supprimer" de la meme fenetre. Un boutton "Retour" est aussi disponible pour supprimé la déerniere modification faite dans votre tracé de courbes.
 -Tracer le segment du profil :
 En cliquant sur le boutton "Segment" puis selection les deux points du segment
 -Afficher le profil topographique :
@@ -40,8 +41,8 @@ Ceci est l'historique de notre application les tracés déjà faits seront affic
 Ce boutton vous dirigera vers cette page d'aide
 <LineBreak/>Quitter :
 Cela permet de sortir du logiciel<LineBreak/>
-            </TextBlock>
-        </ScrollViewer>
+                </TextBlock>
+            </ScrollViewer>
+        </Grid>
     </Grid>
-    </Grid>
-</UserControl>
+    </UserControl>

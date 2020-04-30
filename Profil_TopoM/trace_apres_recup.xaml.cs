@@ -28,7 +28,11 @@ namespace Profil_TopoM
 		BitmapImage kak;
 		Trace trace = new Trace();
 		String nomtr;
-		SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
+		double min1 = 0;
+		double max1 = 0;
+		double equi1 = 0;
+		double ech1 = 0;
+		SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\pc\Source\Repos\Profil_TopoM\Profil_TopoM\BDDtopo.mdf;Integrated Security=True;Connect Timeout=30");
 
 
 		public List<Courbe> courbes33= new List<Courbe>();
@@ -39,12 +43,50 @@ namespace Profil_TopoM
         {
             InitializeComponent();
             img.Source = userImage1;
+<<<<<<< HEAD
+			courbes = courbes3;
+			recuperation(courbes);
+			
+
+			mika = nbo;
+			kak = userImage1;
+			cnx.Open();
+			string readString37 = "select * from Trace  where Id =" + mika;
+
+			SqlCommand readCommand37 = new SqlCommand(readString37, cnx);
+			int nbs = 1000;
+			
+			using (SqlDataReader dataRead37 = readCommand37.ExecuteReader())
+
+			{
+				if (dataRead37 != null)
+				{
+					while (dataRead37.Read())
+					{
+
+						string mins = dataRead37["min"].ToString();
+						min1 = (double)int.Parse(mins);
+						string maxs = dataRead37["max"].ToString();
+						max1 = (double)int.Parse(maxs);
+						string equi = dataRead37["equidistance"].ToString();
+						equi1 = (double)int.Parse(equi);
+					
+
+					}
+				}
+			}
+			cnx.Close();
+
+
+		}
+=======
 			courbes33 = courbes3;
 			recuperation(courbes3);
 			trace = tracerecup;
 			mika = nbo;
 			kak = userImage1;
         }
+>>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
 		int k = 0;
 		List<Point> Points = new List<Point>();
 		List<Courbe> courbes = new List<Courbe>();
@@ -221,7 +263,6 @@ namespace Profil_TopoM
 					Line newLine;
 					if (trouve == 0)
 					{
-
 						cnv.Children.Remove(courbes[l].getlignes(trouve));
 						courbes[l].removeligne(courbes[l].getlignes(trouve));
 					}
@@ -286,18 +327,29 @@ namespace Profil_TopoM
 									Alt alt = new Alt();
 									alt.ShowDialog();
 									altit = double.Parse(alt.altitude.Text, System.Globalization.CultureInfo.InvariantCulture);
+<<<<<<< HEAD
+									if (altit >= min1 && altit <= max1)
+=======
 									if (altit >= trace.min && altit <= trace.max)
+>>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
 									{
 										courbes.Last().setaltitude(altit);
 										ex = 1;
 									}
 									else
 									{
+<<<<<<< HEAD
+										MessageBox.Show($"L'altitude doit être comprise entre {min1} et {max1}");
+										//Supprimer le point dessiné
+									}
+								} while (altit < min1 || altit > max1);
+=======
 										MessageBox.Show($"L'altitude doit être comprise entre {trace.min} et {trace.max}");
 										//Supprimer le point dessiné
 									}
 								} while (altit < trace.min || altit > trace.max); 
 								
+>>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
 							}
 							catch (Exception exp)
 							{
@@ -386,12 +438,15 @@ namespace Profil_TopoM
 
 		public void recuperation(List<Courbe> courbes10)
         {
-			courbes = courbes33;
 			
-            for (int j = 0; j < courbes10.Count(); j++)
+
+
+			for (int j = 0; j < courbes10.Count(); j++)
             {
 
-                Point mousePoint = new Point();
+				List<Ellipse> show = new List<Ellipse>();
+				List<Line> lig = new List<Line>();
+				Point mousePoint = new Point();
                 Point mousePoint1 = new Point();
                 Courbe c = new Courbe();
 
@@ -408,7 +463,8 @@ namespace Profil_TopoM
                 Canvas.SetLeft(ell, mousePoint1.X - 5 / 2);
                 Canvas.SetTop(ell, mousePoint1.Y - 10 / 2);
                 cnv.Children.Add(ell);
-                this.InvalidateVisual();
+				show.Add(ell);
+				this.InvalidateVisual();
                 while (nbpoint < c.nbPoints())
                 {
                     String ag = mousePoint1.X.ToString();
@@ -430,8 +486,10 @@ namespace Profil_TopoM
                     if (altit > 1000) { newLine.Stroke = Brushes.Red; }
                     newLine.StrokeThickness = 2;
                     cnv.Children.Add(newLine);
-                    this.InvalidateVisual();
-                    mousePoint1 = mousePoint2;
+					lig.Add(newLine);
+					courbes10[j].lignes = lig;
+
+					mousePoint1 = mousePoint2;
                     nbpoint++;
                     Ellipse ell2 = new Ellipse();
                     ell2.Width = 7;
@@ -441,18 +499,29 @@ namespace Profil_TopoM
                     Canvas.SetLeft(ell2, mousePoint1.X - 5 / 2);
                     Canvas.SetTop(ell2, mousePoint1.Y - 10 / 2);
                     cnv.Children.Add(ell2);
+					show.Add(ell2);
+					courbes10[j].shownPts = show;
 
 
-                }
+				}
 
-                this.InvalidateVisual();
-            }
-        }
+				this.InvalidateVisual();
+			}
+			
+		}
 
 		
 		private void next_Click(object sender, RoutedEventArgs e)
 		{
-			
+			cnx.Open();
+
+			String date = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+			string readString35 = "UPDATE Trace SET  modification='" + date + "' where Id =" + mika;
+
+			SqlCommand readCommand35 = new SqlCommand(readString35, cnx);
+			readCommand35.ExecuteNonQuery();
+			cnx.Close();
+
 			List<Point> Points1 = new List<Point>();
 			int cr = 0, jk1 = 0;
 			int ik4 = -1, ik3;

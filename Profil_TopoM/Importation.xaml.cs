@@ -24,14 +24,22 @@ namespace Profil_TopoM
 	public partial class Importation : UserControl
 	{
 
+<<<<<<< HEAD
+
+=======
 		
+>>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
 		int Fin = 0;
 		int Ss = 0;
 		BitmapImage kak;
 		Trace trac= new Trace();
 		String nomtr;
+<<<<<<< HEAD
+		SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\pc\Source\Repos\Profil_TopoM\Profil_TopoM\BDDtopo.mdf;Integrated Security=True;Connect Timeout=30");
+=======
 		SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
 
+>>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
 		public Importation(BitmapImage userImage, Trace trace15)
 		{
 			InitializeComponent();
@@ -39,7 +47,10 @@ namespace Profil_TopoM
 			kak = userImage;
 			trac = trace15;
 			nomtr = trace15.nom;
+
+
 		}
+
 		int k = 0;
 		List<Point> Points = new List<Point>();
 		List<Courbe> courbes = new List<Courbe>();
@@ -296,7 +307,11 @@ namespace Profil_TopoM
 										MessageBox.Show($"L'altitude doit être comprise entre {trac.min} et {trac.max}");
 										//Supprimer le point dessiné
 									}
+<<<<<<< HEAD
+								} while (altit < trac.min || altit > trac.max);
+=======
 								} while ( altit<trac.min || altit> trac.max);
+>>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
 							}
 							catch (Exception exp)
 							{
@@ -380,7 +395,11 @@ namespace Profil_TopoM
 		private void Supprimer_Click(object sender, RoutedEventArgs e)
 		{
 			suppp = 1;
-		}	
+		}
+		//-------------------------------------------------------------------------------------------------------------
+
+		//-----------------------------------------------------------------------------------------------------------
+	
 		//----------------------------------------------------------------------------------------------------------
 		private void next_Click(object sender, RoutedEventArgs e)
 		{
@@ -408,6 +427,14 @@ namespace Profil_TopoM
 					}
 				}
 			}
+			cnx.Close();
+			cnx.Open();
+
+			String date = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+			string readString35 = "UPDATE Trace SET  modification='" + date + "' where Id =" + nbs;
+
+			SqlCommand readCommand35 = new SqlCommand(readString35, cnx);
+			readCommand35.ExecuteNonQuery();
 			cnx.Close();
 			for (int ik = 0; ik < courbes.Count; ik++)
 			{
@@ -438,6 +465,8 @@ namespace Profil_TopoM
 					cmd.ExecuteNonQuery();
 					cnx.Close();
 					jk1 = ik3;
+					
+
 				}
 				ik4 =jk1;
 				cr++;
@@ -490,13 +519,28 @@ namespace Profil_TopoM
 							Point ab = new Point(xs1, ys1);
 							fg.setpoints(ab, ik10);
 							ik10++;
+
+
+
+
 						}
 						cris1p = cris1;
 						alts1p = alts1;
+
+
+
+
+
 					}
 				}
 				fg.setaltitude(alts1p);
 				courbes12.Add(fg);
+
+
+
+
+
+
 			}
 			cnx.Close();
 			

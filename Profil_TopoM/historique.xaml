@@ -9,7 +9,7 @@
              d:DesignHeight="570" d:DesignWidth="940">
     <Grid>
         <TextBox x:Name="nomTracefait"
-            materialDesign:HintAssist.Hint="nommez votre tracé "
+            materialDesign:HintAssist.Hint=" rechercher votre tracé par nom "
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
@@ -19,7 +19,7 @@
 
 
         <Label x:Name="parametrageL" Content="Récupération des traces"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="320,9,0,0" VerticalAlignment="Top" Width="184" FontSize="30"/>
-        <Label x:Name="nom" Content="Nom du tracé" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,77,0,0" VerticalAlignment="Top" Width="185"/>
+        <Label x:Name="nom" Content="Rechercher" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,77,0,0" VerticalAlignment="Top" Width="185"/>
 
         <!--Grid Margin="135,615,228,-628">
             <Grid.RowDefinitions>
@@ -75,31 +75,28 @@
                 Background="{x:Null}"
                 BorderBrush="#58A3AF"
                 Foreground="#58A3AF"
-                ToolTip="récupérer votre carte!" Margin="352.333,14,31.667,47" Click="nextBtn_Click" Grid.Column="1">
+                ToolTip="récupérer votre carte!" Margin="217,-377,167,445" Click="nextBtn_Click" Grid.Column="1" RenderTransformOrigin="0.721,0.893">
                 <materialDesign:PackIcon
                     Kind="ArrowRight"
                     Height="24"
                     Width="24" />
             </Button>
-            <Button x:Name="prevBtn"
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                Background="{x:Null}"
-                BorderBrush="#58A3AF"
-                Foreground="#58A3AF"
-                ToolTip="Retour au menu" Margin="282.333,14,101.667,47"  Grid.Column="1">
-                <materialDesign:PackIcon
-                    Kind="ArrowLeft"
-                    Height="24"
-                    Width="24" />
-            </Button>
-            
-            
+         
+
+
         </Grid>
         <Grid Margin="10">
 
-            <DataGrid Name="dg" AutoGenerateColumns="False" Margin="148,119,26,90" Foreground="#DD915D5D" Background="#FF1E5370"  >
+            <DataGrid Name="dg" AutoGenerateColumns="False" Margin="148,119,26,90" Foreground="#DD915D5D" Background="#FF1E5370"    >
 
                 <DataGrid.Columns>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="b1" Click="b1_click" Content="clicker pour ouvrir"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Nom du tracé" Binding="{Binding  Path= nom}" Foreground="#FF060303" />
 
                     <DataGridTextColumn Header="L'échelle" Binding="{Binding echelle}" Foreground="#FF1D0606"/>

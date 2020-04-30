@@ -25,7 +25,7 @@ namespace Profil_TopoM
     {
         int mika1;
         public List<Courbe> courbes15 = new List<Courbe>();
-        SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
+        SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\pc\Source\Repos\Profil_TopoM\Profil_TopoM\BDDtopo.mdf;Integrated Security=True;Connect Timeout=30");
         public tracesegment(BitmapImage userImage1, List<Courbe> courbes3, int mika)
         {
             InitializeComponent();
@@ -70,7 +70,7 @@ namespace Profil_TopoM
                 ell.Stroke = Brushes.Transparent;
                 Canvas.SetLeft(ell, mousePoint11.X - 5 / 2);
                 Canvas.SetTop(ell, mousePoint11.Y - 10 / 2);
-                shownPts.Add(ell);
+               
                 cnv2.Children.Add(ell);
             }
             else //(Schritt 3) linie fertig stellen -> Linie zu canvas hinzufügen, als 2. Punkt aktuelle maus position 
@@ -83,8 +83,9 @@ namespace Profil_TopoM
                 ell.Stroke = Brushes.Transparent;
                 Canvas.SetLeft(ell, mousePoint22.X - 5 / 2);
                 Canvas.SetTop(ell, mousePoint22.Y - 10 / 2);
-                shownPts.Add(ell);
+             
                 cnv2.Children.Add(ell);
+                //linie hinzufügen
                 Line newLine = new Line { X1 = mousePoint11.X, Y1 = mousePoint11.Y, X2 = mousePoint22.X, Y2 = mousePoint22.Y };
                 newLine.Stroke = Brushes.Black;
                 newLine.StrokeThickness = 2;
@@ -142,6 +143,7 @@ namespace Profil_TopoM
         }
         private void next_Click1(object sender, RoutedEventArgs e)
         {
+            //UPDATE employees  SET  lastname = 'Hill'
             cnx.Open();
             string readString3 = "select * from Trace  where Id =" + mika1;
 
@@ -166,12 +168,14 @@ namespace Profil_TopoM
                         string equi = dataRead3["equidistance"].ToString();
                         equi1 = (double)int.Parse(equi);
                         string ech = dataRead3["echelle"].ToString();
-                        ech1 = (double)int.Parse(ech);
+                        ech1 = double.Parse(ech);
 
                     }
                 }
             }
             cnx.Close();
+          
+
             trace_profil pr = new trace_profil(min1, max1, ech1, pente);
             pr.plotData(ech1, min1, max1, equi1, pointIntersection, altitudee);
             Grids.Children.Clear();

@@ -10,15 +10,15 @@ namespace Profil_TopoM.Classes
 {
     public class Courbe
     {
-        private List<Point> Points = new List<Point>();
-        private List<Ellipse> shownPts = new List<Ellipse>();
-        private List<Line> lignes = new List<Line>();
-        private double altitude;
-        private Point p;
-        private Ellipse ell;
-        private Line l;
+        public List<Point> Points = new List<Point>();
+        public List<Ellipse> shownPts = new List<Ellipse>();
+        public List<Line> lignes = new List<Line>();
+        public double altitude;
+        public Point p;
+        public Ellipse ell;
+        public Line l;
 
-      
+
         public Point getpoints(int i) { if (i < Points.Count) return this.Points[i]; else { return p; } }
         public double getaltitude() { return altitude; }
         public int nbPoints() { return Points.Count; }

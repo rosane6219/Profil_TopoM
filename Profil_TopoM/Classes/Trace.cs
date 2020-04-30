@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace Profil_TopoM
 {
-   public  class Trace
+    public class Trace
     {
-        public double min, max;
-        public int  echelle,echellecarte, equidistance;
-        public  String image, nom;
-        public DateTime date_creat, date_modif;
+
         // private Profil profil;
-        public Trace(String name, DateTime creat, DateTime modif, double mini, double maxi, int echel, int equi, String img,int carte)
+        public Trace(String name, String creat, String modif, int mini, int maxi, double echel, int equi, String img)
         {
             this.nom = name;
             this.date_creat = creat;
@@ -21,16 +19,30 @@ namespace Profil_TopoM
             this.min = mini;
             this.max = maxi;
             this.echelle = echel;
+
             this.equidistance = equi;
             this.image = img;
-            this.echellecarte = carte;
         }
-      public Trace()
+        public Trace()
         {
 
         }
 
-     
+        public string nom { get; set; }
+        public string image { get; set; }
+
+        public int min { get; set; }
+        public int max { get; set; }
+        public double echelle { get; set; }
+
+        public int equidistance { get; set; }
+        public String date_creat { get; set; }
+        public String date_modif { get; set; }
+
+
+        // public  void modifier() { }
+        //public void  renommer(){}
+        // public void genererProfil(list< point >) {}
 
     }
 }

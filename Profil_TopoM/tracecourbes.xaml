@@ -70,17 +70,7 @@
            
                     Width="24" />
             </Button>
-            <Button x:Name="prevBtn"
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                Background="{x:Null}"
-                BorderBrush="#58A3AF"
-                Foreground="#58A3AF"
-                ToolTip="Retour au menu" Margin="282.333,14,101.667,47"  Grid.Column="1">
-                <materialDesign:PackIcon
-                    Kind="ArrowLeft"
-                    Height="24"
-                    Width="24" />
-            </Button>
+           
             
         </Grid>
 

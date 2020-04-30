@@ -13,7 +13,7 @@
     <Grid x:Name="selectionGrid" Margin="60,0,10,0" Height="570">
        
         <Image HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="296" Margin="421,83,0,0" Source="Ressources/courbesbleu.jpg"/>
-        <Label Content="Bienvenue dans &#xA;Profil_Topo_Maker,&#xA;une application dédiée à la &#xA;génération de profil &#xA;topographique " FontSize="20" FontFamily="Monserrat"   HorizontalAlignment="Left" Height="138" Margin="64,83,0,0" VerticalAlignment="Top" Width="265" Foreground="#DDEE6B6B"/>
+        <Label Content="Bienvenue dans &#xD;&#xA;Profil_Topo_Maker,&#xA;une application dédiées à la &#xA;génération de profil &#xD;&#xA;topographique " FontSize="20" FontFamily="Monserrat"   HorizontalAlignment="Left" Height="138" Margin="64,83,0,0" VerticalAlignment="Top" Width="265" Foreground="#DDEE6B6B"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="48" Margin="734,2,0,0" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
