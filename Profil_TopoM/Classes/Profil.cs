@@ -197,7 +197,7 @@ namespace Profil_TopoM.Classes
             {
                 denivele = alt1 - alt2;
             }
-            double distanceH = Math.Sqrt(Math.Pow(distanceF, 2) - Math.Pow(denivele, 2));
+            double distanceH = Math.Sqrt(Math.Abs(Math.Pow(distanceF, 2) - Math.Pow(denivele, 2)));
             return (denivele * 100) / distanceH;
         }
         public double distance(double x1, double y1, double x2, double y2)

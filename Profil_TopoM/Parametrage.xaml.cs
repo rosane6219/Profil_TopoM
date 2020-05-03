@@ -157,7 +157,7 @@ namespace Profil_TopoM
         int equi,ech,echCM;
         private void nextBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (nomTrace.Text == "" || altritude_max.Text == "" || altritude_min.Text == "" || echelle.Text == "" || equidistance.Text == "" || url == "" || echelleCM.Text=="")
+            if (nomTrace.Text == "" || altritude_max.Text == "" || altritude_min.Text == "" || echelle.Text == "" || equidistance.Text == "" || url == null || echelleCM.Text=="")
             {
                 MessageBox.Show("Veuillez remplir tous les champs !");
             } 

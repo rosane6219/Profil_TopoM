@@ -44,7 +44,7 @@ namespace Profil_TopoM
             int i = 0;
             while (i < points_intersections.Count)
             {
-                linePoints.Points.Add(new DataPoint(points_intersections[i].X / echelle, altitude[i]));
+                linePoints.Points.Add(new DataPoint(points_intersections[i].X * echelle, altitude[i]));
                 i++;
             }
             var Xaxis = new OxyPlot.Axes.LinearAxis();
