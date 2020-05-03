@@ -50,29 +50,23 @@
             </Slider.RenderTransform>
         </Slider>
 
-       
         <Grid HorizontalAlignment="Left" Height="111" Margin="159,485,0,-26" VerticalAlignment="Top" Width="771">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="227*"/>
                 <ColumnDefinition Width="278*"/>
             </Grid.ColumnDefinitions>
-
+            
             <Button x:Name="nextBtn"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                 Background="{x:Null}"
                 BorderBrush="#58A3AF"
-                Foreground="#58A3AF"
-                
-                ToolTip="récupérer votre tracé!!" Margin="352.333,14,31.667,47"  Grid.Column="1"  Click="next_Click" >
+                Foreground="#58A3AF"             
+                ToolTip="Récupérez votre tracé!!" Margin="352.333,14,31.667,47"  Grid.Column="1"  Click="next_Click" >
                 <materialDesign:PackIcon
                     Kind="ArrowRight"
                     Height="24"
-           
                     Width="24" />
             </Button>
-           
-            
         </Grid>
-
     </Grid>
 </UserControl>

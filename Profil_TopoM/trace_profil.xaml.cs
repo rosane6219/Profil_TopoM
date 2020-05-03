@@ -17,16 +17,19 @@ namespace Profil_TopoM
 {
     public partial class trace_profil : UserControl
     {
-        public trace_profil(double altmin, double altmax, double echelle, double pente)
+        String echell;
+        public trace_profil(double altmin ,double altmax, double echelle, double echCM,double pente)
         {
             InitializeComponent();
             T.Text = altmin.ToString();
             T1.Text = altmax.ToString();
-            T2.Text = echelle.ToString();
+            echell = $"{echCM} cm par {echelle} m ";
+            T2.Text = echell;
             T3.Text = pente.ToString();            
         }
-        public void plotData(double echelle, double altmin, double altmax, double equidist, List<Point> points_intersections, List<double> altitude)
+        public void plotData(double echelll,double echlleCM,double altmin, double altmax, double equidist, List<Point> points_intersections, List<double> altitude)
         {
+            double echelle = echlleCM / echelll;
             var model = new PlotModel();
             LineSeries linePoints = new LineSeries()
             {

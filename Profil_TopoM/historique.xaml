@@ -9,17 +9,17 @@
              d:DesignHeight="570" d:DesignWidth="940">
     <Grid>
         <TextBox x:Name="nomTracefait"
-            materialDesign:HintAssist.Hint=" rechercher votre tracé par nom "
+            materialDesign:HintAssist.Hint=" recherchez votre tracé par son nom "
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="58" Margin="442,62,253,450" />
+            VerticalAlignment="Center" Height="58" Margin="325,62,305,450" />
 
 
 
         <Label x:Name="parametrageL" Content="Récupération des traces"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="320,9,0,0" VerticalAlignment="Top" Width="184" FontSize="30"/>
-        <Label x:Name="nom" Content="Rechercher" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,77,0,0" VerticalAlignment="Top" Width="185"/>
+        <Label x:Name="nom" Content="Rechercher" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,77,0,0" VerticalAlignment="Top" Width="122"/>
 
         <!--Grid Margin="135,615,228,-628">
             <Grid.RowDefinitions>
@@ -75,13 +75,13 @@
                 Background="{x:Null}"
                 BorderBrush="#58A3AF"
                 Foreground="#58A3AF"
-                ToolTip="récupérer votre carte!" Margin="217,-377,167,445" Click="nextBtn_Click" Grid.Column="1" RenderTransformOrigin="0.721,0.893">
+                ToolTip="récupérer votre carte!" Margin="157.333,-384,226.667,452" Click="nextBtn_Click" Grid.Column="1" RenderTransformOrigin="0.721,0.893">
                 <materialDesign:PackIcon
                     Kind="ArrowRight"
                     Height="24"
                     Width="24" />
             </Button>
-         
+
 
 
         </Grid>

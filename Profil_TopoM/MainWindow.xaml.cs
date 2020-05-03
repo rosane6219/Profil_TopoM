@@ -84,20 +84,23 @@ namespace Profil_TopoM
 
         private void textBlock2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            selectionGrid.Children.Clear();
+            historique param = new historique();
+            selectionGrid.Children.Add(param);
         }
 
         private void aideBtn_Click(object sender, RoutedEventArgs e)
         {
             selectionGrid.Children.Clear();
-            Aide aid = new Aide();
-            selectionGrid.Children.Add(aid);
-
+            Aide aide = new Aide();
+            selectionGrid.Children.Add(aide);
         } 
 
         private void textBlock3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            selectionGrid.Children.Clear();
+            Aide aide = new Aide();
+            selectionGrid.Children.Add(aide);
         }
 
         private void quitBtn_Click(object sender, RoutedEventArgs e)

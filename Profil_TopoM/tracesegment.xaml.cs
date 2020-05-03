@@ -23,17 +23,18 @@ namespace Profil_TopoM
     /// </summary>
     public partial class tracesegment : UserControl
     {
+        Trace trac = new Trace();
         int mika1;
         public List<Courbe> courbes15 = new List<Courbe>();
-        SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\pc\Source\Repos\Profil_TopoM\Profil_TopoM\BDDtopo.mdf;Integrated Security=True;Connect Timeout=30");
-        public tracesegment(BitmapImage userImage1, List<Courbe> courbes3, int mika)
+        SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
+        public tracesegment(BitmapImage userImage1, List<Courbe> courbes3, int mika,Trace trace)
         {
             InitializeComponent();
             img1.Source = userImage1;
             courbes15 = courbes3;
             recuperation(courbes3);
             mika1 = mika;
-
+            trac = trace;
         }
 
         List<Point> Points = new List<Point>();
@@ -70,7 +71,7 @@ namespace Profil_TopoM
                 ell.Stroke = Brushes.Transparent;
                 Canvas.SetLeft(ell, mousePoint11.X - 5 / 2);
                 Canvas.SetTop(ell, mousePoint11.Y - 10 / 2);
-               
+               // shownPts.Add(ell);
                 cnv2.Children.Add(ell);
             }
             else //(Schritt 3) linie fertig stellen -> Linie zu canvas hinzufügen, als 2. Punkt aktuelle maus position 
@@ -83,9 +84,8 @@ namespace Profil_TopoM
                 ell.Stroke = Brushes.Transparent;
                 Canvas.SetLeft(ell, mousePoint22.X - 5 / 2);
                 Canvas.SetTop(ell, mousePoint22.Y - 10 / 2);
-             
+               // shownPts.Add(ell);
                 cnv2.Children.Add(ell);
-                //linie hinzufügen
                 Line newLine = new Line { X1 = mousePoint11.X, Y1 = mousePoint11.Y, X2 = mousePoint22.X, Y2 = mousePoint22.Y };
                 newLine.Stroke = Brushes.Black;
                 newLine.StrokeThickness = 2;
@@ -113,54 +113,49 @@ namespace Profil_TopoM
                     }
                 }
                 if (pointIntersection.Count > 1)
-                    pente = p.Calcul_P(pointIntersection[0].X, pointIntersection[0].Y, pointIntersection[pointIntersection.Count - 1].X, pointIntersection[pointIntersection.Count - 1].Y, altitudee[0], altitudee[altitudee.Count - 1], 60);
-
+                {
+                    double echsurcarte = ((double)(trac.echellecarte )/(double)(trac.echelle));
+                    Console.WriteLine(echsurcarte);
+                    pente = p.Calcul_P(pointIntersection[0].X, pointIntersection[0].Y, pointIntersection[pointIntersection.Count - 1].X, pointIntersection[pointIntersection.Count - 1].Y, altitudee[0], altitudee[altitudee.Count - 1], echsurcarte);
+                }
                 //nächste linie zulassen
                 this.lineStarted1 = false;
             }
-
             this.InvalidateVisual();
-
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-
             base.OnMouseMove(e);
-
             //temporäre linie zeichnen (in onRender)
             if (lineStarted1)
                 this.InvalidateVisual();
-
         }
+
         protected override void OnRender(DrawingContext dc)
         {
-
-
             if (lineStarted)
-                dc.DrawLine(new Pen(Brushes.Black, 5), this.mousePoint11, Mouse.GetPosition(this));
-          
+                dc.DrawLine(new Pen(Brushes.Black, 5), this.mousePoint11, Mouse.GetPosition(this));  
         }
+
         private void next_Click1(object sender, RoutedEventArgs e)
         {
-            //UPDATE employees  SET  lastname = 'Hill'
             cnx.Open();
             string readString3 = "select * from Trace  where Id =" + mika1;
-
             SqlCommand readCommand3 = new SqlCommand(readString3, cnx);
             int nbs = 1000;
             double min1 = 0;
             double max1 = 0;
             double equi1 = 0;
             double ech1 = 0;
+            double echCM2 = 0;
             using (SqlDataReader dataRead3 = readCommand3.ExecuteReader())
 
             {
                 if (dataRead3 != null)
                 {
                     while (dataRead3.Read())
-                    {
-                        
+                    {                        
                         string mins = dataRead3["min"].ToString();
                         min1 = double.Parse(mins);//, System.Globalization.CultureInfo.InvariantCulture
                         string maxs = dataRead3["max"].ToString();                       
@@ -168,27 +163,23 @@ namespace Profil_TopoM
                         string equi = dataRead3["equidistance"].ToString();
                         equi1 = (double)int.Parse(equi);
                         string ech = dataRead3["echelle"].ToString();
-                        ech1 = double.Parse(ech);
-
+                        ech1 = (double)int.Parse(ech);
+                        string echCM = dataRead3["echellecarte"].ToString();
+                        echCM2 = (double)int.Parse(echCM);
                     }
                 }
             }
             cnx.Close();
-          
-
-            trace_profil pr = new trace_profil(min1, max1, ech1, pente);
-            pr.plotData(ech1, min1, max1, equi1, pointIntersection, altitudee);
+            trace_profil pr = new trace_profil(min1, max1, ech1,echCM2 ,pente);
+            pr.plotData(ech1,echCM2 ,min1, max1, equi1, pointIntersection, altitudee);
             Grids.Children.Clear();
             Grids.Children.Add(pr);
         }
 
         public void recuperation(List<Courbe> courbes)
         {
-
-
             for (int j = 0; j < courbes.Count(); j++)
             {
-
                 Point mousePoint = new Point();
                 Point mousePoint1 = new Point();
                 Courbe c = new Courbe();
@@ -210,7 +201,6 @@ namespace Profil_TopoM
                 while (nbpoint < c.nbPoints())
                 {
                     String ag = mousePoint1.X.ToString();
-
                     Point mousePoint2 = c.getpoints(nbpoint);
                     Line newLine = new Line { X1 = mousePoint1.X, Y1 = mousePoint1.Y, X2 = mousePoint2.X, Y2 = mousePoint2.Y };
                     ToolTip t = new ToolTip();
@@ -239,27 +229,9 @@ namespace Profil_TopoM
                     Canvas.SetLeft(ell2, mousePoint1.X - 5 / 2);
                     Canvas.SetTop(ell2, mousePoint1.Y - 10 / 2);
                     cnv2.Children.Add(ell2);
-
-
                 }
-
                 this.InvalidateVisual();
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

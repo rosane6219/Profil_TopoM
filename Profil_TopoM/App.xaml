@@ -12,5 +12,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Orange.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+         
     </Application.Resources>
 </Application>

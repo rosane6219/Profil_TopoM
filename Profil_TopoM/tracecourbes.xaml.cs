@@ -29,7 +29,7 @@ namespace Profil_TopoM
 		BitmapImage kak = new BitmapImage();
 		Trace trac = new Trace();
 		String nomtr;
-		SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\pc\Source\Repos\Profil_TopoM\Profil_TopoM\BDDtopo.mdf;Integrated Security=True;Connect Timeout=30");
+		SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
 		public tracecourbes(BitmapImage userImage, Trace trace15)
 		{
 			InitializeComponent();

@@ -34,15 +34,9 @@ namespace Profil_TopoM
         bool isDecimal = false;
         Regex nameControl = new Regex(@"[A-Za-z0-9]+");
         Regex intControl = new Regex(@"[0-9]+");
-<<<<<<< HEAD
-        Regex floating = new Regex(@"^[-+]?\d+(.\d+)?$");
-
-        SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\pc\Source\Repos\Profil_TopoM\Profil_TopoM\BDDtopo.mdf;Integrated Security=True;Connect Timeout=30");
-=======
         Regex floating = new Regex(@"^[-+]?\d+(.\d+)?$");      
 
         SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename= {System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
->>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
 
         //C:\Users\Fujitsu\Desktop\Profil_topo_MAKER25\Profil_topo_MAKER\Profil_TopoM\BDDtopo.mdf
        // SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename= C:\Users\User\source\repos\Profil_TopoM\Profil_TopoM\BDDtopo.mdf;Integrated Security=True");
@@ -51,11 +45,6 @@ namespace Profil_TopoM
         public Parametrage()
         {
             InitializeComponent();
-<<<<<<< HEAD
-           
-
-=======
->>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
         }
 
         private void insertion(Trace trace)
@@ -84,8 +73,7 @@ namespace Profil_TopoM
                         {
                             while (dataRead4.Read())
                             {
-                                string xsk = dataRead4["nom"].ToString();
-                               
+                                string xsk = dataRead4["max"].ToString();
                                 
                                 bac = false;
                             cac++;
@@ -105,12 +93,6 @@ namespace Profil_TopoM
              }
             
             i = i - 1;
-<<<<<<< HEAD
-            cnx.Open();
-            cmd.CommandText    = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id) values ('" +trace.min + "','" + trace.max + "','" +trace.echelle.ToString() + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat + "','" + trace.date_modif + "','" + i + "')";
-          cmd.ExecuteNonQuery();
-            cnx.Close();
-=======
 
            /* cmd.CommandText = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id) values ('" + trace.min + "','" + trace.max + "','" + trace.echelle + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat.ToString("dd/mm/yyyy hh:mm:ss") + "','" + trace.date_modif.ToString("dd/mm/yyyy hh:mm:ss") + "','" + i + "')";
             cmd.ExecuteNonQuery();
@@ -145,7 +127,6 @@ namespace Profil_TopoM
              //cmd.CommandText    = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id) values ('" +trace.min + "','" + trace.max + "','" +trace.echelle + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat.ToString("dd/MM/yyyy hh:mm:ss") + "','" + trace.date_modif.ToString("dd/MM/yyyy hh:mm:ss") + "','" + i + "')";
              cmd.ExecuteNonQuery();
              cnx.Close();*/
->>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
         }
         BitmapImage img;
         String url;
@@ -173,105 +154,82 @@ namespace Profil_TopoM
         }
 
         double max,min;
-
+        int equi,ech,echCM;
         private void nextBtn_Click(object sender, RoutedEventArgs e)
         {
-<<<<<<< HEAD
-            Trace trace;
-
-                if (nomTrace.Text == "" || altritude_max.Text == "" || altritude_min.Text == "" || echelle.Text == "" || equidistance.Text == "" || url == "" || echelleCM.Text == "")
-                {
-                    MessageBox.Show("Veuillez remplir tous les champs !");
-                }
-                else
-                {
-                try
-                {
-                    double max = double.Parse(altritude_max.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture);
-                    double min = double.Parse(altritude_min.Text, System.Globalization.CultureInfo.InvariantCulture);
-                    if (max < min)
-                    { MessageBox.Show("L'altitude max doit être superieure à l'altitude min !"); }
-                    else
-                    {
-                        double ech1 = double.Parse(echelleCM.Text);
-                       double ech2= double.Parse(echelle.Text);
-                        double f1 = ech2 / ech1;
-                        trace = new Trace(nomTrace.Text, DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"), DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"), int.Parse(altritude_min.Text), Int32.Parse(altritude_max.Text), f1, Int32.Parse(equidistance.Text), url);
-
-                        cnx.Open();
-
-                        string readString56 = "select * from Trace  where nom ='" + nomTrace.Text + "'";
-
-                        SqlCommand readCommand56 = new SqlCommand(readString56, cnx);
-
-                        int aym = -1;
-                        int gk = -1;
-                        using (SqlDataReader dataRead31 = readCommand56.ExecuteReader())
-
-                        {
-                            if (dataRead31 != null)
-                            {
-                                while (dataRead31.Read())
-                                {
-
-                                    string xas = dataRead31["Id"].ToString();
-                                    gk = int.Parse(xas);
-                                    aym = gk;
-
-                                }
-                            }
-                        }
-                        cnx.Close();
-                        if (aym == -1)
-                        {
-
-                            insertion(trace);
-                            Importation imp = new Importation(img, trace);
-                            var parent = (Grid)this.Parent;
-                            parent.Children.Clear();
-                            parent.Children.Add(imp);
-                        }
-
-                        else
-                        {
-                            MessageBox.Show("ce nom existe déja , faut que vous changez du nom !");
-
-                        }
-                    }
-                }
-                catch (Exception ex) { MessageBox.Show(ex.Message); }
-                }
-           
-            
-           
-=======
             if (nomTrace.Text == "" || altritude_max.Text == "" || altritude_min.Text == "" || echelle.Text == "" || equidistance.Text == "" || url == "" || echelleCM.Text=="")
             {
                 MessageBox.Show("Veuillez remplir tous les champs !");
-            }
+            } 
             else
-            {
-                try
-                {
-                     max = double.Parse(altritude_max.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture);
-                     min = double.Parse(altritude_min.Text, System.Globalization.CultureInfo.InvariantCulture);
-                   if (max < min)
-                   { MessageBox.Show("L'altitude max doit être superieure à l'altitude min !"); }
-                   else
-                   {
-                    Trace trace = new Trace(nomTrace.Text, DateTime.Now, DateTime.Now, min, 
-                        max, Int32.Parse(echelle.Text), 
-                        Int32.Parse(equidistance.Text), url, Int32.Parse(echelleCM.Text));
-                    insertion(trace);
-                    Importation imp = new Importation(img, trace);
-                    var parent = (Grid)this.Parent;
-                    parent.Children.Clear();
-                    parent.Children.Add(imp);
-                   } 
-                } catch (Exception ex) { MessageBox.Show(ex.Message); }
+            { equi = int.Parse(equidistance.Text);
+                
+                    try
+                    {
+                        max = double.Parse(altritude_max.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                        min = double.Parse(altritude_min.Text, System.Globalization.CultureInfo.InvariantCulture);
+                        ech = int.Parse(echelle.Text);
+                        echCM = int.Parse(echelleCM.Text);
+                        if (max < min || ech==0 || echCM ==0 || equi % 5 != 0)
+                        { 
+                            if (max < min) {  MessageBox.Show("L'altitude max doit être supérieure à l'altitude min !"); }
+                            if (equi % 5 != 0) { MessageBox.Show("L'équidisatnce doit être multiple de 5"); }
+                            else { MessageBox.Show("L'échelle doit être supérieure à zéro"); }
+                        }
+                        else
+                        {
+                            /*
+                              Trace trace = new Trace(nomTrace.Text, DateTime.Now, DateTime.Now, min,
+                                   max, Int32.Parse(echelle.Text),
+                                   Int32.Parse(equidistance.Text), url, Int32.Parse(echelleCM.Text));
+                             insertion(trace);
+                            Importation imp = new Importation(img, trace);
+                            var parent = (Grid)this.Parent;
+                            parent.Children.Clear();
+                            parent.Children.Add(imp);*/
+                            Trace trace = new Trace(nomTrace.Text, DateTime.Now, DateTime.Now, min,
+                                   max, Int32.Parse(echelle.Text),
+                                   Int32.Parse(equidistance.Text), url, Int32.Parse(echelleCM.Text));
+
+                            cnx.Open();
+                            string readString56 = "select * from Trace  where nom ='" + nomTrace.Text + "'";
+                            SqlCommand readCommand56 = new SqlCommand(readString56, cnx);
+                            int aym = -1;
+                            int gk = -1;
+                            using (SqlDataReader dataRead31 = readCommand56.ExecuteReader())
+                            {
+                                if (dataRead31 != null)
+                                {
+                                    while (dataRead31.Read())
+                                    {
+                                        string xas = dataRead31["Id"].ToString();
+                                        gk = int.Parse(xas);
+                                        aym = gk;
+                                    }
+                                }
+                            }
+                            cnx.Close();
+                            if (aym == -1)
+                            {
+                                insertion(trace);
+                                Importation imp = new Importation(img, trace);
+                                var parent = (Grid)this.Parent;
+                                parent.Children.Clear();
+                                parent.Children.Add(imp);
+                            }
+
+                            else
+                            {
+                                MessageBox.Show("ce nom existe déja , faut que vous changez du nom !");
+                            }
+
+                        }
+                    }
+                    catch (Exception ex) { MessageBox.Show(ex.Message); }
+                
             }
->>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
         }
+
         private void nomTrace_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!nameControl.IsMatch(e.Text)) { e.Handled = true; MessageBox.Show("Caractère non valide"); }
@@ -311,15 +269,9 @@ namespace Profil_TopoM
                     altritude_min.Text = altritude_min.Text.Substring(0, altritude_min.Text.Length - 1);
                     altritude_min.Select(altritude_min.Text.Length, 0);
                 }
-<<<<<<< HEAD
-                else isDecimal = false;
-            }
-
-=======
                 else  isDecimal = false;
             }
           
->>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
         }
 
         private void altritude_max_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -330,22 +282,6 @@ namespace Profil_TopoM
                 else isDecimal = (e.Text == ".");
             }
 
-<<<<<<< HEAD
-        }
-
-        private void altritude_max_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (altritude_max.Text != "-" && altritude_max.Text != "")
-            {
-                if (!floating.IsMatch(altritude_max.Text) && !isDecimal)
-                {
-                    altritude_max.Text = altritude_max.Text.Substring(0, altritude_max.Text.Length - 1);
-                    altritude_max.Select(altritude_max.Text.Length, 0);
-                }
-                else isDecimal = false;
-            }
-=======
->>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
         }
 
         private void altritude_max_TextChanged(object sender, TextChangedEventArgs e)

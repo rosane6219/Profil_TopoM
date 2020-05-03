@@ -59,14 +59,9 @@
                 </TransformGroup>
             </Slider.RenderTransform>
         </Slider>
-<<<<<<< HEAD
-
-      
-=======
         <Button x:Name="btn" Content="Retour" Margin="10,13,845,525"   />
         <Button x:Name="Supprimer" Content="Supprimer un point " Margin="220,0,557,526" Height="34" VerticalAlignment="Bottom" />
         <Button x:Name="Arret" Content =" Arrêt " Margin="117,12,745,526" />
->>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
         <Grid HorizontalAlignment="Left" Height="111" Margin="159,485,0,-26" VerticalAlignment="Top" Width="771">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="227*"/>
@@ -86,10 +81,6 @@
            
                     Width="24" />
             </Button>
-<<<<<<< HEAD
-         
-          
-=======
             <Button x:Name="prevBtn"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                 Background="{x:Null}"
@@ -102,7 +93,6 @@
                     Width="24" />
             </Button>
             <Button x:Name="next" Content="Suivant " Height="Auto" Margin="261,-475,396.667,550" Grid.ColumnSpan="2" ></Button>
->>>>>>> 8a42412688a4be5586bec1660492f123c7c01da5
         </Grid>
 
     </Grid>

@@ -14,8 +14,7 @@ namespace Profil_TopoM.Classes
         Point start, end;
 
         public Profil(Point start, Point end) { this.start = start; this.end = end; }
-        //public void DessinerAxes(min , max, echelle) { }
-        //public real CalculPente(segment) {}
+        
         public void Intersection(List<Courbe> courbeaniveau, out List<Point> point_Intersection, out List<double> altitude)
         {
             bool trouv;
@@ -186,9 +185,9 @@ namespace Profil_TopoM.Classes
 
 
 
-        public double Calcul_P(double x1, double y1, double x2, double y2, double alt1, double alt2, int ech)
+        public double Calcul_P(double x1, double y1, double x2, double y2, double alt1, double alt2, double ech)
         {
-            double distanceF = ((distance(x1, y1, x2, y2)) * ech);// conversion en metres
+            double distanceF = (distance(x1, y1, x2, y2));// * ech) ;// conversion en metres
             double denivele;
             if (alt1 <= alt2)
             {
@@ -198,7 +197,7 @@ namespace Profil_TopoM.Classes
             {
                 denivele = alt1 - alt2;
             }
-            double distanceH = Math.Pow(distanceF, 2) - Math.Pow(denivele, 2);
+            double distanceH = Math.Sqrt(Math.Pow(distanceF, 2) - Math.Pow(denivele, 2));
             return (denivele * 100) / distanceH;
         }
         public double distance(double x1, double y1, double x2, double y2)
