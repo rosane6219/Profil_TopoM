@@ -22,15 +22,13 @@ namespace Profil_TopoM
     /// </summary>
     public partial class MainWindow : Window
     {
-        private SqlConnection _con;
+      
        
         public MainWindow()
         {
             InitializeComponent();
             Accueil home = new Accueil();
             selectionGrid.Children.Add(home);
-            _con = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
-
         }
 
        
@@ -94,7 +92,13 @@ namespace Profil_TopoM
             selectionGrid.Children.Clear();
             Aide aide = new Aide();
             selectionGrid.Children.Add(aide);
-        } 
+        }
+        public void CtrShortcut1(Object sender, ExecutedRoutedEventArgs e)
+        {
+            selectionGrid.Children.Clear();
+            Aide aid = new Aide();
+            selectionGrid.Children.Add(aid);
+        }
 
         private void textBlock3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -106,6 +110,12 @@ namespace Profil_TopoM
         private void quitBtn_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        public void CtrShortcut2(Object sender, ExecutedRoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+
         }
 
         private void textBlock4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

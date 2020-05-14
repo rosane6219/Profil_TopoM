@@ -24,23 +24,18 @@ namespace Profil_TopoM
     /// </summary>
     public partial class Parametrage : UserControl
     {
-
-        private string _user;
-        private SqlConnection _con;
-        private SqlCommand _command;
-        private SqlDataReader _reader;
-        private string _query;
         private Trace trace;
         bool isDecimal = false;
+        double max, min;
+        int equi;
+        BitmapImage img;
+        String url;
+
         Regex nameControl = new Regex(@"[A-Za-z0-9]+");
         Regex intControl = new Regex(@"[0-9]+");
-        Regex floating = new Regex(@"^[-+]?\d+(.\d+)?$");      
-
+        Regex floating = new Regex(@"^[-+]?\d+(.\d+)?$");  
+        
         SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename= {System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
-
-        //C:\Users\Fujitsu\Desktop\Profil_topo_MAKER25\Profil_topo_MAKER\Profil_TopoM\BDDtopo.mdf
-       // SqlConnection cnx = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename= C:\Users\User\source\repos\Profil_TopoM\Profil_TopoM\BDDtopo.mdf;Integrated Security=True");
-
 
         public Parametrage()
         {
@@ -51,85 +46,45 @@ namespace Profil_TopoM
         {
             cnx.Open();
             bool bac = false;
-            SqlCommand cmd;
-            //SqlCommand cmd = cnx.CreateCommand();
-           // cmd.CommandType = CommandType.Text;
+            SqlCommand cmd = cnx.CreateCommand();
+            cmd.CommandType = CommandType.Text;
             int i = 0;
             i++;
             int cac = 0;
             while (bac == false)
             {
                 string readString4 = "select * from Trace  where Id=" + i;
-              
-            SqlCommand readCommand4 = new SqlCommand(readString4, cnx);
-            int nbs = 1000;
-             
-          
+                SqlCommand readCommand4 = new SqlCommand(readString4, cnx);
+                int nbs = 1000;
                 using (SqlDataReader dataRead4 = readCommand4.ExecuteReader())
-
                 {
-                   
-                        if (dataRead4 != null)
+                    if (dataRead4 != null)
+                    {
+                        while (dataRead4.Read())
                         {
-                            while (dataRead4.Read())
-                            {
-                                string xsk = dataRead4["max"].ToString();
-                                
-                                bac = false;
+                            string xsk = dataRead4["nom"].ToString();
+                            bac = false;
                             cac++;
-                            }
-
-                            if (cac==0)
+                        }
+                        if (cac == 0)
                         {
                             bac = true;
                         }
                         cac = 0;
-                      }
-                       
-                    
-                   
+                    }
                 }
                 i++;
-             }
-            
+            }
+            cnx.Close();
             i = i - 1;
-
-           /* cmd.CommandText = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id) values ('" + trace.min + "','" + trace.max + "','" + trace.echelle + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat.ToString("dd/mm/yyyy hh:mm:ss") + "','" + trace.date_modif.ToString("dd/mm/yyyy hh:mm:ss") + "','" + i + "')";
+            cnx.Open();
+            int echelle1 = (int)trace.echelle;
+            int echelle2 = (int)trace.echellecarte;
+            cmd.CommandText = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id,echellecarte) values ('" + trace.min.ToString() + "','" + trace.max.ToString() + "','" + echelle1 + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat + "','" + trace.date_modif + "','" + i + "','" + echelle2 + "')";
             cmd.ExecuteNonQuery();
-            cnx.Close();*/
-            //______________________________________________________________________________________________________________
-             _query = "insert into Trace values (@min, @max, @echelle, @equidistance, @image, @nom, @dateCrea, @dateModif, @id,@echellecarte)";
-             using (cmd = new SqlCommand(_query, cnx))
-             {
-                 cmd.Parameters.AddWithValue("@min", trace.min);
-                 cmd.Parameters.AddWithValue("@max", trace.max);
-                 cmd.Parameters.AddWithValue("@echelle", trace.echelle);
-                 cmd.Parameters.AddWithValue("@equidistance", trace.equidistance);
-                 cmd.Parameters.AddWithValue("@image", trace.image);
-                 cmd.Parameters.AddWithValue("@nom", trace.nom);
-                 cmd.Parameters.AddWithValue("@dateCrea", trace.date_creat);
-                 cmd.Parameters.AddWithValue("@dateModif", trace.date_modif);
-                 cmd.Parameters.AddWithValue("@id", i);
-                 cmd.Parameters.AddWithValue("@echellecarte", trace.echellecarte);
-                 try
-                 {
-                     cmd.ExecuteNonQuery();
-                 }
-                 catch (Exception e)
-                 {
-                     MessageBox.Show(e.Message);
-                 }
-             }
-             cnx.Close();
-            //________________________________________________________________________
-            /* _query = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id) values ('" + trace.min + "','" + trace.max + "','" + trace.echelle + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat.ToString("dd/MM/yyyy hh:mm:ss") + "','" + trace.date_modif.ToString("dd/MM/yyyy hh:mm:ss") + "','" + i + "')";
-             cmd = new SqlCommand(_query, cnx);
-             //cmd.CommandText    = "insert into [Trace] (min,max,echelle,equidistance,image,nom,creation,modification,Id) values ('" +trace.min + "','" + trace.max + "','" +trace.echelle + "','" + trace.equidistance + "','" + trace.image + "','" + trace.nom + "','" + trace.date_creat.ToString("dd/MM/yyyy hh:mm:ss") + "','" + trace.date_modif.ToString("dd/MM/yyyy hh:mm:ss") + "','" + i + "')";
-             cmd.ExecuteNonQuery();
-             cnx.Close();*/
+            cnx.Close();
         }
-        BitmapImage img;
-        String url;
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
@@ -141,7 +96,20 @@ namespace Profil_TopoM
             {
                url = op.FileName;
                img = new BitmapImage(new Uri(op.FileName));
+            }
+        }
 
+        public void CtrShortcut1(Object sender, ExecutedRoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Selectionner une image";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                url = op.FileName;
+                img = new BitmapImage(new Uri(op.FileName));
             }
         }
 
@@ -153,8 +121,8 @@ namespace Profil_TopoM
             parent.Children.Add(accueil);
         }
 
-        double max,min;
-        int equi,ech,echCM;
+      
+
         private void nextBtn_Click(object sender, RoutedEventArgs e)
         {
             if (nomTrace.Text == "" || altritude_max.Text == "" || altritude_min.Text == "" || echelle.Text == "" || equidistance.Text == "" || url == null || echelleCM.Text=="")
@@ -167,10 +135,10 @@ namespace Profil_TopoM
                     try
                     {
                         max = double.Parse(altritude_max.Text.ToString(), System.Globalization.CultureInfo.InvariantCulture);
-                        min = double.Parse(altritude_min.Text, System.Globalization.CultureInfo.InvariantCulture);
-                        ech = int.Parse(echelle.Text);
-                        echCM = int.Parse(echelleCM.Text);
-                        if (max < min || ech==0 || echCM ==0 || equi % 5 != 0)
+                        min = double.Parse(altritude_min.Text, System.Globalization.CultureInfo.InvariantCulture);                 
+                        double ech1 = double.Parse(echelleCM.Text);
+                        double ech2 = double.Parse(echelle.Text);
+                    if (max < min || ech2==0 || ech1 ==0 || equi % 5 != 0)
                         { 
                             if (max < min) {  MessageBox.Show("L'altitude max doit être supérieure à l'altitude min !"); }
                             if (equi % 5 != 0) { MessageBox.Show("L'équidisatnce doit être multiple de 5"); }
@@ -178,38 +146,26 @@ namespace Profil_TopoM
                         }
                         else
                         {
-                            /*
-                              Trace trace = new Trace(nomTrace.Text, DateTime.Now, DateTime.Now, min,
-                                   max, Int32.Parse(echelle.Text),
-                                   Int32.Parse(equidistance.Text), url, Int32.Parse(echelleCM.Text));
-                             insertion(trace);
-                            Importation imp = new Importation(img, trace);
-                            var parent = (Grid)this.Parent;
-                            parent.Children.Clear();
-                            parent.Children.Add(imp);*/
-                            Trace trace = new Trace(nomTrace.Text, DateTime.Now, DateTime.Now, min,
-                                   max, Int32.Parse(echelle.Text),
-                                   Int32.Parse(equidistance.Text), url, Int32.Parse(echelleCM.Text));
-
-                            cnx.Open();
-                            string readString56 = "select * from Trace  where nom ='" + nomTrace.Text + "'";
-                            SqlCommand readCommand56 = new SqlCommand(readString56, cnx);
-                            int aym = -1;
-                            int gk = -1;
-                            using (SqlDataReader dataRead31 = readCommand56.ExecuteReader())
+                        trace = new Trace(nomTrace.Text, DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"), DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"), min, max, ech1, ech2, Int32.Parse(equidistance.Text), url);
+                        cnx.Open();
+                        string readString56 = "select * from Trace  where nom ='" + nomTrace.Text + "'";
+                        SqlCommand readCommand56 = new SqlCommand(readString56, cnx);
+                        int aym = -1;
+                        int gk = -1;
+                        using (SqlDataReader dataRead31 = readCommand56.ExecuteReader())
+                        {
+                            if (dataRead31 != null)
                             {
-                                if (dataRead31 != null)
+                                while (dataRead31.Read())
                                 {
-                                    while (dataRead31.Read())
-                                    {
-                                        string xas = dataRead31["Id"].ToString();
-                                        gk = int.Parse(xas);
-                                        aym = gk;
-                                    }
+                                    string xas = dataRead31["Id"].ToString();
+                                    gk = int.Parse(xas);
+                                    aym = gk;
                                 }
                             }
-                            cnx.Close();
-                            if (aym == -1)
+                        }
+                        cnx.Close();
+                        if (aym == -1)
                             {
                                 insertion(trace);
                                 Importation imp = new Importation(img, trace);
@@ -217,12 +173,10 @@ namespace Profil_TopoM
                                 parent.Children.Clear();
                                 parent.Children.Add(imp);
                             }
-
                             else
                             {
-                                MessageBox.Show("ce nom existe déja , faut que vous changez du nom !");
+                                MessageBox.Show("Ce nom existe déjà , veillez choisir un autre nom ");
                             }
-
                         }
                     }
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -257,7 +211,6 @@ namespace Profil_TopoM
                 if (altritude_min.Text.Contains(e.Text)) e.Handled = true;
                 else isDecimal = (e.Text == ".");
             }
-
         }
 
         private void altritude_min_TextChanged(object sender, TextChangedEventArgs e)
@@ -270,8 +223,7 @@ namespace Profil_TopoM
                     altritude_min.Select(altritude_min.Text.Length, 0);
                 }
                 else  isDecimal = false;
-            }
-          
+            }          
         }
 
         private void altritude_max_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -281,7 +233,6 @@ namespace Profil_TopoM
                 if (altritude_max.Text.Contains(e.Text)) e.Handled = true;
                 else isDecimal = (e.Text == ".");
             }
-
         }
 
         private void altritude_max_TextChanged(object sender, TextChangedEventArgs e)
@@ -296,7 +247,5 @@ namespace Profil_TopoM
                 else  isDecimal = false; 
             }
         }
-
-       
     }
 }

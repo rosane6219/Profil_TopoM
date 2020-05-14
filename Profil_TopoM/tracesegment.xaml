@@ -8,17 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="570" d:DesignWidth="940">
     <Grid  x:Name="Grids">
-        <!--Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5" Canvas.Left="786" Canvas.Top="7" Margin="800,0,0,0">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image-->
-        <Image x:Name="image" HorizontalAlignment="Left" Height="48" Margin="800,0,0,0" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5" Canvas.Left="786" Canvas.Top="7" Margin="800,0,0,0">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -28,38 +18,22 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <ScrollViewer HorizontalAlignment="Left" Height="393" Margin="23,68,0,0" VerticalAlignment="Top" Width="903">
-            <Image x:Name="img1"  Stretch="Fill" Height="367" Width="725">
-                <Image.LayoutTransform>
-                    <ScaleTransform ScaleX="{Binding ElementName=zoom,Path=Value}"
-                                    ScaleY="{Binding ElementName=zoom,Path=Value}"/>
 
-                </Image.LayoutTransform>
-            </Image>
-        </ScrollViewer>
+        <Image x:Name="img1"  Stretch="Fill" Height="367" Width="725"/>
+
+        <Label x:Name="parametrageL" Content="Dessin du segment "  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="308,10,0,0" VerticalAlignment="Top" Width="303" FontSize="30"/>
+
+
 
         <Canvas
             x:Name="cnv2" 
             Background="Transparent"  Margin="0,0,0,0"   
          >
-            <Canvas.LayoutTransform>
-                <ScaleTransform ScaleX="{Binding ElementName=zoom,Path=Value}"
-                                ScaleY="{Binding ElementName=zoom,Path=Value}"/>
-            </Canvas.LayoutTransform>
+            
 
         </Canvas>
 
-        <Slider  x:Name="zoom" DockPanel.Dock="Left" Value="1"  Maximum="5" Height="31" VerticalAlignment="Top" Width="169" Margin="599,10,172,0" RenderTransformOrigin="0.5,0.5" Background="{x:Null}">
-            <Slider.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Slider.RenderTransform>
-        </Slider>
-     
+
         <Grid HorizontalAlignment="Left" Height="111" Margin="159,485,0,-26" VerticalAlignment="Top" Width="771">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="227*"/>
@@ -79,7 +53,8 @@
            
                     Width="24" />
             </Button>
-            
+         
+          
         </Grid>
 
     </Grid>

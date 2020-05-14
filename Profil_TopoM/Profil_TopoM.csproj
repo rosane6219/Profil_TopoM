@@ -51,6 +51,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icone.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MaterialDesignColors, Version=1.2.3.1244, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.2.3\lib\net45\MaterialDesignColors.dll</HintPath>
@@ -206,9 +209,15 @@
     <Content Include="BDDtopo_log.ldf">
       <DependentUpon>BDDtopo.mdf</DependentUpon>
     </Content>
-    <Resource Include="Ressources\Acceuil.PNG" />
+    <Resource Include="Ressources\logout2.png" />
+    <Resource Include="Ressources\import2.png" />
+    <Resource Include="Ressources\home2.png" />
+    <Resource Include="Ressources\dossier2.png" />
+    <Resource Include="Ressources\aide2.png" />
+    <Resource Include="Icone.ico" />
+    <Resource Include="Logo_Icone.ico" />
+    <Resource Include="Ressources\accueilProfil.png" />
     <Resource Include="Ressources\aide.png" />
-    <Resource Include="Ressources\courbesbleu.jpg" />
     <Resource Include="Ressources\dossier.png" />
     <Resource Include="Ressources\home.png" />
     <Resource Include="Ressources\import.png" />

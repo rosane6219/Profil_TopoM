@@ -53,26 +53,16 @@ namespace Profil_TopoM
             Xaxis.Title = "Axe des Abscisses";
             model.Axes.Add(Xaxis);
             var Yaxis = new OxyPlot.Axes.LinearAxis();
-
             Yaxis.Minimum = altmin;
             Yaxis.Maximum = altmax;
-
             Yaxis.Title = "Axe des altitudes";
             model.Axes.Add(Yaxis);
-
             // Add Each series to the
             model.Series.Add(linePoints);
-
             // Add the plot to the window
             plot.Model = model;
 
         }
-        private void precedant_Click(object sender, RoutedEventArgs e)
-        {
-            /* var parent = (Grid)this.Parent;
-             parent.Children.Clear();
-             Importation importation = new Importation();
-             parent.Children.Add(importation);*/
-        }
+       
     }
 }

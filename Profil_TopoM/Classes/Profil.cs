@@ -13,13 +13,17 @@ namespace Profil_TopoM.Classes
     {
         Point start, end;
 
-        public Profil(Point start, Point end) { this.start = start; this.end = end; }
-        
+        public Profil(Point start, Point end)
+        {
+            this.start = start; 
+            this.end = end;
+        }
+ 
         public void Intersection(List<Courbe> courbeaniveau, out List<Point> point_Intersection, out List<double> altitude)
         {
             bool trouv;
             int k, a = 0;
-            bool intersect, inters1;
+            bool intersect;
             Point intersectionPoint;
             point_Intersection = new List<Point>();
             altitude = new List<double>();
@@ -51,8 +55,6 @@ namespace Profil_TopoM.Classes
                                 if ((a >= 0) && (a < point_Intersection.Count) && (point_Intersection.Count > 0))
                                 {
                                     point_Intersection.Add(point_Intersection[point_Intersection.Count - 1]);
-
-
                                     altitude.Add(altitude[altitude.Count - 1]);
                                     k = point_Intersection.Count - 2;
                                     while (k >= a)
@@ -76,10 +78,7 @@ namespace Profil_TopoM.Classes
                                 point_Intersection.Add(intersectionPoint);
                                 altitude.Add(item.getaltitude());
                             }
-
                         }
-
-
                     }
                 }
             }
@@ -93,11 +92,8 @@ namespace Profil_TopoM.Classes
             bool hasIntersection = IntersectsWithLine(start, end, p, p1, out intersectionPoint);
 
             if (hasIntersection)
-            {
-                Console.WriteLine("okeeeyyyyy");
-                Console.WriteLine("---------Le Point d Intersection est :" + intersectionPoint + "-----------");
-
-                if (IsBetweenTwoPoints(start, end, intersectionPoint) && IsBetweenTwoPoints(p, p1, intersectionPoint)) { Console.WriteLine("trouuuuuuuuve"); return true; }
+            { 
+                if (IsBetweenTwoPoints(start, end, intersectionPoint) && IsBetweenTwoPoints(p, p1, intersectionPoint)) {  return true; }
                 else return false;
             }
             else return false;
@@ -106,16 +102,10 @@ namespace Profil_TopoM.Classes
         public bool IntersectsWithLine(Point start, Point end, Point p, Point p1, out Point intersectionPoint)
         {
             intersectionPoint = new Point(0, 0);
-
-
             double a = (end.Y - start.Y) / (end.X - start.X);
-
             double a1 = (p1.Y - p.Y) / (p1.X - p.X);
-
             double b = end.Y - a * end.X;
-
             double b1 = p1.Y - a1 * p1.X;
-
             double delta = a - a1;
 
             bool hasIntersection = Math.Abs(delta) > 0;
@@ -136,8 +126,6 @@ namespace Profil_TopoM.Classes
             Line verticalLine, nonVerticalLine;
             if (isVertical(line2)) { verticalLine = line2; } else { verticalLine = line1; }
             if (isVertical(line2)) { nonVerticalLine = line1; } else { nonVerticalLine = line2; }
-
-
             double y = (verticalLine.X1 - nonVerticalLine.X1) *
                        (nonVerticalLine.Y2 - nonVerticalLine.Y1) /
                        ((nonVerticalLine.X2 - nonVerticalLine.X1)) +
@@ -185,9 +173,9 @@ namespace Profil_TopoM.Classes
 
 
 
-        public double Calcul_P(double x1, double y1, double x2, double y2, double alt1, double alt2, double ech)
+        public double Calcul_P(double x1, double y1, double x2, double y2, double alt1, double alt2, int ech1, int ech2)
         {
-            double distanceF = (distance(x1, y1, x2, y2));// * ech) ;// conversion en metres
+            double distanceF = ((distance(x1, y1, x2, y2)) * ech2) / ech1;// conversion en metres
             double denivele;
             if (alt1 <= alt2)
             {
@@ -207,6 +195,7 @@ namespace Profil_TopoM.Classes
             double result = Math.Sqrt(p1 + p2);
             return result;
         }
+       
 
     }
 }

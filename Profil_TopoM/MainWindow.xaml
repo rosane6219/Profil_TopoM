@@ -6,9 +6,14 @@
         xmlns:local="clr-namespace:Profil_TopoM"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" 
-        Title="MainWindow" Height="600" Width="1000" SizeToContent="WidthAndHeight" Topmost="False" WindowState="Normal" Background="White" ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
+        Title="Profil Topo Maker" Height="600" Width="1000" SizeToContent="WidthAndHeight" Topmost="False" WindowState="Normal" Background="White"  WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        >
 
     <Window.Resources>
+        <ResourceDictionary>
+            <RoutedUICommand x:Key="Ctr1" Text="Another Text" />
+            <RoutedUICommand x:Key="Ctr2" Text="Another Text" />
         <Storyboard x:Key="Menuopen">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)"  Storyboard.TargetName="GridMenu">
                 <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
@@ -83,6 +88,7 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        </ResourceDictionary>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="buttonopenmenu">
@@ -202,7 +208,7 @@
                     </ListViewItem>
                     <ListViewItem  Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="aideBtn" BorderBrush="{x:Null}" ToolTip="Page d'aide" Height="25" Width="25" Margin="10" Click="aideBtn_Click">
+                            <Button x:Name="aideBtn" BorderBrush="{x:Null}" ToolTip="Page d'aide ou Ctrl+H" Height="25" Width="25" Margin="10" Click="aideBtn_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="./Ressources/aide.png"/>
                                 </Button.Background>
@@ -222,7 +228,7 @@
 
                     <ListViewItem  Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="quitBtn" BorderBrush="{x:Null}" ToolTip="Quitter l'application" Height="25" Width="25" Margin="10" Click="quitBtn_Click">
+                            <Button x:Name="quitBtn" BorderBrush="{x:Null}" ToolTip="Quitter l'application ou Ctrl+Q" Height="25" Width="25" Margin="10" Click="quitBtn_Click">
                                 <Button.Background>
                                     <ImageBrush ImageSource="./Ressources/logout.png"/>
                                 </Button.Background>
@@ -243,13 +249,15 @@
                 </ListView>
             </StackPanel>
         </Grid>
-
-
-
-
-
-
-
-
     </Grid>
+    <Window.InputBindings>
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{StaticResource Ctr1}" />
+        <KeyBinding Key="Q" Modifiers="Ctrl" Command="{StaticResource Ctr2}" />
+    </Window.InputBindings>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource Ctr1}" Executed="CtrShortcut1" />
+        <CommandBinding Command="{StaticResource Ctr2}" Executed="CtrShortcut2" />
+
+    </Window.CommandBindings>
 </Window>

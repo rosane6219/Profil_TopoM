@@ -23,44 +23,41 @@ namespace Profil_TopoM
     /// </summary>
     public partial class tracesegment : UserControl
     {
-        Trace trac = new Trace();
         int mika1;
+        double alt1 = 0;
+        double alt2 = 0;
+        double pente;
+        List<Point> Points = new List<Point>();
+        List<Courbe> courbes = new List<Courbe>();
+        bool lineStarted = false;
+        bool lineStarted0 = false;
+        bool dep = false;
+        bool lineStarted1 = false;
+        Point mousePoint1;
+        Point mousePoint;
+        Point mousePoint11;
+        Line segment;
+        List<Ellipse> shownPts = new List<Ellipse>();
+        List<Line> lignes = new List<Line>();
+        MouseButtonEventArgs m;  
+        List<Point> pointIntersection = new List<Point>();
+        List<double> altitudee = new List<double>();
         public List<Courbe> courbes15 = new List<Courbe>();
         SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
-        public tracesegment(BitmapImage userImage1, List<Courbe> courbes3, int mika,Trace trace)
+       
+        public tracesegment(BitmapImage userImage1, List<Courbe> courbes3, int mika)
         {
             InitializeComponent();
             img1.Source = userImage1;
             courbes15 = courbes3;
             recuperation(courbes3);
             mika1 = mika;
-            trac = trace;
-        }
-
-        List<Point> Points = new List<Point>();
-        List<Courbe> courbes = new List<Courbe>();
-        bool lineStarted = false;
-        Point mousePoint1;
-        bool lineStarted0 = false;
-        Point mousePoint;
-        List<Ellipse> shownPts = new List<Ellipse>();
-        List<Line> lignes = new List<Line>();
-        MouseButtonEventArgs m;
-        bool dep = false;
-        List<Point> pointIntersection = new List<Point>();
-        List<double> altitudee = new List<double>();
-        double alt1 = 0;
-        double alt2 = 0;
-        double pente;
-        Line segment;
-        bool lineStarted1 = false;
-        Point mousePoint11;
+        }    
         //----------------------------------------------------------------------------------------------------------
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
-
-            if (!lineStarted1) //(Schritt 1) neue linie anfangen -> lineStarted setzen, 1. Punkt speichern
+            if (!lineStarted1) 
             {
                 lineStarted1 = true;
                 mousePoint11 = e.GetPosition(this);
@@ -70,11 +67,10 @@ namespace Profil_TopoM
                 ell.Fill = Brushes.SkyBlue;
                 ell.Stroke = Brushes.Transparent;
                 Canvas.SetLeft(ell, mousePoint11.X - 5 / 2);
-                Canvas.SetTop(ell, mousePoint11.Y - 10 / 2);
-               // shownPts.Add(ell);
+                Canvas.SetTop(ell, mousePoint11.Y - 10 / 2);               
                 cnv2.Children.Add(ell);
             }
-            else //(Schritt 3) linie fertig stellen -> Linie zu canvas hinzufügen, als 2. Punkt aktuelle maus position 
+            else 
             {
                 Point mousePoint22 = e.GetPosition(this);
                 Ellipse ell = new Ellipse();
@@ -83,8 +79,7 @@ namespace Profil_TopoM
                 ell.Fill = Brushes.SkyBlue;
                 ell.Stroke = Brushes.Transparent;
                 Canvas.SetLeft(ell, mousePoint22.X - 5 / 2);
-                Canvas.SetTop(ell, mousePoint22.Y - 10 / 2);
-               // shownPts.Add(ell);
+                Canvas.SetTop(ell, mousePoint22.Y - 10 / 2);           
                 cnv2.Children.Add(ell);
                 Line newLine = new Line { X1 = mousePoint11.X, Y1 = mousePoint11.Y, X2 = mousePoint22.X, Y2 = mousePoint22.Y };
                 newLine.Stroke = Brushes.Black;
@@ -99,10 +94,6 @@ namespace Profil_TopoM
                 segment = new Line { X1 = start.X, Y1 = start.Y, X2 = end.X, Y2 = end.Y };
                 Profil p = new Profil(start, end);
                 p.Intersection(courbes15, out pointIntersection, out altitudee);
-                for (int l = 0; l < pointIntersection.Count; l++)
-                {
-                    Console.WriteLine(pointIntersection[l]);
-                }
                 int o = 0; Point pp;
                 foreach (Courbe item in courbes15)
                 {
@@ -112,13 +103,28 @@ namespace Profil_TopoM
                         pp = item.getpoints(i);
                     }
                 }
-                if (pointIntersection.Count > 1)
+                cnx.Open();
+                string readString9 = "select * from Trace  where Id =" + mika1;
+
+                SqlCommand readCommand9 = new SqlCommand(readString9, cnx);
+                int echellenormal = 0;
+                int echellecarte = 0;
+                using (SqlDataReader dataRead9 = readCommand9.ExecuteReader())
                 {
-                    double echsurcarte = ((double)(trac.echellecarte )/(double)(trac.echelle));
-                    Console.WriteLine(echsurcarte);
-                    pente = p.Calcul_P(pointIntersection[0].X, pointIntersection[0].Y, pointIntersection[pointIntersection.Count - 1].X, pointIntersection[pointIntersection.Count - 1].Y, altitudee[0], altitudee[altitudee.Count - 1], echsurcarte);
+                    if (dataRead9 != null)
+                    {
+                        while (dataRead9.Read())
+                        {
+                            string echnormal = dataRead9["echelle"].ToString();
+                            echellenormal = int.Parse(echnormal);
+                            string echlcarte = dataRead9["echellecarte"].ToString();
+                            echellecarte = int.Parse(echlcarte);
+                        }
+                    }
                 }
-                //nächste linie zulassen
+                cnx.Close();
+                if (pointIntersection.Count > 1)
+                    pente = p.Calcul_P(pointIntersection[0].X, pointIntersection[0].Y, pointIntersection[pointIntersection.Count - 1].X, pointIntersection[pointIntersection.Count - 1].Y, altitudee[0], altitudee[altitudee.Count - 1], echellecarte, echellenormal);
                 this.lineStarted1 = false;
             }
             this.InvalidateVisual();
@@ -127,17 +133,14 @@ namespace Profil_TopoM
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            //temporäre linie zeichnen (in onRender)
-            if (lineStarted1)
-                this.InvalidateVisual();
+            if (lineStarted1) this.InvalidateVisual();
         }
-
         protected override void OnRender(DrawingContext dc)
         {
             if (lineStarted)
-                dc.DrawLine(new Pen(Brushes.Black, 5), this.mousePoint11, Mouse.GetPosition(this));  
+                dc.DrawLine(new Pen(Brushes.Black, 5), this.mousePoint11, Mouse.GetPosition(this));
+          
         }
-
         private void next_Click1(object sender, RoutedEventArgs e)
         {
             cnx.Open();
@@ -148,30 +151,29 @@ namespace Profil_TopoM
             double max1 = 0;
             double equi1 = 0;
             double ech1 = 0;
-            double echCM2 = 0;
+            double ech1carte = 0;
             using (SqlDataReader dataRead3 = readCommand3.ExecuteReader())
-
             {
                 if (dataRead3 != null)
                 {
                     while (dataRead3.Read())
-                    {                        
+                    {
                         string mins = dataRead3["min"].ToString();
-                        min1 = double.Parse(mins);//, System.Globalization.CultureInfo.InvariantCulture
-                        string maxs = dataRead3["max"].ToString();                       
+                        min1 = double.Parse(mins);
+                        string maxs = dataRead3["max"].ToString();
                         max1 = double.Parse(maxs);
                         string equi = dataRead3["equidistance"].ToString();
                         equi1 = (double)int.Parse(equi);
                         string ech = dataRead3["echelle"].ToString();
-                        ech1 = (double)int.Parse(ech);
-                        string echCM = dataRead3["echellecarte"].ToString();
-                        echCM2 = (double)int.Parse(echCM);
+                        ech1 = double.Parse(ech);
+                        string echcarte = dataRead3["echellecarte"].ToString();
+                        ech1carte = double.Parse(echcarte);
                     }
                 }
             }
             cnx.Close();
-            trace_profil pr = new trace_profil(min1, max1, ech1,echCM2 ,pente);
-            pr.plotData(ech1,echCM2 ,min1, max1, equi1, pointIntersection, altitudee);
+            trace_profil pr = new trace_profil(min1, max1, ech1carte, ech1, pente);
+            pr.plotData(ech1carte, ech1, min1, max1, equi1, pointIntersection, altitudee);
             Grids.Children.Clear();
             Grids.Children.Add(pr);
         }
@@ -183,7 +185,6 @@ namespace Profil_TopoM
                 Point mousePoint = new Point();
                 Point mousePoint1 = new Point();
                 Courbe c = new Courbe();
-
                 c = courbes[j];
                 double altit = c.getaltitude();
                 int nbpoint = 0;

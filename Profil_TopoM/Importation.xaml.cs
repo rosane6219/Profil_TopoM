@@ -23,13 +23,28 @@ namespace Profil_TopoM
 	/// </summary>
 	public partial class Importation : UserControl
 	{
-
-		
+		String nomtr;
 		int Fin = 0;
 		int Ss = 0;
+		int k = 0;
+		int suppp = 0; 
+		int sup = 0;
+		int s = 0;
+		int u = 0;
+		int v = 0;
 		BitmapImage kak;
-		Trace trac= new Trace();
-		String nomtr;
+		bool lineStarted = false;
+		bool lineStarted0 = false;
+		bool dep = false;
+		Point mousePoint1;
+		Point mousePoint;
+		Courbe c;		
+		Trace trac = new Trace();
+		List<Point> Points = new List<Point>();
+		List<Courbe> courbes = new List<Courbe>();
+		List<Ellipse> shownPts = new List<Ellipse>();
+		List<Line> lignes = new List<Line>();
+		MouseButtonEventArgs m;
 		SqlConnection cnx = new SqlConnection($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename={System.IO.Directory.GetCurrentDirectory()}\BDDtopo.mdf;Integrated Security=True");
 
 		public Importation(BitmapImage userImage, Trace trace15)
@@ -40,22 +55,6 @@ namespace Profil_TopoM
 			trac = trace15;
 			nomtr = trace15.nom;
 		}
-		int k = 0;
-		List<Point> Points = new List<Point>();
-		List<Courbe> courbes = new List<Courbe>();
-		bool lineStarted = false;
-		Point mousePoint1;
-		bool lineStarted0 = false;
-		Point mousePoint;
-		List<Ellipse> shownPts = new List<Ellipse>();
-		List<Line> lignes = new List<Line>();
-		MouseButtonEventArgs m;
-		bool dep = false;
-		List<Point> pointIntersection = new List<Point>();
-		List<double> altitudee = new List<double>();
-		double alt1 = 0;
-		double alt2 = 0;
-		double pente;
 
 		//------------------------------------------------------------------------------------------------------
 		private void cnv_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
@@ -93,7 +92,6 @@ namespace Profil_TopoM
 					courbes[l].setpoints(p, trouve);
 					Canvas.SetLeft(ell, courbes[l].getpoints(trouve).X - 5 / 2);
 					Canvas.SetTop(ell, courbes[l].getpoints(trouve).Y - 10 / 2);
-
 					courbes[l].setshownPts(ell, trouve);
 					cnv.Children.Add(ell);
 					if (trouve > 0) cnv.Children.Remove(courbes[l].getlignes(trouve - 1));
@@ -111,7 +109,6 @@ namespace Profil_TopoM
 						if ((courbes[l].getaltitude() > 600) && (courbes[l].getaltitude() <= 800)) { newLine.Stroke = Brushes.Orange; }
 						if ((courbes[l].getaltitude() > 800) && (courbes[l].getaltitude() <= 1000)) { newLine.Stroke = Brushes.OrangeRed; }
 						if (courbes[l].getaltitude() > 1000) { newLine.Stroke = Brushes.Red; }
-
 						newLine.StrokeThickness = 2;
 						cnv.Children.Add(newLine);
 						courbes[l].setlignes(newLine, trouve - 1);
@@ -137,7 +134,7 @@ namespace Profil_TopoM
 				}
 				this.InvalidateVisual();
 			}
-			catch (Exception exp) { MessageBox.Show("Veuillez dessiner au moins une ligne afin de pouvoir modifier des points SVP", "Erreur"); }
+			catch (Exception exp) { MessageBox.Show("Veuillez dessiner au moins une ligne afin de pouvoir modifier des points "); }
 		}
 		//-----------------------------------------------------------------------------------------------------
 		private void cnv_MouseMove(object sender, MouseEventArgs e)
@@ -155,38 +152,20 @@ namespace Profil_TopoM
 					this.InvalidateVisual();
 			}
 		}
-		//-------------------------------------------------------------------------------------------------------
-		private void btn_Click(object sender, RoutedEventArgs e)
-		{
-			if (courbes[courbes.Count - 1].nbPoints() <= 0) { courbes.Remove(courbes[courbes.Count - 1]); }
-			courbes[courbes.Count - 1].removePoint(courbes[courbes.Count - 1].getpoints(courbes[courbes.Count - 1].nbPoints() - 1));
-			cnv.Children.Remove(courbes[courbes.Count - 1].getshownPts(courbes[courbes.Count - 1].nbshownPts() - 1));
-			courbes.Last().removeshownPts(courbes[courbes.Count - 1].getshownPts(courbes[courbes.Count - 1].nbshownPts() - 1));
-			if (courbes[courbes.Count - 1].nblignes() > 0)
-			{
-				cnv.Children.Remove(courbes[courbes.Count - 1].getlignes(courbes[courbes.Count - 1].nblignes() - 1));
-				courbes[courbes.Count - 1].removeligne(courbes[courbes.Count - 1].getlignes(courbes[courbes.Count - 1].nblignes() - 1));
-			}
-			if (courbes[courbes.Count - 1].nbPoints() > 0)
-			{
-				lineStarted = true;
-				mousePoint1 = courbes[courbes.Count - 1].getpoints(courbes[courbes.Count - 1].nbPoints() - 1);
-			}
-			else
-			{
-				lineStarted = false;
-				k = 0;
-			}
-		}
-		int suppp = 0; int sup = 0;
+		
+		
 		//------------------------------------------------------------------------------------------------------
 		private void Arret_Click(object sender, RoutedEventArgs e)
 		{
 			lineStarted = false;
 			k = 0;
 		}
-		Courbe c;
-		int s = 0; int u = 0; int v = 0;
+		public void CtrShortcut1(Object sender, ExecutedRoutedEventArgs e)
+		{
+			lineStarted = false;
+			k = 0;
+		}
+		
 		private void cnv_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			if (Ss == 0)
@@ -297,16 +276,17 @@ namespace Profil_TopoM
 										{
 											MessageBox.Show($"L'altitude doit être multiplie de l'équidistance :{trac.equidistance} ");
 										}
+										
 									}
 									else
 									{
-										MessageBox.Show($"L'altitude doit être comprise entre {trac.min} et {trac.max}");
+										MessageBox.Show($"L'altitude doit être comprise entre {trac.min} et {trac.max}");										
 									}
-								} while ( altit<trac.min || altit> trac.max);
+								} while (altit < trac.min || altit > trac.max);
 							}
 							catch (Exception exp)
 							{
-								MessageBox.Show("Veuillez entrer l'altitude SVP", "Erreur");
+								MessageBox.Show("Veuillez entrer l'altitude de la courbe");
 								ex = 0;
 							}
 						}
@@ -331,7 +311,6 @@ namespace Profil_TopoM
 						if ((courbes.Last().getaltitude() > 600) && (courbes.Last().getaltitude() <= 800)) { newLine.Stroke = Brushes.Orange; }
 						if ((courbes.Last().getaltitude() > 800) && (courbes.Last().getaltitude() <= 1000)) { newLine.Stroke = Brushes.OrangeRed; }
 						if (courbes.Last().getaltitude() > 1000) { newLine.Stroke = Brushes.Red; }
-
 						newLine.StrokeThickness = 2;
 						lignes.Add(newLine);
 						courbes.Last().setlignes(newLine, v); v++;
@@ -386,58 +365,54 @@ namespace Profil_TopoM
 		private void Supprimer_Click(object sender, RoutedEventArgs e)
 		{
 			suppp = 1;
-		}	
+		}
+		//-------------------------------------------------------------------------------------------------------------
+		public void CtrShortcut2(Object sender, ExecutedRoutedEventArgs e)
+		{
+			suppp = 1;
+		}
+		//-----------------------------------------------------------------------------------------------------------
+
 		//----------------------------------------------------------------------------------------------------------
 		private void next_Click(object sender, RoutedEventArgs e)
 		{
 			Ss = 1;
 			List<Point> Points1 = new List<Point>();
-			int cr = 0,jk1=0;
-			int ik4=-1,ik3;
+			int cr = 0, jk1 = 0;
+			int ik4 = -1, ik3;
 			cnx.Open();
-			string readString3 = "select * from Trace  where nom ='"+ nomtr +"'";
-			
+			string readString3 = "select * from Trace  where nom ='" + nomtr + "'";
 			SqlCommand readCommand3 = new SqlCommand(readString3, cnx);
-			int nbs=1000;
-
+			int nbs = 1000;
 			using (SqlDataReader dataRead3 = readCommand3.ExecuteReader())
-
 			{
 				if (dataRead3 != null)
 				{
 					while (dataRead3.Read())
 					{
-
 						string xas = dataRead3["Id"].ToString();
-						 nbs = int.Parse(xas);
-
+						nbs = int.Parse(xas);
 					}
 				}
 			}
 			cnx.Close();
-			//----------MAJ de la date ----------
 			cnx.Open();
-			string readString35 = "UPDATE Trace SET  modification='" + DateTime.Now + "' where Id =" + nbs;
+			String date = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+			string readString35 = "UPDATE Trace SET  modification='" + date + "' where Id =" + nbs;
 			SqlCommand readCommand35 = new SqlCommand(readString35, cnx);
 			readCommand35.ExecuteNonQuery();
 			cnx.Close();
-			//-------------------
 			for (int ik = 0; ik < courbes.Count; ik++)
 			{
-
 				int jk = 0;
-
 				for (int ik2 = 0; ik2 < courbes[ik].nbPoints(); ik2++)
 				{
-
 					Points1.Add(courbes[ik].getpoints(ik2));
-
 				}
 				double ab = courbes[ik].getaltitude();
-				double ab1 = (double)ab;
-				for ( ik3 = ik4+1; ik3 <( ik4+1+courbes[ik].nbPoints()); ik3++)
+				String ab1 = ab.ToString();
+				for (ik3 = ik4 + 1; ik3 < (ik4 + 1 + courbes[ik].nbPoints()); ik3++)
 				{
-
 					double a;
 					double b;
 					a = Points1[ik3].X;
@@ -447,52 +422,42 @@ namespace Profil_TopoM
 					cmd.CommandType = CommandType.Text;
 					int a1 = (int)a;
 					int b1 = (int)b;
-					cmd.CommandText = "insert into Point  values (" + a1 + "," + b1 + "," + ab1 + "," + cr + "," + nbs + ")";
+					cmd.CommandText = "insert into [Point] (x,y,altitude,critere,Id) values ('" + a1 + "','" + b1 + "','" + ab1 + "','" + cr + "','" + nbs + "')";
 					cmd.ExecuteNonQuery();
 					cnx.Close();
 					jk1 = ik3;
 				}
-				ik4 =jk1;
+				ik4 = jk1;
 				cr++;
-
 			}
 			Ss = 1;
 			cnx.Open();
-			
-
-						string readString = "select * from Point  where  Id =" +nbs;
-
+			string readString = "select * from Point  where  Id =" + nbs;
 			SqlCommand readCommand = new SqlCommand(readString, cnx);
-
-
 			List<Courbe> courbes12 = new List<Courbe>();
-
 			double cris1p = 0;
 			int ik10 = 0;
 			double alts1p = 0;
 			Courbe fg = new Courbe();
 			using (SqlDataReader dataRead = readCommand.ExecuteReader())
-
 			{
 				if (dataRead != null)
 				{
 					while (dataRead.Read())
 					{
-
 						string xs = dataRead["x"].ToString();
 						string ys = dataRead["y"].ToString();
 						string alts = dataRead["altitude"].ToString();
 						string cris = dataRead["critere"].ToString();
 						double xs1 = (double)int.Parse(xs);
 						double ys1 = (double)int.Parse(ys);
-						double alts1 = double.Parse(alts);
+						double alts1 = Double.Parse(alts);
 						double cris1 = (double)int.Parse(cris);
 						if (cris1 == cris1p)
 						{
 							Point ab = new Point(xs1, ys1);
 							fg.setpoints(ab, ik10);
 							ik10++;
-
 						}
 						else
 						{
@@ -512,13 +477,10 @@ namespace Profil_TopoM
 				courbes12.Add(fg);
 			}
 			cnx.Close();
-			
-			tracesegment imp = new tracesegment(kak, courbes12, nbs,trac);
+			tracesegment imp = new tracesegment(kak, courbes12, nbs);
 			var parent = (Grid)this.Parent;
 			parent.Children.Clear();
 			parent.Children.Add(imp);
-
-
 		}
 	}
 }

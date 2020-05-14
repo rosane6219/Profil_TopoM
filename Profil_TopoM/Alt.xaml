@@ -4,18 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Profil_TopoM"
-             x:Name="alt"
-        Title="Saisissez l'altitude"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        ResizeMode="NoResize"
+        x:Name="alt"
+        Title="Altitude de courbe"
         mc:Ignorable="d"
-         Height="179.897" Width="271.65">
+        Height="179.897" Width="271.65">
+
     <Grid Background="AliceBlue" Margin="0,0,2,1">
-        <TextBlock HorizontalAlignment="Center" Background="AntiqueWhite" Margin="22,10,19,0" TextWrapping="Wrap" 
-                   VerticalAlignment="Top" Width="221" Height="32" FontSize="18" Foreground="#FF8E7B"
-                   FontStyle="Oblique" TextAlignment="Center" FontWeight="UltraBold"
-                   FontFamily="Century Gothic" ><Run Text="L'Altitude"/><Run Text=" de la"/><Run Text=" "/><Run Text="courbe"/></TextBlock>
-        <TextBox x:Name="altitude" HorizontalAlignment="Left" Height="43" Margin="45,47,0,0" TextWrapping="Wrap" 
-                 VerticalAlignment="Top" 
-                 Width="175" TextChanged="altitude_TextChanged" PreviewTextInput="altitude_PreviewTextInput"/>
-        <Button x:Name="sauvegarder" Content="Sauvegarder"  HorizontalAlignment="Left" Margin="67,95,0,0" VerticalAlignment="Top" Width="115" Height="33" Click="sauvegarder_Click"/>
+        <Label x:Name="parametrageL" Content="Altitude de la courbe"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="32" Margin="45,10,0,0" VerticalAlignment="Top" Width="186" FontSize="18"/>
+       
+
+        <TextBox x:Name="altitude" HorizontalAlignment="Left" Height="48" Margin="36,42,0,61" TextWrapping="Wrap" 
+                  materialDesign:HintAssist.Hint="Saisissez l'altitude de la courbe  "
+                   BorderBrush="#58A3AF"
+                   Foreground="#58A3AF"
+                   Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                   FontSize="14"
+                   Width="195" TextChanged="altitude_TextChanged" PreviewTextInput="altitude_PreviewTextInput"/>
+      
+        <Button x:Name="sauvegarder" Content="Valider" 
+                Foreground="#58A3AF"   
+                Height="37"
+                materialDesign:ButtonAssist.CornerRadius="20"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                Background="{x:Null}"
+                BorderBrush="#58A3AF"
+                HorizontalAlignment="Left" Margin="99,101,0,0" VerticalAlignment="Top"  Click="sauvegarder_Click"/>
     </Grid>
 </Window>

@@ -7,7 +7,7 @@
         Height="570" Width="940">
 
     <Grid>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="46" Margin="840,0,0,0" VerticalAlignment="Top" Width="100" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="image" HorizontalAlignment="Left" Height="46" Margin="819,6,0,0" VerticalAlignment="Top" Width="100" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -17,9 +17,8 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Label Content="                              Tracé du profil topographique"  FontSize="30" Foreground="#FF8E7B" 
-         FontFamily="Rockwell Condensed" >
-        </Label>
+        <Label Content="Tracé du profil topographique"  FontSize="30" Foreground="#FF8E7B" Margin="236,-5,284,529" />
+
 
 
 
@@ -46,17 +45,7 @@
             <TextBlock x:Name="T2"  Margin="0,180,0,-189" FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
             <TextBlock Text="Pente moyenne :" Margin="0,221,0,-269" FontFamily="Segoe UI Semibold" Foreground="#58A3AF" FontSize="14" Grid.Column="1"/>
             <TextBlock x:Name="T3"  Margin="0,269,0,-269" FontFamily="Segoe UI Semibold" FontSize="14" Grid.Column="1"/>
-            <Button x:Name="precedant"
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                Background="{x:Null}"
-                BorderBrush="#58A3AF"
-                Foreground="#58A3AF"
-                ToolTip="Retour au menu" Margin="65,485,69,10"  Grid.Column="1" Click="precedant_Click" >
-                <materialDesign:PackIcon
-                    Kind="ArrowLeft"
-                    Height="24"
-                    Width="24" />
-            </Button>
+          
         </Grid>
     </Grid>
 </UserControl>

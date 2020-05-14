@@ -4,44 +4,76 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Profil_TopoM"
-      
       Background="White"
-              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
-             d:DesignHeight="570" d:DesignWidth="940">
-    <Grid>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="50"/>
-        <ColumnDefinition Width="*"/>
-    </Grid.ColumnDefinitions>
-    <Grid Grid.Column="1">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Text="Page d'aide :" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30"/>
-        <ScrollViewer Grid.Row="2" >
-            <TextBlock TextWrapping="Wrap" xml:space="preserve" FontSize="16" Width="Auto" >Ceci est l'aide d'utilisation du logiciel 'Profil Topo Maker, logiciel destiné a realiser le profil topogrphique d'un relief à partir de ses courbes de niveau, pour une explication plus détaillée consultez le manuel d'utilisation<LineBreak/>
-La fenetre pricipale se constitue d'une barre de recherche ainsi que 5 boutton permettant la facilité de l'utilisation du logiciel
-<LineBreak/>Menu :
-Ce boutton vous permettera d'afficher la page principale de l'application
-<LineBreak/>Impotation :
-Ce boutton vous dirigera vers la page de parametrages ou vous aller saisir les informations de votre carte topographique (l'echelle, l'altitude min, l'altitude max etc.) Puis,en cliquant sur le boutton "Ouvrir" cela vous permettera d'importer une image depuis votre PC et la mettre au fond du milieu du travail, vous pourriez ainsi :
--Tracer les courbes de niveau :
-Vous pouvez dessiner les courbes de niveau en saisissante l'altitude de la courbe d'abord, puis commencer à dessiner avec des clicks successives de la souris afin d marquer les points. Tout point pourra etre déplacé avec un simple click droit de la souris oubien supprimé grace au boutton "Supprimer" de la meme fenetre.
--Tracer le segment du profil :
-En cliquant sur le boutton "Segment" puis selection les deux points du segment
--Afficher le profil topographique :
-Le profil topographique sera généré à partir des points d'intersection entre les courbes de niveau et le segment du profil, vous pouvez afficher le tracé du profil final en cliquant sur le boutton suivant en bas et à droite de la page
-<LineBreak/>Afficher un tracé déjà fait :
-Ceci est l'historique de notre application les tracés déjà faits seront affichés selon l'ordre chronologique de leurs réalisation, vous pouvez ainsi ouvrir un ancien tracé et travailler dessus
-<LineBreak/>Aide :
-Ce boutton vous dirigera vers cette page d'aide
-<LineBreak/>Quitter :
-Cela permet de sortir du logiciel<LineBreak/>
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="570" d:DesignWidth="940">
+
+    <Grid x:Name="selectionGrid"  >
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid    Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="53"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock  Text="Aide " VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF8E7B" FontSize="30" Height="46" Margin="373,7.333,0,0" Width="95" Grid.Row="1"/>
+
+            <TextBlock Background="White"  TextWrapping="Wrap" xml:space="preserve" FontSize="16" Width="880" Margin="10,0.333,0,10" Grid.Row="2" >
+              Bienvenue(e) dans la page d'aide de Profil Topo Maker, logiciel qui vous permettra de générer le profil topographique d'un relief à partir de ses courbes de niveau.
+              Ceci n'est qu'une aide de prise en main, pour plus d'informations veuillez consulter le manuel d'utilisation fournit avec le logiciel.
+              La fenêtre principale de l'application se compose d'une barre de recherche ainsi que d'un menu latéral gauche contenant 5 boutons:
+           <Bold Foreground="#1E5370">Accueil :</Bold>   Permet de revenir à la page d'accueil.
+           <Bold Foreground="#1E5370">Création d'un tracé :</Bold>  Permet de naviguer vers la page de parametrage . Il vous suffira de saisir l'ensemble des informations relatives à votre tracé dans cette dernière, et de sélectionner le bouton "Importer" ou de faire Ctrl+I afin d'importer une image depuis votre ordinateur qui constituera votre plan de travail. Une fois validé, vous serez redirigés vers la page d'édition du tracé créé à partir de laquelle vous pourrez:
+                *Tracer les courbes de niveau en utilisant votre souris pour insérer des points successifs après avoir saisis l'altitude de leurs courbe et à la fin de chaque courbe vous marquerez en cliquant sur "Fin" ou Ctrl+A. Ces points peuvent être déplacés via un clique droit de la souris, ou supprimés avec le bouton "Effacer" ou avec Ctrl+Z.
+                *Tracer le segment du profil à l'aide de votre souris après avoir cliqué sur le bouton "Suivant" en bas à droite de 
+la page. Une fois le segment du profil tracé, il suffira alors d'appuyer sur le bouton "Suivant" en bas à droite afin d'afficher le profil topographique généré.
+             <Bold Foreground="#1E5370">Ouvrir un tracé :</Bold>  Affiche la liste des tracés. Cette page contient l'ensemble des tracés de l'utilisateurs, vous permettant ainsi de reprendre votre travail sur un tracé précédemment crée. 
+Vous pouvez y accéder aussi avec Ctrl+H.
+             <Bold Foreground="#1E5370">Aide :</Bold>  Ouvre la page d'aide de Profil Topo Maker.
+            <Bold Foreground="#1E5370"> Quitter :</Bold>  Ou Ctrl+Q, permet de quitter le logiciel.
             </TextBlock>
-        </ScrollViewer>
-    </Grid>
+        </Grid>
+        <Button x:Name="homeBtn" BorderBrush="{x:Null}" ToolTip="Acceuil" Height="25" Width="25" Margin="24,201,1,344" Click="homeBtn_Click" RenderTransformOrigin="-1,0.406">
+            <Button.Background >
+                <ImageBrush ImageSource="./Ressources/home2.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="aideBtn" BorderBrush="{x:Null}"  ToolTip="Page d'aide" Height="25" Width="25" Margin="24,497,1,48" Click="aideBtn_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="./Ressources/aide2.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="quitBtn" BorderBrush="{x:Null}" ToolTip="Quitter l'application" Height="25" Width="25" Margin="25,522,0,23" Click="quitBtn_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="./Ressources/logout2.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="dossierBtn"  BorderBrush="{x:Null}" ToolTip="Ouvrir un tracé" Height="25" Width="25" Margin="24,438,1,106" Click="dossierBtn_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="./Ressources/dossier2.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="paramBtn" BorderBrush="{x:Null}" ToolTip="Créer un tracé" Height="25" Width="25" Margin="25,226,0,319" Click="paramBtn_Click" >
+            <Button.Background>
+                <ImageBrush ImageSource="./Ressources/import2.png"/>
+            </Button.Background>
+        </Button>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5" Canvas.Left="786" Canvas.Top="7" Margin="745,4,0,0" Grid.Column="1">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+
     </Grid>
 </UserControl>

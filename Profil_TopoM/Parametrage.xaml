@@ -60,38 +60,6 @@
 
 
 
-        <!--Grid Margin="135,615,228,-628">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="82*"/>
-                <RowDefinition Height="91*"/>
-            </Grid.RowDefinitions-->
-
-        <!--/Grid-->
-
-        <!--Button x:Name="nextBtn"
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                Background="{x:Null}"
-                BorderBrush="#58A3AF"
-                Foreground="#58A3AF"
-                ToolTip="Allons dessiner les courbes de niveau!!" Margin="845,493,55,37" Click="nextBtn_Click">
-            <materialDesign:PackIcon
-                    Kind="ArrowRight"
-                    Height="24"
-                    Width="24" />
-        </>
-        <Button x:Name="prevBtn"
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                Background="{x:Null}"
-                BorderBrush="#58A3AF"
-                Foreground="#58A3AF"
-                ToolTip="Retour au menu" Margin="793,493,107,37" Click="prevBtn_Click">
-            <materialDesign:PackIcon
-                    Kind="ArrowLeft"
-                    Height="24"
-                    Width="24" />
-        </Button-->
-
         <Image x:Name="image" HorizontalAlignment="Left" Height="48" Margin="800,0,0,0" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
@@ -113,7 +81,7 @@
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 Height="50"
                 materialDesign:ButtonAssist.CornerRadius="25"
-                ToolTip="Importer une image" Margin="195,10,423.667,0" Click="Button_Click" Background="{x:Null}" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                ToolTip="Importer une image ou Ctrl+I" Margin="195,10,423.667,0" Click="Button_Click" Background="{x:Null}" VerticalAlignment="Top" Grid.ColumnSpan="2">
                 <TextBlock Text="Importer" FontSize="19" />
             </Button>
             <Button x:Name="nextBtn"
@@ -132,12 +100,28 @@
                 Background="{x:Null}"
                 BorderBrush="#58A3AF"
                 Foreground="#58A3AF"
-                ToolTip="Retour au menu" Margin="282.333,14,101.667,47" Click="prevBtn_Click" Grid.Column="1">
+                ToolTip="Retour à l'accueil" Margin="282.333,14,101.667,47" Click="prevBtn_Click" Grid.Column="1">
                 <materialDesign:PackIcon
-                    Kind="ArrowLeft"
+                    Kind="Home"
                     Height="24"
                     Width="24" />
             </Button>
         </Grid>
     </Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <RoutedUICommand x:Key="Ctr1" Text="Another Text" />
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="I" Modifiers="Ctrl" Command="{StaticResource Ctr1}" />
+
+    </UserControl.InputBindings>
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="{StaticResource Ctr1}" Executed="CtrShortcut1" />
+
+    </UserControl.CommandBindings>
 </UserControl>

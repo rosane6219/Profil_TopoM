@@ -7,53 +7,23 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="570" d:DesignWidth="940">
+    
     <Grid>
         <TextBox x:Name="nomTracefait"
-            materialDesign:HintAssist.Hint=" recherchez votre tracé par son nom "
+            materialDesign:HintAssist.Hint=" rechercher votre tracé par son nom "
             BorderBrush="#58A3AF"
             Foreground="#58A3AF"
             FontSize="19"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-            VerticalAlignment="Center" Height="58" Margin="325,62,305,450" />
+            VerticalAlignment="Center" Height="58" Margin="279,62,345,450" />
 
 
+        <Label x:Name="parametrageL" Content="Liste des tracés"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="314,9,0,0" VerticalAlignment="Top" Width="219" FontSize="30"/>
+        <!--Label x:Name="nom" Content="Rechercher" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,77,0,0" VerticalAlignment="Top" Width="116"/-->
 
-        <Label x:Name="parametrageL" Content="Récupération des traces"  Foreground="#FF8E7B" HorizontalAlignment="Left" Height="53" Margin="320,9,0,0" VerticalAlignment="Top" Width="184" FontSize="30"/>
-        <Label x:Name="nom" Content="Rechercher" FontSize="19"  Foreground="#58A3AF" HorizontalAlignment="Left" Height="39" Margin="198,77,0,0" VerticalAlignment="Top" Width="122"/>
+  
 
-        <!--Grid Margin="135,615,228,-628">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="15*"/>
-                <RowDefinition Height="82*"/>
-                <RowDefinition Height="91*"/>
-            </Grid.RowDefinitions-->
-
-        <!--/Grid-->
-
-        <!--Button x:Name="nextBtn"
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                Background="{x:Null}"
-                BorderBrush="#58A3AF"
-                Foreground="#58A3AF"
-                ToolTip="Allons dessiner les courbes de niveau!!" Margin="845,493,55,37" Click="nextBtn_Click">
-            <materialDesign:PackIcon
-                    Kind="ArrowRight"
-                    Height="24"
-                    Width="24" />
-        </>
-        <Button x:Name="prevBtn"
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                Background="{x:Null}"
-                BorderBrush="#58A3AF"
-                Foreground="#58A3AF"
-                ToolTip="Retour au menu" Margin="793,493,107,37" Click="prevBtn_Click">
-            <materialDesign:PackIcon
-                    Kind="ArrowLeft"
-                    Height="24"
-                    Width="24" />
-        </Button-->
-
-        <Image x:Name="image" HorizontalAlignment="Left" Height="48" Margin="800,0,0,0" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
+        <Image x:Name="image" HorizontalAlignment="Left" Height="48" Margin="794,2,0,0" VerticalAlignment="Top" Width="126" Source="Ressources/LogoProfil.PNG" RenderTransformOrigin="0.5,0.5">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -75,33 +45,42 @@
                 Background="{x:Null}"
                 BorderBrush="#58A3AF"
                 Foreground="#58A3AF"
-                ToolTip="récupérer votre carte!" Margin="157.333,-384,226.667,452" Click="nextBtn_Click" Grid.Column="1" RenderTransformOrigin="0.721,0.893">
+                ToolTip="Récupérez votre carte!" Margin="115.333,-386,268.667,454" Click="nextBtn_Click" Grid.Column="1" RenderTransformOrigin="0.721,0.893">
                 <materialDesign:PackIcon
-                    Kind="ArrowRight"
+                    Kind="Search"
                     Height="24"
                     Width="24" />
             </Button>
-
+         
 
 
         </Grid>
         <Grid Margin="10">
-
-            <DataGrid Name="dg" AutoGenerateColumns="False" Margin="148,119,26,90" Foreground="#DD915D5D" Background="#FF1E5370"    >
+            <DataGrid Name="dg" AutoGenerateColumns="False" Margin="103,119,26,38" Foreground="#DD915D5D"   Background="#FF1E5370"    >
 
                 <DataGrid.Columns>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="b1" Click="b1_click" Content="clicker pour ouvrir"/>
+                                <Button x:Name="b1" 
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                        Background="{x:Null}"
+                                        BorderBrush="{x:Null}"   
+                                        Foreground="#FFFFFF"
+                                        materialDesign:ButtonAssist.CornerRadius="25"
+                                        ToolTip="Ouvrir le tracé"
+                                         Click="b1_click">
+                                    <materialDesign:PackIcon Kind="OpenInNew" Height="24" Width="24" />
+                                </Button>
+                             
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Nom du tracé" Binding="{Binding  Path= nom}" Foreground="#FF060303" />
-
-                    <DataGridTextColumn Header="L'échelle" Binding="{Binding echelle}" Foreground="#FF1D0606"/>
-                    <DataGridTextColumn Header="Date de création" Binding="{Binding date_creat}" Foreground="#FF1D0606" />
-                    <DataGridTextColumn Header="Date de modification" Binding="{Binding date_modif}" Foreground="#FF111B21"  />
+                    <DataGridTextColumn Header="Nom du tracé" Binding="{Binding  Path= nom}" Foreground="#FFFDFBFB" />
+                    <DataGridTextColumn Header="Echelle" Binding="{Binding echelle}"  Foreground="#FFFDFBFB"/>
+                    <DataGridTextColumn Header="Echelle sur carte" Binding="{Binding echellecarte}"  Foreground="#FFFDFBFB"/>
+                    <DataGridTextColumn Header="Date de création" Binding="{Binding date_creat}" Foreground="#FFFDFBFB" />
+                    <DataGridTextColumn Header="Date de modification" Binding="{Binding date_modif}" Foreground="#FFFDFBFB" />
                 </DataGrid.Columns>
 
                 <DataGrid.RowDetailsTemplate>
@@ -118,14 +97,12 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-
-                                <TextBlock Text="Le maximum: " FontWeight="Normal" Foreground="#FF030303" TextDecorations="Underline" FontSize="14" />
+                                <TextBlock Text="L'altitude maximum: " FontWeight="Normal" Foreground="#FF030303" TextDecorations="Underline" FontSize="14" />
                                 <TextBlock Text="{Binding max}" Grid.Column="1" Foreground="#FF8D1212" />
-                                <TextBlock Text="le minimum: " FontWeight="Normal" Grid.Row="1" FontSize="14" Foreground="#FF030303"/>
+                                <TextBlock Text="L'altitude  minimum: " FontWeight="Normal" Grid.Row="1" FontSize="14" Foreground="#FF030303"/>
                                 <TextBlock Text="{Binding min}" Grid.Column="1" Grid.Row="1" Foreground="#FF8D1212" />
                                 <TextBlock Text="l'équidistance: " FontWeight="Normal" Grid.Row="2" FontSize="14" Foreground="#FF030303" />
                                 <TextBlock Text="{Binding equidistance, StringFormat=d}" Grid.Column="1" Grid.Row="2"  Foreground="#FF8D1212"/>
-
                             </Grid>
                         </DockPanel>
                     </DataTemplate>
